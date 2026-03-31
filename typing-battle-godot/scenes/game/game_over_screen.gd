@@ -7,12 +7,10 @@ signal play_again_requested
 @onready var result_label: Label = %ResultLabel
 @onready var summary_label: Label = %SummaryLabel
 
-@onready var left_stats_title: Label = %LeftStatsTitle
-@onready var left_words_label: Label = %LeftWordsLabel
+@onready var left_player_name: Label = %LeftPlayerName
 @onready var left_words_list: RichTextLabel = %LeftWordsList
 
-@onready var right_stats_title: Label = %RightStatsTitle
-@onready var right_words_label: Label = %RightWordsLabel
+@onready var right_player_name: Label = %RightPlayerName
 @onready var right_words_list: RichTextLabel = %RightWordsList
 
 @onready var back_to_menu_button: Button = %BackToMenuButton
@@ -30,12 +28,10 @@ func _ready() -> void:
 	result_label.text = ""
 	summary_label.text = ""
 
-	left_stats_title.text = "Left Player"
-	left_words_label.text = "Words Typed"
+	left_player_name.text = "Left Player"
 	left_words_list.text = ""
 
-	right_stats_title.text = "Right Player"
-	right_words_label.text = "Words Typed"
+	right_player_name.text = "Right Player"
 	right_words_list.text = ""
 
 	waiting_label.text = ""
@@ -64,7 +60,7 @@ func show_results(data: Dictionary) -> void:
 
 	if typeof(left_data_raw) == TYPE_DICTIONARY:
 		_apply_player_block(
-			left_stats_title,
+			left_player_name,
 			left_words_list,
 			left_data_raw as Dictionary,
 			"Left Player"
@@ -72,7 +68,7 @@ func show_results(data: Dictionary) -> void:
 
 	if typeof(right_data_raw) == TYPE_DICTIONARY:
 		_apply_player_block(
-			right_stats_title,
+			right_player_name,
 			right_words_list,
 			right_data_raw as Dictionary,
 			"Right Player"

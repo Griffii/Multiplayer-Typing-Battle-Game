@@ -118,16 +118,19 @@ function createMatchManager(state) {
 
     notifyOpponentPlayerLeft(match, client.playerId);
 
-    match.status = "ended";
-    match.winner = getOpponent(match, client.playerId);
+    if (match.status !== "ended") {
+      match.status = "ended";
+      match.winner = getOpponent(match, client.playerId);
 
-    broadcast(match, {
-      type: "match_ended",
-      winnerPlayerId: match.winner,
-      winnerSide: getOpponentSide(match, client.playerId),
-      state: serializeMatch(match),
-    });
+      broadcast(match, {
+        type: "match_ended",
+        winnerPlayerId: match.winner,
+        winnerSide: getOpponentSide(match, client.playerId),
+        state: serializeMatch(match),
+      });
+    }
 
+    stopMatchRuntime(match);
     cleanupMatch(match);
   }
 
@@ -139,17 +142,21 @@ function createMatchManager(state) {
 
     notifyOpponentPlayerLeft(match, client.playerId);
 
-    match.status = "ended";
-    match.winner = getOpponent(match, client.playerId);
-
-    broadcast(match, {
-      type: "match_ended",
-      winnerPlayerId: match.winner,
-      winnerSide: getOpponentSide(match, client.playerId),
-      state: serializeMatch(match),
-    });
+    stopMatchRuntime(match);
 
     cleanupMatch(match);
+  }
+
+  function stopMatchRuntime(match) {
+    if (match.countdownTimer) {
+      clearTimeout(match.countdownTimer);
+      match.countdownTimer = null;
+    }
+
+    if (match.simulationInterval) {
+      clearInterval(match.simulationInterval);
+      match.simulationInterval = null;
+    }
   }
 
   function cleanupMatch(match) {
@@ -235,6 +242,8 @@ function createMatchManager(state) {
         match.status = "ended";
         match.winner = match.players[result.winnerSide].playerId;
 
+        stopMatchRuntime(match);
+
         broadcast(match, {
           type: "match_ended",
           winnerPlayerId: match.winner,
@@ -242,7 +251,7 @@ function createMatchManager(state) {
           state: serializeMatch(match),
         });
 
-        cleanupMatch(match);
+        return;
       }
     }, SIM_TICK_MS);
   }

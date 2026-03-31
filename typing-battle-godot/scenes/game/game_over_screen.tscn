@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://r2lmnunso6ux"]
 
 [ext_resource type="Script" uid="uid://dphmihvpeco5r" path="res://scenes/game/game_over_screen.gd" id="1_agkj2"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="2_74tcy"]
+[ext_resource type="FontFile" uid="uid://b4qpckb7ynfwm" path="res://assets/fonts/BadComic-Italic.ttf" id="3_dilvs"]
+[ext_resource type="FontFile" uid="uid://dfafj6dmhu6ti" path="res://assets/fonts/ud-digi-kyokasho-n-b.ttf" id="4_dilvs"]
 
 [node name="GameOver_Screen" type="Control" unique_id=1380305430]
 z_index = 5
@@ -38,22 +41,35 @@ layout_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="CenterWrap/Panel/Margin" unique_id=456799780]
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox" unique_id=472422861]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75686276)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("2_74tcy")
+theme_override_font_sizes/font_size = 48
 text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="ResultLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox" unique_id=822854693]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75686276)
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("3_dilvs")
+theme_override_font_sizes/font_size = 32
 text = "You Win/Lose!"
 horizontal_alignment = 1
 
 [node name="SummaryLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox" unique_id=1404725536]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_74tcy")
+theme_override_font_sizes/font_size = 22
 text = "Game stats here"
 horizontal_alignment = 1
 
@@ -63,6 +79,7 @@ theme_override_constants/separation = 100
 alignment = 1
 
 [node name="LeftStatsPanel" type="PanelContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow" unique_id=2079539059]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="LeftStatsMargin" type="MarginContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow/LeftStatsPanel" unique_id=1300589813]
@@ -71,9 +88,16 @@ layout_mode = 2
 [node name="LeftStatsVbox" type="VBoxContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow/LeftStatsPanel/LeftStatsMargin" unique_id=240635234]
 layout_mode = 2
 
-[node name="LeftStatsTitle" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/LeftStatsPanel/LeftStatsMargin/LeftStatsVbox" unique_id=1676081814]
+[node name="LeftPlayerName" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/LeftStatsPanel/LeftStatsMargin/LeftStatsVbox" unique_id=555379938]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7058824)
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("4_dilvs")
+theme_override_font_sizes/font_size = 22
+text = "Left Player Name"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="LeftWordsLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/LeftStatsPanel/LeftStatsMargin/LeftStatsVbox" unique_id=1816089938]
 unique_name_in_owner = true
@@ -83,8 +107,15 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_74tcy")
+theme_override_fonts/italics_font = ExtResource("3_dilvs")
+text = "Word
+Word
+Word
+Word"
 
 [node name="RightStatsPanel" type="PanelContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow" unique_id=1681372310]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="RightStatsMargin" type="MarginContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow/RightStatsPanel" unique_id=1605952421]
@@ -93,9 +124,16 @@ layout_mode = 2
 [node name="RightStatsVbox" type="VBoxContainer" parent="CenterWrap/Panel/Margin/VBox/StatsRow/RightStatsPanel/RightStatsMargin" unique_id=802719728]
 layout_mode = 2
 
-[node name="RightStatsTitle" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/RightStatsPanel/RightStatsMargin/RightStatsVbox" unique_id=102209612]
+[node name="RightPlayerName" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/RightStatsPanel/RightStatsMargin/RightStatsVbox" unique_id=102209612]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7058824)
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("4_dilvs")
+theme_override_font_sizes/font_size = 22
+text = "Right Player Name"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="RightWordsLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox/StatsRow/RightStatsPanel/RightStatsMargin/RightStatsVbox" unique_id=1797531960]
 unique_name_in_owner = true
@@ -105,6 +143,12 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_74tcy")
+theme_override_fonts/italics_font = ExtResource("3_dilvs")
+text = "Word
+Word
+Word
+Word"
 
 [node name="ButtonsRow" type="HBoxContainer" parent="CenterWrap/Panel/Margin/VBox" unique_id=252381431]
 layout_mode = 2
@@ -114,15 +158,20 @@ alignment = 1
 [node name="BackToMenuButton" type="Button" parent="CenterWrap/Panel/Margin/VBox/ButtonsRow" unique_id=1549646800]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Back to Main Menu"
+theme_override_fonts/font = ExtResource("2_74tcy")
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
 
 [node name="PlayAgainButton" type="Button" parent="CenterWrap/Panel/Margin/VBox/ButtonsRow" unique_id=1177684516]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_74tcy")
+theme_override_font_sizes/font_size = 32
 text = "Play Again"
 
 [node name="WaitingLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox" unique_id=1044447210]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_74tcy")
 text = "Waiting Label..."
 horizontal_alignment = 1
