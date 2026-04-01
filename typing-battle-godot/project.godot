@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="English Typing Battle"
+config/name="Super Fun & Cool Typing Battle Game!"
 run/main_scene="uid://ws4cm1qoqgge"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/image="uid://p2nuq11q8jsi"
+config/icon="uid://p2nuq11q8jsi"
 
 [autoload]
 

@@ -146,6 +146,9 @@ func apply_match_state(state: Dictionary) -> void:
 	var left_word: Dictionary = left_word_raw as Dictionary
 	var right_word: Dictionary = right_word_raw as Dictionary
 
+	var previous_word_id: String = current_my_word_id
+	var previous_word_text: String = current_my_word_text
+
 	if my_side == "left":
 		current_my_word_id = str(left_word.get("wordId", ""))
 		current_my_word_text = str(left_word.get("text", ""))
@@ -153,11 +156,13 @@ func apply_match_state(state: Dictionary) -> void:
 		current_my_word_id = str(right_word.get("wordId", ""))
 		current_my_word_text = str(right_word.get("text", ""))
 
-	_update_input_target_word()
+	if current_my_word_id != previous_word_id or current_my_word_text != previous_word_text:
+		_update_input_target_word()
 
 	var soldiers_raw: Variant = state.get("soldiers", [])
 	if typeof(soldiers_raw) == TYPE_ARRAY:
 		_sync_soldiers_from_snapshot(soldiers_raw as Array)
+
 
 
 func show_countdown() -> void:
@@ -208,9 +213,6 @@ func handle_word_rejected(msg: Dictionary) -> void:
 	if typeof(rejected_state_raw) == TYPE_DICTIONARY:
 		apply_match_state(rejected_state_raw as Dictionary)
 	
-	# Play wrong ping sfx
-	wrong_sfx.play()
-	
 	_add_log("Word rejected: %s" % str(msg.get("reason", "Unknown")))
 
 
@@ -232,9 +234,9 @@ func handle_word_resolved(msg: Dictionary) -> void:
 		_set_input_editable(true)
 		_grab_input_focus()
 		_update_input_target_word()
-	
-	# Play correct ping sfx
-	correct_sfx.play()
+		
+		# Play correct ping sfx
+		correct_sfx.play()
 	
 	_add_log("Resolved: %s sent 1 soldier." % attacker_side)
 

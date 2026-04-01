@@ -22,6 +22,9 @@ func _ready() -> void:
 
 
 func set_target_word(word: String) -> void:
+	if word == target_word:
+		return
+	
 	target_word = word
 	type_input.text = ""
 	_render_hybrid_text("")
