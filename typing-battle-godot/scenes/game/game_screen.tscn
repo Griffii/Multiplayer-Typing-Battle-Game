@@ -159,6 +159,7 @@ layout_mode = 2
 [node name="correct-sfx" type="AudioStreamPlayer2D" parent="SfxContainer" unique_id=1839958051]
 unique_name_in_owner = true
 stream = ExtResource("7_6qx3b")
+volume_db = -15.0
 
 [node name="wrong-sfx" type="AudioStreamPlayer2D" parent="SfxContainer" unique_id=1002116931]
 unique_name_in_owner = true
