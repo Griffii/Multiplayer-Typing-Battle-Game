@@ -17,6 +17,9 @@ signal play_again_requested
 @onready var play_again_button: Button = %PlayAgainButton
 @onready var waiting_label: Label = %WaitingLabel
 
+@onready var fanfare_sfx: AudioStreamPlayer = %FanfareSfx
+@onready var fail_sfx: AudioStreamPlayer = %FailSfx
+
 var rematch_locked: bool = false
 var opponent_left: bool = false
 
@@ -48,8 +51,10 @@ func show_results(data: Dictionary) -> void:
 
 	if did_win:
 		result_label.text = "You Win!"
+		fanfare_sfx.play()
 	else:
 		result_label.text = "You Lose"
+		fail_sfx.play()
 
 	var minutes: int = int(game_length_seconds) / 60
 	var seconds: int = int(game_length_seconds) % 60

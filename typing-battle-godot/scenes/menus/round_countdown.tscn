@@ -45,3 +45,4 @@ vertical_alignment = 1
 [node name="count-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1979135951]
 unique_name_in_owner = true
 stream = ExtResource("3_i3x7k")
+volume_db = -5.0
