@@ -5,6 +5,8 @@ signal countdown_finished
 @onready var number_label: Label = %NumberLabel
 @onready var dim_rect: ColorRect = %DimRect
 
+@onready var count_sfx: AudioStreamPlayer2D = %"count-sfx"
+
 var base_number_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -20,28 +22,30 @@ func _store_base_position() -> void:
 
 func play_countdown(start_number: int = 3, step_time: float = 1.0) -> void:
 	visible = true
-
+	
 	if base_number_position == Vector2.ZERO:
 		base_number_position = number_label.position
-
+	
 	number_label.text = ""
 	number_label.modulate.a = 0.0
 	dim_rect.modulate.a = 0.0
-
+	
+	count_sfx.play()
+	
 	var fade_in_tween: Tween = create_tween()
 	fade_in_tween.tween_property(dim_rect, "modulate:a", 0.65, 0.18)
 	await fade_in_tween.finished
-
+	
 	for i: int in range(start_number, 0, -1):
 		await _play_single_number(str(i), step_time)
-
+	
 	number_label.text = ""
-
+	
 	var fade_out_tween: Tween = create_tween()
 	fade_out_tween.parallel().tween_property(dim_rect, "modulate:a", 0.0, 0.16)
 	fade_out_tween.parallel().tween_property(number_label, "modulate:a", 0.0, 0.10)
 	await fade_out_tween.finished
-
+	
 	visible = false
 	countdown_finished.emit()
 

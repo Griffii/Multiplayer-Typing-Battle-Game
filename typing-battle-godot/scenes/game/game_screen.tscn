@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://160u44o703f8"]
 
 [ext_resource type="Script" uid="uid://dct4gjexb3n5b" path="res://scenes/game/game_screen.gd" id="1_rs55t"]
-[ext_resource type="Texture2D" uid="uid://boloplsrx54db" path="res://assets/images/castle.png" id="2_h5hde"]
 [ext_resource type="TileSet" uid="uid://381uk2yd5j73" path="res://assets/tilesets/tiny-town-tileset.tres" id="2_u3wq2"]
 [ext_resource type="FontFile" uid="uid://b4qpckb7ynfwm" path="res://assets/fonts/BadComic-Italic.ttf" id="3_xuyhh"]
 [ext_resource type="FontFile" uid="uid://dfafj6dmhu6ti" path="res://assets/fonts/ud-digi-kyokasho-n-b.ttf" id="5_6qx3b"]
 [ext_resource type="PackedScene" uid="uid://idnsvj643pvt" path="res://scenes/game/main_input_container.tscn" id="6_6qx3b"]
-[ext_resource type="AudioStream" uid="uid://dagwp65eftifx" path="res://assets/sounds/correct-ping.ogg" id="7_6qx3b"]
+[ext_resource type="AudioStream" uid="uid://dagwp65eftifx" path="res://assets/sfx/correct-ping.ogg" id="7_6qx3b"]
+[ext_resource type="AudioStream" uid="uid://lj557ih7bune" path="res://assets/sfx/no-sfx.ogg" id="7_fxpxx"]
 
 [node name="Game" type="Control" unique_id=1988827291]
 layout_mode = 3
@@ -62,18 +62,6 @@ theme_override_font_sizes/font_size = 28
 text = "Example"
 horizontal_alignment = 1
 
-[node name="LeftCastleTexture" type="TextureRect" parent="LeftCastleContainer" unique_id=2129058064]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 0
-offset_left = 99.0
-offset_top = 167.0
-offset_right = 219.0
-offset_bottom = 287.0
-texture = ExtResource("2_h5hde")
-expand_mode = 1
-
 [node name="LeftHpLabel" type="Label" parent="LeftCastleContainer" unique_id=333809644]
 unique_name_in_owner = true
 layout_mode = 0
@@ -105,18 +93,6 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_xuyhh")
 theme_override_font_sizes/font_size = 28
 text = "Example"
-
-[node name="RightCastleTexture" type="TextureRect" parent="RightCastleContainer" unique_id=450285718]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 0
-offset_left = 1062.0
-offset_top = 169.0
-offset_right = 1182.0
-offset_bottom = 289.0
-texture = ExtResource("2_h5hde")
-expand_mode = 1
 
 [node name="RightHpLabel" type="Label" parent="RightCastleContainer" unique_id=126037472]
 unique_name_in_owner = true
@@ -186,5 +162,6 @@ stream = ExtResource("7_6qx3b")
 
 [node name="wrong-sfx" type="AudioStreamPlayer2D" parent="SfxContainer" unique_id=1002116931]
 unique_name_in_owner = true
+stream = ExtResource("7_fxpxx")
 
 [editable path="InputContainer"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beln8qhuu8r2w"
-path="res://.godot/imported/trace_01_rotated.png-a2575ead8576b267899ef9d3e37350c6.ctex"
+uid="uid://dl8g1tdf1vman"
+path="res://.godot/imported/buttonSquare_beige.png-a68a30e3534e28981e8bae2b387878c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/trace_01_rotated.png"
-dest_files=["res://.godot/imported/trace_01_rotated.png-a2575ead8576b267899ef9d3e37350c6.ctex"]
+source_file="res://assets/images/menu/buttonSquare_beige.png"
+dest_files=["res://.godot/imported/buttonSquare_beige.png-a68a30e3534e28981e8bae2b387878c9.ctex"]
 
 [params]
 

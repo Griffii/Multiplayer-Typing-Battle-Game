@@ -1,83 +1,53 @@
 [gd_scene format=3 uid="uid://r2lmnunso6ux"]
 
 [ext_resource type="Script" uid="uid://dphmihvpeco5r" path="res://scenes/game/game_over_screen.gd" id="1_agkj2"]
-[ext_resource type="Texture2D" uid="uid://dtfkclsdftyli" path="res://assets/images/panel-fantasy-01.png" id="2_35e7h"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="2_74tcy"]
+[ext_resource type="Texture2D" uid="uid://dgnpkl5wwblb1" path="res://assets/images/menu/panelInset_blue.png" id="2_pxy88"]
 [ext_resource type="FontFile" uid="uid://b4qpckb7ynfwm" path="res://assets/fonts/BadComic-Italic.ttf" id="3_dilvs"]
 [ext_resource type="FontFile" uid="uid://dfafj6dmhu6ti" path="res://assets/fonts/ud-digi-kyokasho-n-b.ttf" id="4_dilvs"]
-[ext_resource type="Texture2D" uid="uid://ddm5dcpb7ud0p" path="res://assets/images/button-01.png" id="5_lohbg"]
-[ext_resource type="Texture2D" uid="uid://v1j1lrc1w21j" path="res://assets/images/button-01-hover.png" id="6_35e7h"]
+[ext_resource type="Texture2D" uid="uid://gc1m2jgtycj1" path="res://assets/images/menu/buttonSquare_blue.png" id="6_8xsqk"]
+[ext_resource type="Texture2D" uid="uid://ba1ulrvypxycl" path="res://assets/images/menu/buttonSquare_blue_pressed.png" id="7_mu18a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vxs3"]
-texture = ExtResource("2_35e7h")
-texture_margin_left = 44.2844
-texture_margin_top = 43.965767
-texture_margin_right = 44.2844
-texture_margin_bottom = 44.015675
+texture = ExtResource("2_pxy88")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 region_rect = Rect2(0, 0, 96, 96)
 modulate_color = Color(0.58431375, 0.57254905, 0.67058825, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxy88"]
-texture = ExtResource("5_lohbg")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
+texture = ExtResource("6_8xsqk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lohbg"]
-texture = ExtResource("5_lohbg")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-modulate_color = Color(0.9149972, 0.78172475, 0.8645419, 1)
+texture = ExtResource("7_mu18a")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8xsqk"]
-texture = ExtResource("6_35e7h")
-texture_margin_left = 24.0
-texture_margin_top = 24.0
-texture_margin_right = 24.0
-texture_margin_bottom = 24.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_35e7h"]
-texture = ExtResource("5_lohbg")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-modulate_color = Color(0.48178947, 0.48178947, 0.48178947, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxy88"]
+texture = ExtResource("6_8xsqk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.8862616, 0.88626146, 0.8862615, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mu18a"]
-texture = ExtResource("5_lohbg")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-expand_margin_left = 16.0
-expand_margin_top = 16.0
-expand_margin_right = 16.0
-expand_margin_bottom = 16.0
-modulate_color = Color(0.9149972, 0.78172475, 0.8645419, 1)
+texture = ExtResource("6_8xsqk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.50980395)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_td8qg"]
-texture = ExtResource("5_lohbg")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-modulate_color = Color(0.48178947, 0.48178947, 0.48178947, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8xsqk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxy88"]
 
 [node name="GameOver_Screen" type="Control" unique_id=1380305430]
 z_index = 5
@@ -96,7 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.21568628)
+color = Color(0.1148968, 0.11489681, 0.1148968, 0.21568628)
 
 [node name="CenterWrap" type="CenterContainer" parent="." unique_id=967277885]
 layout_mode = 1
@@ -224,30 +194,34 @@ alignment = 1
 
 [node name="BackToMenuButton" type="Button" parent="CenterWrap/Panel/Margin/VBox/ButtonsRow" unique_id=1549646800]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(240, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_74tcy")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxTexture_pxy88")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_lohbg")
 theme_override_styles/hover = SubResource("StyleBoxTexture_8xsqk")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_35e7h")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_mu18a")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pxy88")
 text = "Main Menu"
 
-[node name="PlayAgainButton" type="Button" parent="CenterWrap/Panel/Margin/VBox/ButtonsRow" unique_id=1177684516]
+[node name="PlayAgainButton" type="Button" parent="CenterWrap/Panel/Margin/VBox/ButtonsRow" unique_id=957839554]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 60)
+custom_minimum_size = Vector2(240, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_74tcy")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxTexture_pxy88")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_mu18a")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_lohbg")
 theme_override_styles/hover = SubResource("StyleBoxTexture_8xsqk")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_td8qg")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8xsqk")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_mu18a")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pxy88")
 text = "Play Again"
 
 [node name="WaitingLabel" type="Label" parent="CenterWrap/Panel/Margin/VBox" unique_id=1044447210]

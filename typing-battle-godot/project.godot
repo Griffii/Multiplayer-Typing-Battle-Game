@@ -13,11 +13,11 @@ config_version=5
 config/name="English Typing Battle"
 run/main_scene="uid://ws4cm1qoqgge"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://assets/images/icon.svg"
 
 [autoload]
 
 NetworkManager="*uid://b05iwefirw6f8"
+UiSfxManager="*uid://djhi43b2iy1oq"
 
 [display]
 

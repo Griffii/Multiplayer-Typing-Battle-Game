@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qn2wbpqaevvc" path="res://scenes/game/main_input_container.gd" id="1_3d2dt"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="1_qw0bp"]
-[ext_resource type="AudioStream" uid="uid://d21dtkxbcw5qs" path="res://assets/sounds/Type_Click.ogg" id="3_r33r3"]
+[ext_resource type="AudioStream" uid="uid://d21dtkxbcw5qs" path="res://assets/sfx/Type_Click.ogg" id="3_r33r3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r33r3"]
 
@@ -55,7 +55,6 @@ bbcode_enabled = true
 text = "Input Text"
 scroll_active = false
 autowrap_mode = 0
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypeInput" type="LineEdit" parent="." unique_id=63343060]
@@ -74,16 +73,17 @@ offset_bottom = 33.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/caret_color = Color(0.9490196, 0.9490196, 0.9490196, 0)
+theme_override_colors/caret_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+theme_override_constants/caret_width = 2
 theme_override_fonts/font = ExtResource("1_qw0bp")
 theme_override_font_sizes/font_size = 52
 theme_override_styles/normal = SubResource("StyleBoxEmpty_r33r3")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_m0eup")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h7a2i")
 placeholder_text = "Input Text"
-alignment = 1
 keep_editing_on_text_submit = true
 expand_to_text_length = true
+caret_blink = true
 
 [node name="TypingSfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1966682271]
 unique_name_in_owner = true

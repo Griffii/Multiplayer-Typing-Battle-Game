@@ -164,7 +164,7 @@ func _on_lobby_leave_requested() -> void:
 		network.send_json({
 			"type": "leave_lobby"
 		})
-
+	
 	current_lobby_code = ""
 	current_lobby_mode = ""
 	current_match_state.clear()
@@ -198,6 +198,22 @@ func _on_socket_disconnected() -> void:
 	current_match_state.clear()
 	_show_main_menu()
 
+func _on_connection_state_changed(state: String) -> void:
+	if current_screen == null:
+		return
+	
+	if not current_screen.has_method("set_status_text"):
+		return
+	
+	match state:
+		"connecting":
+			current_screen.set_status_text("Connecting to server...")
+		"failed":
+			current_screen.set_status_text("Waking up server...")
+		"open":
+			# Optional: only overwrite if you are in lobby/setup flow
+			if current_screen.scene_file_path.ends_with("lobby_screen.tscn"):
+				current_screen.set_status_text("Connected.")
 
 func _on_connection_failed() -> void:
 	print("Connection failed")

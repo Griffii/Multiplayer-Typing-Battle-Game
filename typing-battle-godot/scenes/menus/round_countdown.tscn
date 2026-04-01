@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3jiu5nydwwxj" path="res://scenes/menus/round_countdown.gd" id="1_2jpbh"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="2_b7dil"]
+[ext_resource type="AudioStream" uid="uid://c13tku0pdgk86" path="res://assets/sfx/arcade-countdown.mp3" id="3_i3x7k"]
 
 [node name="RoundCountdown" type="Control" unique_id=2122675623]
 layout_mode = 3
@@ -40,3 +41,7 @@ theme_override_font_sizes/font_size = 156
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="count-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1979135951]
+unique_name_in_owner = true
+stream = ExtResource("3_i3x7k")

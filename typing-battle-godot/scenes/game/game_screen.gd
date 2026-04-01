@@ -89,8 +89,8 @@ func _set_pre_match_ui() -> void:
 
 	left_castle_hp_visual = 100
 	right_castle_hp_visual = 100
-	left_hp_label.text = "HP: 100"
-	right_hp_label.text = "HP: 100"
+	left_hp_label.text = "100"
+	right_hp_label.text = "100"
 
 	_set_input_editable(false)
 	_clear_input_text()
@@ -130,8 +130,8 @@ func apply_match_state(state: Dictionary) -> void:
 
 	left_castle_hp_visual = int(left.get("castleHp", left_castle_hp_visual))
 	right_castle_hp_visual = int(right.get("castleHp", right_castle_hp_visual))
-	left_hp_label.text = "HP: %d" % left_castle_hp_visual
-	right_hp_label.text = "HP: %d" % right_castle_hp_visual
+	left_hp_label.text = "%d" % left_castle_hp_visual
+	right_hp_label.text = "%d" % right_castle_hp_visual
 	castle_hp_initialized = true
 
 	left_player_name = str(left.get("name", left_player_name))
@@ -286,12 +286,12 @@ func handle_soldier_state(msg: Dictionary) -> void:
 		if typeof(left_castle_raw) == TYPE_DICTIONARY:
 			var left_castle: Dictionary = left_castle_raw as Dictionary
 			left_castle_hp_visual = int(left_castle.get("hp", left_castle_hp_visual))
-			left_hp_label.text = "HP: %d" % left_castle_hp_visual
+			left_hp_label.text = "%d" % left_castle_hp_visual
 
 		if typeof(right_castle_raw) == TYPE_DICTIONARY:
 			var right_castle: Dictionary = right_castle_raw as Dictionary
 			right_castle_hp_visual = int(right_castle.get("hp", right_castle_hp_visual))
-			right_hp_label.text = "HP: %d" % right_castle_hp_visual
+			right_hp_label.text = "%d" % right_castle_hp_visual
 
 
 func handle_soldier_attack(msg: Dictionary) -> void:
@@ -335,10 +335,10 @@ func handle_castle_hp_updated(msg: Dictionary) -> void:
 
 	if side == "left":
 		left_castle_hp_visual = hp
-		left_hp_label.text = "HP: %d" % left_castle_hp_visual
+		left_hp_label.text = "%d" % left_castle_hp_visual
 	elif side == "right":
 		right_castle_hp_visual = hp
-		right_hp_label.text = "HP: %d" % right_castle_hp_visual
+		right_hp_label.text = "%d" % right_castle_hp_visual
 
 
 func handle_match_ended(msg: Dictionary) -> void:
@@ -373,20 +373,24 @@ func _on_word_submitted_from_container(submitted_text: String) -> void:
 		return
 	
 	var typed: String = submitted_text.strip_edges().to_lower()
+	
+	# If the input is incorrect dont even send it to the server, just wipe the input field and tell the player No.
 	if typed != current_my_word_text:
 		_add_log("Incorrect word entered.")
+		_clear_input_text()
+		wrong_sfx.play()
 		return
 	
 	var now_ms: int = Time.get_ticks_msec()
 	var duration_ms: int = max(1, now_ms - word_started_at_ms)
-
+	
 	NetworkManager.send_json({
 		"type": "submit_word",
 		"wordId": current_my_word_id,
 		"text": typed,
 		"typedDurationMs": duration_ms
 	})
-
+	
 	_clear_input_text()
 	_set_input_editable(false)
 
