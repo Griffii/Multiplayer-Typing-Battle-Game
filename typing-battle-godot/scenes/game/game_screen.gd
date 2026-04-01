@@ -20,20 +20,22 @@ var right_player_name: String = "Right Player"
 
 var soldier_nodes: Dictionary = {}
 
-
 @onready var left_word_label: Label = %LeftWordLabel
 @onready var right_word_label: Label = %RightWordLabel
 @onready var left_hp_label: Label = %LeftHpLabel
 @onready var right_hp_label: Label = %RightHpLabel
 
-@onready var word_to_type_label: Label = %WordToTypeLabel
-@onready var type_input: LineEdit = %TypeInput
+@onready var input_container: Control = %InputContainer
 
 @onready var soldier_layer: Node = %SoldierLayer
 @onready var left_spawn_marker: Marker2D = %LeftSpawnMarker
 @onready var right_spawn_marker: Marker2D = %RightSpawnMarker
 
 @onready var log_label: RichTextLabel = %LogLabel
+
+@onready var correct_sfx: AudioStreamPlayer2D = %"correct-sfx"
+@onready var wrong_sfx: AudioStreamPlayer2D = %"wrong-sfx"
+
 
 var my_player_id: String = ""
 var my_side: String = ""
@@ -51,17 +53,19 @@ var left_castle_hp_visual: int = 100
 var right_castle_hp_visual: int = 100
 
 func _ready() -> void:
-	type_input.text_submitted.connect(_on_type_submitted)
+	if input_container.has_signal("word_submitted"):
+		input_container.word_submitted.connect(_on_word_submitted_from_container)
+	
 	_set_pre_match_ui()
-
+	
 	game_over_overlay = GameOverScene.instantiate()
 	add_child(game_over_overlay)
 	game_over_overlay.back_to_menu_requested.connect(_on_game_over_back_to_menu_requested)
 	game_over_overlay.play_again_requested.connect(_on_game_over_play_again_requested)
-
+	
 	countdown_overlay = CountDownScene.instantiate()
 	add_child(countdown_overlay)
-
+	
 	if countdown_overlay.has_signal("countdown_finished"):
 		countdown_overlay.countdown_finished.connect(_on_countdown_finished)
 
@@ -69,7 +73,7 @@ func _ready() -> void:
 func set_local_player_info(player_id: String, side: String) -> void:
 	my_player_id = player_id
 	my_side = side
-	_update_word_to_type_label()
+	_update_input_target_word()
 
 
 func set_player_names(left_name: String, right_name: String) -> void:
@@ -88,10 +92,8 @@ func _set_pre_match_ui() -> void:
 	left_hp_label.text = "HP: 100"
 	right_hp_label.text = "HP: 100"
 
-	type_input.text = ""
-	type_input.editable = false
-	word_to_type_label.text = "Waiting for match to begin."
-	type_input.placeholder_text = ""
+	_set_input_editable(false)
+	_clear_input_text()
 
 	opponent_left_session = false
 	match_active = false
@@ -151,7 +153,7 @@ func apply_match_state(state: Dictionary) -> void:
 		current_my_word_id = str(right_word.get("wordId", ""))
 		current_my_word_text = str(right_word.get("text", ""))
 
-	_update_word_to_type_label()
+	_update_input_target_word()
 
 	var soldiers_raw: Variant = state.get("soldiers", [])
 	if typeof(soldiers_raw) == TYPE_ARRAY:
@@ -160,9 +162,8 @@ func apply_match_state(state: Dictionary) -> void:
 
 func show_countdown() -> void:
 	match_active = false
-	type_input.editable = false
-	type_input.placeholder_text = ""
-	word_to_type_label.text = "Get ready..."
+	_set_input_editable(false)
+	_clear_input_text()
 	left_word_label.visible = false
 	right_word_label.visible = false
 
@@ -174,9 +175,9 @@ func _on_countdown_finished() -> void:
 	if game_over:
 		return
 
-	_update_word_to_type_label()
-	type_input.editable = true
-	type_input.grab_focus()
+	_update_input_target_word()
+	_set_input_editable(true)
+	_grab_input_focus()
 	match_active = true
 
 	if match_start_time_ms <= 0:
@@ -190,47 +191,51 @@ func start_match() -> void:
 	if match_start_time_ms <= 0:
 		match_start_time_ms = Time.get_ticks_msec()
 
-	_update_word_to_type_label()
-	type_input.editable = true
-	type_input.grab_focus()
+	_update_input_target_word()
+	_set_input_editable(true)
+	_grab_input_focus()
 	match_active = true
 
 
 func handle_word_rejected(msg: Dictionary) -> void:
 	if game_over:
 		return
-
-	type_input.editable = true
-	type_input.grab_focus()
-	type_input.placeholder_text = "Try again"
-
+	
+	_set_input_editable(true)
+	_grab_input_focus()
+	
 	var rejected_state_raw: Variant = msg.get("state", {})
 	if typeof(rejected_state_raw) == TYPE_DICTIONARY:
 		apply_match_state(rejected_state_raw as Dictionary)
-
+	
+	# Play wrong ping sfx
+	wrong_sfx.play()
+	
 	_add_log("Word rejected: %s" % str(msg.get("reason", "Unknown")))
 
 
 func handle_word_resolved(msg: Dictionary) -> void:
 	if game_over:
 		return
-
+	
 	var attacker_side: String = str(msg.get("attackerSide", ""))
 	var typed_text: String = str(msg.get("typedText", ""))
-
+	
 	var resolved_state_raw: Variant = msg.get("state", {})
 	if typeof(resolved_state_raw) == TYPE_DICTIONARY:
 		apply_match_state(resolved_state_raw as Dictionary)
-
+	
 	_record_word_entry(attacker_side, typed_text)
 	_play_castle_word_flash(attacker_side, typed_text)
-
+	
 	if attacker_side == my_side:
-		type_input.editable = true
-		type_input.grab_focus()
-		type_input.placeholder_text = ""
-		_update_word_to_type_label()
-
+		_set_input_editable(true)
+		_grab_input_focus()
+		_update_input_target_word()
+	
+	# Play correct ping sfx
+	correct_sfx.play()
+	
 	_add_log("Resolved: %s sent 1 soldier." % attacker_side)
 
 
@@ -342,9 +347,8 @@ func handle_match_ended(msg: Dictionary) -> void:
 
 	match_active = false
 	game_over = true
-	type_input.editable = false
-	type_input.release_focus()
-	type_input.placeholder_text = ""
+	_set_input_editable(false)
+	_release_input_focus()
 
 	var ended_state_raw: Variant = msg.get("state", {})
 	if typeof(ended_state_raw) == TYPE_DICTIONARY:
@@ -353,30 +357,26 @@ func handle_match_ended(msg: Dictionary) -> void:
 	var winner_id: String = str(msg.get("winnerPlayerId", ""))
 	var did_win: bool = winner_id == my_player_id
 
-	word_to_type_label.text = "Game over."
 	_show_game_over_overlay(did_win)
 	_add_log("Match ended.")
-
 
 
 func set_status_text(text: String) -> void:
 	_add_log(text)
 
 
-func _on_type_submitted(submitted_text: String) -> void:
+func _on_word_submitted_from_container(submitted_text: String) -> void:
 	if not match_active:
 		return
-
+	
 	if game_over:
 		return
-
+	
 	var typed: String = submitted_text.strip_edges().to_lower()
 	if typed != current_my_word_text:
-		type_input.placeholder_text = "Try again"
-		type_input.text = ""
 		_add_log("Incorrect word entered.")
 		return
-
+	
 	var now_ms: int = Time.get_ticks_msec()
 	var duration_ms: int = max(1, now_ms - word_started_at_ms)
 
@@ -387,9 +387,8 @@ func _on_type_submitted(submitted_text: String) -> void:
 		"typedDurationMs": duration_ms
 	})
 
-	type_input.text = ""
-	type_input.editable = false
-	type_input.placeholder_text = ""
+	_clear_input_text()
+	_set_input_editable(false)
 
 
 func _show_game_over_overlay(did_win: bool) -> void:
@@ -440,7 +439,7 @@ func set_waiting_for_rematch(is_waiting: bool) -> void:
 func set_opponent_left_session() -> void:
 	opponent_left_session = true
 	match_active = false
-	type_input.editable = false
+	_set_input_editable(false)
 
 	if game_over_overlay != null and game_over_overlay.has_method("set_opponent_left"):
 		game_over_overlay.set_opponent_left()
@@ -465,33 +464,51 @@ func _on_game_over_play_again_requested() -> void:
 	play_again_requested.emit()
 
 
-func _update_word_to_type_label() -> void:
+func _update_input_target_word() -> void:
 	if game_over:
 		return
 
-	if current_my_word_text.strip_edges().is_empty():
-		word_to_type_label.text = "Waiting for word..."
-	else:
-		word_to_type_label.text = current_my_word_text
+	if input_container != null and input_container.has_method("set_target_word"):
+		input_container.set_target_word(current_my_word_text)
+
+
+func _set_input_editable(is_editable: bool) -> void:
+	if input_container != null and input_container.has_method("set_editable"):
+		input_container.set_editable(is_editable)
+
+
+func _grab_input_focus() -> void:
+	if input_container != null and input_container.has_method("grab_input_focus"):
+		input_container.grab_input_focus()
+
+
+func _release_input_focus() -> void:
+	if input_container != null and input_container.has_method("release_input_focus"):
+		input_container.release_input_focus()
+
+
+func _clear_input_text() -> void:
+	if input_container != null and input_container.has_method("clear_input"):
+		input_container.clear_input()
 
 
 func _play_castle_word_flash(attacker_side: String, word: String) -> void:
 	var target_label: Label = left_word_label
 	if attacker_side == "right":
 		target_label = right_word_label
-	
+
 	target_label.text = word
 	target_label.visible = true
-	
+
 	var base_position: Vector2 = target_label.position
 	target_label.modulate.a = 1.0
 	target_label.position = base_position + Vector2(0.0, 8.0)
-	
+
 	var tween: Tween = create_tween()
 	tween.parallel().tween_property(target_label, "modulate:a", 0.0, 0.8)
 	tween.parallel().tween_property(target_label, "position", base_position + Vector2(0.0, -10.0), 0.8)
 	await tween.finished
-	
+
 	target_label.visible = false
 	target_label.text = ""
 	target_label.modulate.a = 1.0

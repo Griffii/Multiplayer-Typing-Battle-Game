@@ -7,6 +7,14 @@ signal message_received(message: Dictionary)
 var socket := WebSocketPeer.new()
 var was_open_last_frame: bool = false
 
+const LOCAL_URL := "ws://localhost:8080"
+const PROD_URL := "https://eitake-typing-battle-game.onrender.com/"
+
+var use_local := false
+
+func get_server_url() -> String:
+	return LOCAL_URL if use_local else PROD_URL
+
 func connect_to_server(target_url: String) -> void:
 	var err := socket.connect_to_url(target_url)
 	if err != OK:

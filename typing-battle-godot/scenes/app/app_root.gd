@@ -27,7 +27,7 @@ func _ready() -> void:
 	_show_main_menu()
 
 	await get_tree().process_frame
-	network.connect_to_server("ws://localhost:8080")
+	network.connect_to_server(NetworkManager.get_server_url())
 
 
 func _clear_current_screen() -> void:
