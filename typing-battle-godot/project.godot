@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Super Fun & Cool Typing Battle Game!"
+config/name="Typing Tower Defence!"
 run/main_scene="uid://ws4cm1qoqgge"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://p2nuq11q8jsi"

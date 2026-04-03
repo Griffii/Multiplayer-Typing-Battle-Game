@@ -14,11 +14,13 @@ enum RunState {
 
 const DEFAULT_WAVE_SET = preload("res://data/waves/wave_set_01.gd")
 const ARROW_PROJECTILE_SCENE: PackedScene = preload("res://scenes/game/projectiles/arrow_projectile.tscn")
+const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
 
 @onready var game_hud: CanvasLayer = %GameHud
 @onready var countdown_overlay: CanvasLayer = %CountdownOverlay
 @onready var game_over_overlay: CanvasLayer = %GameOverOverlay
 @onready var game_menu_overlay: CanvasLayer = %GameMenuOverlay
+@onready var shop_overlay: CanvasLayer = %ShopOverlay
 
 @onready var arrow_spawn_marker: Marker2D = %ArrowSpawnMarker
 @onready var projectile_container: Node = %ProjectileContainer
@@ -36,6 +38,7 @@ var total_waves: int = 0
 var run_active: bool = false
 var wave_set: Array = []
 var is_game_menu_open: bool = false
+var is_shop_open: bool = false
 
 
 func _ready() -> void:
@@ -87,6 +90,15 @@ func _connect_signals() -> void:
 		if game_menu_overlay.has_signal("resume_requested"):
 			game_menu_overlay.resume_requested.connect(_on_game_menu_resume_requested)
 
+	if shop_overlay != null:
+		if shop_overlay.has_signal("purchase_requested"):
+			shop_overlay.purchase_requested.connect(_on_shop_purchase_requested)
+		if shop_overlay.has_signal("build_mode_requested"):
+			shop_overlay.build_mode_requested.connect(_on_shop_build_mode_requested)
+		if shop_overlay.has_signal("next_wave_requested"):
+			shop_overlay.next_wave_requested.connect(_on_shop_next_wave_requested)
+
+
 	if wave_manager != null:
 		if wave_manager.has_signal("wave_started"):
 			wave_manager.wave_started.connect(_on_wave_started)
@@ -129,6 +141,7 @@ func _reset_run() -> void:
 	current_wave_index = 0
 	total_waves = wave_set.size()
 	is_game_menu_open = false
+	is_shop_open = false
 
 	get_tree().paused = false
 
@@ -152,6 +165,9 @@ func _reset_run() -> void:
 
 	if game_menu_overlay != null and game_menu_overlay.has_method("hide_overlay"):
 		game_menu_overlay.hide_overlay()
+	
+	if shop_overlay != null and shop_overlay.has_method("hide_overlay"):
+		shop_overlay.hide_overlay()
 
 
 	_set_run_state(RunState.PRE_WAVE)
@@ -167,33 +183,40 @@ func _set_run_state(new_state: RunState) -> void:
 			_disable_typing()
 			_show_start_wave_button("Start Wave")
 			_set_status_text("Press Start Wave when ready.")
+			_hide_shop()
 
 		RunState.COUNTDOWN:
 			_disable_typing()
 			_hide_start_wave_button()
 			_set_status_text("Get ready...")
+			_hide_shop()
 
 		RunState.WAVE_ACTIVE:
 			_enable_typing()
 			_hide_start_wave_button()
 			_set_status_text("Wave %d in progress." % (current_wave_index + 1))
+			_hide_shop()
 
 		RunState.SHOP:
 			_disable_typing()
-			_show_start_wave_button("Start Next Wave")
-			_set_status_text("Wave cleared.")
+			_hide_start_wave_button()
+			_set_status_text("Shopping Time.")
+			_show_shop()
 
 		RunState.VICTORY:
 			_disable_typing()
 			_hide_start_wave_button()
 			_set_status_text("Victory.")
+			_hide_shop()
 			_show_game_over(true)
 
 		RunState.DEFEAT:
 			_disable_typing()
 			_hide_start_wave_button()
 			_set_status_text("Defeat.")
+			_hide_shop()
 			_show_game_over(false)
+
 
 
 func _refresh_wave_ui() -> void:
@@ -205,7 +228,7 @@ func _on_start_wave_pressed() -> void:
 	if not run_active:
 		return
 
-	if is_game_menu_open:
+	if is_game_menu_open or is_shop_open:
 		return
 
 	if run_state != RunState.PRE_WAVE and run_state != RunState.SHOP:
@@ -243,6 +266,9 @@ func _on_wave_cleared(wave_index: int) -> void:
 	if run_state == RunState.DEFEAT or run_state == RunState.VICTORY:
 		return
 
+	if combat_manager != null and combat_manager.has_method("reset_arrow_meter"):
+		combat_manager.reset_arrow_meter()
+
 	current_wave_index = wave_index + 1
 	_refresh_wave_ui()
 
@@ -273,7 +299,7 @@ func _on_hud_text_changed(text: String) -> void:
 	if run_state != RunState.WAVE_ACTIVE:
 		return
 
-	if is_game_menu_open:
+	if is_game_menu_open or is_shop_open:
 		return
 
 	if typing_manager != null and typing_manager.has_method("process_input_text"):
@@ -317,6 +343,8 @@ func _on_hud_stats_changed(stats: Dictionary) -> void:
 	if game_hud.has_method("set_base_hp"):
 		game_hud.set_base_hp(int(stats.get("base_hp", 0)), int(stats.get("base_hp_max", 0)))
 
+	if is_shop_open:
+		_refresh_shop()
 
 func _on_arrow_meter_changed(current_value: float, max_value: float) -> void:
 	if game_hud != null and game_hud.has_method("set_arrow_meter"):
@@ -439,3 +467,73 @@ func _on_play_again_requested() -> void:
 func _on_back_to_menu_pressed() -> void:
 	get_tree().paused = false
 	back_to_menu_requested.emit()
+
+
+func _show_shop() -> void:
+	is_shop_open = true
+	
+	if shop_overlay == null or combat_manager == null:
+		return
+
+	if shop_overlay.has_method("show_overlay") and combat_manager.has_method("get_shop_state"):
+		shop_overlay.show_overlay(
+			combat_manager.get_shop_state(),
+			SHOP_DEFINITIONS.UPGRADES
+		)
+
+
+func _hide_shop() -> void:
+	is_shop_open = false
+	
+	if shop_overlay != null and shop_overlay.has_method("hide_overlay"):
+		shop_overlay.hide_overlay()
+
+
+func _refresh_shop() -> void:
+	if not is_shop_open:
+		return
+	if shop_overlay == null or combat_manager == null:
+		return
+
+	if shop_overlay.has_method("refresh_shop") and combat_manager.has_method("get_shop_state"):
+		shop_overlay.refresh_shop(
+			combat_manager.get_shop_state(),
+			SHOP_DEFINITIONS.UPGRADES
+		)
+
+
+func _on_shop_purchase_requested(upgrade_id: String) -> void:
+	if run_state != RunState.SHOP:
+		return
+	if combat_manager == null or not combat_manager.has_method("apply_upgrade_purchase"):
+		return
+
+	var purchased: bool = combat_manager.apply_upgrade_purchase(upgrade_id)
+	if purchased:
+		_refresh_shop()
+
+
+func _on_shop_build_mode_requested() -> void:
+	if run_state != RunState.SHOP:
+		return
+
+	# Placeholder for tower placement mode.
+	_set_status_text("Build mode not implemented yet.")
+
+
+func _on_shop_next_wave_requested() -> void:
+	print("Game Screen: _on_shop_next_wave_requested called")
+	if not run_active:
+		print("Game Screen: _on_shop_next_wave_requested returned - Not Run Active")
+		return
+	
+	if run_state != RunState.SHOP:
+		print("Game Screen: _on_shop_next_wave_requested returned - Not Shop State")
+		return
+	
+	print("Game Screen: _on_shop_next_wave_requested not returned")
+	
+	_set_run_state(RunState.COUNTDOWN)
+	print("Game Screen: State changed to: COUNTDOWN")
+	if countdown_overlay != null and countdown_overlay.has_method("play_countdown"):
+		countdown_overlay.play_countdown(3, 1.0)

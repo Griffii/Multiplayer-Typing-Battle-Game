@@ -23,7 +23,7 @@ func _ready() -> void:
 	var wave_effect := WaveTextEffect.new()
 	title_label.install_effect(wave_effect)
 
-	title_label.text = "[center][wave height=8 speed=2.2 spacing=0.45]Super Fun & Cool Typing Battle Game![/wave][/center]"
+	title_label.text = "[center][wave height=8 speed=2.2 spacing=0.45]Typing\nTower Defence![/wave][/center]"
 
 
 func _on_play_pressed() -> void:

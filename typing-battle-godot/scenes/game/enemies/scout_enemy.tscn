@@ -520,12 +520,12 @@ size = Vector2(40, 40)
 size = Vector2(65, 56)
 
 [node name="Scout" type="CharacterBody2D" unique_id=1935126053]
-scale = Vector2(0.8, 0.8)
 collision_layer = 2
 script = ExtResource("1_grmvo")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1740791532]
 unique_name_in_owner = true
+scale = Vector2(0.8, 0.8)
 
 [node name="Body" type="Sprite2D" parent="VisualRoot" unique_id=972723332]
 unique_name_in_owner = true

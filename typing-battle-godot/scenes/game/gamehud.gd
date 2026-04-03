@@ -6,8 +6,6 @@ signal text_submitted(text: String)
 signal text_changed(text: String)
 
 @onready var wave_label: Label = %WaveLabel
-@onready var timer_label: Label = %TimerLabel
-@onready var points_label: Label = %PointsLabel
 @onready var status_label: Label = %StatusLabel
 
 @onready var start_wave_button: Button = %StartWaveButton
@@ -33,7 +31,6 @@ func _ready() -> void:
 
 	input_field.editable = false
 	feedback_label.visible = false
-	timer_label.visible = false
 
 	show_start_wave_button("Start Wave")
 	set_wave_text(1, 1)
@@ -43,6 +40,7 @@ func _ready() -> void:
 func _on_start_wave_button_pressed() -> void:
 	start_wave_pressed.emit()
 	_focus_input()
+	hide_start_wave_button()
 
 
 func _on_game_menu_button_pressed() -> void:
@@ -62,19 +60,15 @@ func set_wave_text(current_wave: int, total_waves: int) -> void:
 	wave_label.text = "Wave %d / %d" % [current_wave, total_waves]
 
 
-func set_score(score: int) -> void:
-	points_label.text = "Points: %d" % score
-
-
 func set_gold(gold: int) -> void:
-	gold_label.text = "Gold: %d" % gold
+	gold_label.text = "%d" % gold
 
 
 func set_base_hp(current_hp: int, max_hp: int) -> void:
 	if max_hp <= 0:
-		base_hp_label.text = "Base HP: %d" % current_hp
+		base_hp_label.text = "%d" % current_hp
 	else:
-		base_hp_label.text = "Base HP: %d / %d" % [current_hp, max_hp]
+		base_hp_label.text = "%d / %d" % [current_hp, max_hp]
 
 
 func set_arrow_meter(current_value: float, max_value: float) -> void:
@@ -82,13 +76,10 @@ func set_arrow_meter(current_value: float, max_value: float) -> void:
 	progress_bar.value = clampf(current_value, 0.0, progress_bar.max_value)
 
 
+
 func set_status_text(text: String) -> void:
 	status_label.text = text
 
-
-func set_timer_text(text: String) -> void:
-	timer_label.text = text
-	timer_label.visible = not text.is_empty()
 
 
 func show_start_wave_button(button_text: String) -> void:

@@ -1,0 +1,370 @@
+[gd_scene format=3 uid="uid://bs1hvpqt6or3h"]
+
+[ext_resource type="Script" uid="uid://dam307em63adr" path="res://scenes/game/shop_menu_overlay.gd" id="1_ho8j0"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="2_4j2oy"]
+[ext_resource type="Texture2D" uid="uid://6lcwpgiafsmk" path="res://assets/images/card_01.png" id="2_8e4jm"]
+[ext_resource type="Texture2D" uid="uid://dl8g1tdf1vman" path="res://assets/images/menu/buttonSquare_beige.png" id="3_8e4jm"]
+[ext_resource type="Texture2D" uid="uid://cx2ovcmvgohjs" path="res://assets/images/menu/buttonSquare_beige_pressed.png" id="4_ixlxq"]
+[ext_resource type="Texture2D" uid="uid://3f1l2j46ds7y" path="res://assets/images/heart_icon.png" id="6_0wlgu"]
+[ext_resource type="Texture2D" uid="uid://cj5akasmqynae" path="res://assets/images/build_icon.png" id="7_idgks"]
+[ext_resource type="Texture2D" uid="uid://hufcnkabsplo" path="res://assets/images/menu/panelInset_beigeLight.png" id="8_idgks"]
+[ext_resource type="Texture2D" uid="uid://bd3nhyopixmid" path="res://assets/images/gold_coin.png" id="9_vb16a"]
+[ext_resource type="FontFile" uid="uid://dfafj6dmhu6ti" path="res://assets/fonts/ud-digi-kyokasho-n-b.ttf" id="10_kespj"]
+[ext_resource type="Texture2D" uid="uid://rb4720ggs5up" path="res://assets/images/scroll_label_panel.png" id="11_styg8"]
+[ext_resource type="AudioStream" uid="uid://dacstklnvog4q" path="res://assets/sfx/card_swipe.ogg" id="12_styg8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kmlj4"]
+texture = ExtResource("11_styg8")
+texture_margin_left = 10.054782
+texture_margin_top = 3.0511062
+texture_margin_right = 9.916096
+texture_margin_bottom = 2.0109565
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bahfu"]
+texture = ExtResource("2_8e4jm")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(8.111382, 0, 47.88862, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t6oyg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_styg8"]
+bg_color = Color(1, 1, 1, 0.42352942)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kmlj4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bahfu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dy1ff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ooo55"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehsud"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_anwqy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_styg8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aumtx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kespj"]
+texture = ExtResource("8_idgks")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0.9439678, 2.1212835, 92.05603, 91.878716)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0wlgu"]
+texture = ExtResource("3_8e4jm")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_idgks"]
+texture = ExtResource("4_ixlxq")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vb16a"]
+texture = ExtResource("3_8e4jm")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.85606754, 0.85606724, 0.85606724, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xjaea"]
+texture = ExtResource("3_8e4jm")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.50980395)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kespj"]
+
+[node name="ShopOverlay" type="CanvasLayer" unique_id=2140083217]
+script = ExtResource("1_ho8j0")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=2096681193]
+unique_name_in_owner = true
+visible = false
+offset_left = 406.0
+offset_top = 128.0
+offset_right = 553.9709
+offset_bottom = 198.06207
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.72156864)
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("10_kespj")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_kmlj4")
+text = "Shop"
+
+[node name="CardRoot_WordDamage" type="Control" parent="." unique_id=1415568419]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 265.0
+offset_top = 386.0
+offset_right = 395.0
+offset_bottom = 536.0
+
+[node name="CardTexture" type="Panel" parent="CardRoot_WordDamage" unique_id=1736794971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bahfu")
+
+[node name="WordDamageButton" type="Button" parent="CardRoot_WordDamage" unique_id=1165688287]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t6oyg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_styg8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kmlj4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bahfu")
+text = "+ Word
+Damage"
+autowrap_mode = 3
+
+[node name="CardRoot_ArrowDamage" type="Control" parent="." unique_id=2145547706]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 365.0
+offset_top = 386.0
+offset_right = 495.0
+offset_bottom = 536.0
+
+[node name="CardTexture" type="Panel" parent="CardRoot_ArrowDamage" unique_id=1352035571]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bahfu")
+
+[node name="ArrowDamageButton" type="Button" parent="CardRoot_ArrowDamage" unique_id=1953137594]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t6oyg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_styg8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dy1ff")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ooo55")
+text = "+ Arrow
+Damage"
+autowrap_mode = 3
+
+[node name="CardRoot_ArrowMeter" type="Control" parent="." unique_id=1685981917]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 465.0
+offset_top = 386.0
+offset_right = 595.0
+offset_bottom = 536.0
+
+[node name="CardTexture" type="Panel" parent="CardRoot_ArrowMeter" unique_id=300445654]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bahfu")
+
+[node name="ArrowMeterButton" type="Button" parent="CardRoot_ArrowMeter" unique_id=1355266849]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t6oyg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_styg8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ehsud")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_anwqy")
+text = "+ Arrow
+Meter"
+autowrap_mode = 3
+
+[node name="CardRoot_GoldGain" type="Control" parent="." unique_id=915635299]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 565.0
+offset_top = 386.0
+offset_right = 695.0
+offset_bottom = 536.0
+
+[node name="CardTexture" type="Panel" parent="CardRoot_GoldGain" unique_id=1635097887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bahfu")
+
+[node name="GoldGainButton" type="Button" parent="CardRoot_GoldGain" unique_id=1278282630]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t6oyg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_styg8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_styg8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aumtx")
+text = "+ Gold
+Gain"
+autowrap_mode = 3
+
+[node name="UpgradeCardsHBox - For Repositioning" type="HBoxContainer" parent="." unique_id=1618639219]
+custom_minimum_size = Vector2(0, 150)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -168.0
+offset_top = -64.0
+offset_right = 168.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = -30
+alignment = 1
+
+[node name="GoldContainer" type="HBoxContainer" parent="." unique_id=1453181399]
+visible = false
+offset_left = 457.0
+offset_top = 334.0
+offset_right = 502.0
+offset_bottom = 357.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="GoldContainer" unique_id=2039493674]
+layout_mode = 2
+texture = ExtResource("9_vb16a")
+expand_mode = 3
+
+[node name="GoldLabel" type="Label" parent="GoldContainer" unique_id=2075328028]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_font_sizes/font_size = 22
+text = "0 G"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="." unique_id=1762160267]
+unique_name_in_owner = true
+offset_left = 14.0
+offset_top = 309.0
+offset_right = 151.0
+offset_bottom = 345.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_styles/normal = SubResource("StyleBoxTexture_kespj")
+text = "Description Text"
+horizontal_alignment = 1
+
+[node name="NextWaveButton" type="Button" parent="." unique_id=1357789461]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 80)
+offset_left = 736.0
+offset_top = 24.0
+offset_right = 936.0
+offset_bottom = 104.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_4j2oy")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_0wlgu")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_idgks")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vb16a")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_xjaea")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kespj")
+text = "Next Wave"
+
+[node name="BottomButtonRow" type="HBoxContainer" parent="." unique_id=1711924826]
+offset_left = 24.0
+offset_top = 485.0
+offset_right = 936.0
+offset_bottom = 516.0
+size_flags_vertical = 8
+theme_override_constants/separation = 600
+alignment = 1
+
+[node name="RepairButton" type="Button" parent="BottomButtonRow" unique_id=432045555]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Repair Base"
+icon = ExtResource("6_0wlgu")
+
+[node name="BuildModeButton" type="Button" parent="BottomButtonRow" unique_id=72813904]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Build Mode"
+icon = ExtResource("7_idgks")
+
+[node name="CardHoverSfx" type="AudioStreamPlayer2D" parent="." unique_id=518790465]
+unique_name_in_owner = true
+stream = ExtResource("12_styg8")

@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://dgyvycrbybuhs"]
+[gd_scene format=3 uid="uid://cgyf85aard03x"]
 
-[ext_resource type="Script" uid="uid://b847mmq3ltync" path="res://scenes/game/enemies/enemy.gd" id="1_018dc"]
-[ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/soldiers/soldier_01.png" id="2_cwxcp"]
-[ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/soldiers/weapon_01.png" id="3_aqtvf"]
-[ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/soldiers/shield.png" id="4_bt7jr"]
-[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="5_vniek"]
-[ext_resource type="AudioStream" uid="uid://d1c1qptlmsujv" path="res://assets/sfx/sword-attack-sfx.ogg" id="6_7qbyo"]
-[ext_resource type="AudioStream" uid="uid://cj0a4f0d843dj" path="res://assets/sfx/soldier-death-sfx.ogg" id="7_ci21b"]
-[ext_resource type="AudioStream" uid="uid://cxto2jug3865u" path="res://assets/sfx/soldier-take-damage-sfx.ogg" id="8_3kw7w"]
+[ext_resource type="Script" uid="uid://b847mmq3ltync" path="res://scenes/game/enemies/enemy.gd" id="1_obodn"]
+[ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/soldiers/soldier_01.png" id="2_l4agm"]
+[ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/soldiers/weapon_01.png" id="3_ect7s"]
+[ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/soldiers/shield.png" id="4_ia1wx"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="5_4cu83"]
+[ext_resource type="AudioStream" uid="uid://d1c1qptlmsujv" path="res://assets/sfx/sword-attack-sfx.ogg" id="6_duoiv"]
+[ext_resource type="AudioStream" uid="uid://cj0a4f0d843dj" path="res://assets/sfx/soldier-death-sfx.ogg" id="7_fsd4n"]
+[ext_resource type="AudioStream" uid="uid://cxto2jug3865u" path="res://assets/sfx/soldier-take-damage-sfx.ogg" id="8_jbcq4"]
 
 [sub_resource type="Animation" id="Animation_1vxcc"]
 length = 0.001
@@ -519,19 +519,19 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ddi5"]
 size = Vector2(65, 56)
 
-[node name="Tank" type="CharacterBody2D" unique_id=1935126053 groups=["enemy"]]
+[node name="Boss" type="CharacterBody2D" unique_id=1935126053 groups=["enemy"]]
 collision_layer = 2
-script = ExtResource("1_018dc")
+script = ExtResource("1_obodn")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=1740791532]
 unique_name_in_owner = true
-scale = Vector2(1.5, 1.5)
+scale = Vector2(3, 3)
 
 [node name="Body" type="Sprite2D" parent="VisualRoot" unique_id=972723332]
 unique_name_in_owner = true
 position = Vector2(0, 24)
 scale = Vector2(3, 3)
-texture = ExtResource("2_cwxcp")
+texture = ExtResource("2_l4agm")
 offset = Vector2(0, -8)
 
 [node name="Weapon" type="Sprite2D" parent="VisualRoot" unique_id=1242448013]
@@ -539,14 +539,14 @@ unique_name_in_owner = true
 position = Vector2(17.000002, 15.000003)
 rotation = 0.7853982
 scale = Vector2(1.9999998, 1.9999998)
-texture = ExtResource("3_aqtvf")
+texture = ExtResource("3_ect7s")
 offset = Vector2(-0.20558357, -5.305299)
 
 [node name="Shield" type="Sprite2D" parent="VisualRoot" unique_id=70943691]
 unique_name_in_owner = true
 position = Vector2(-15, 12.999999)
 scale = Vector2(2, 2)
-texture = ExtResource("4_bt7jr")
+texture = ExtResource("4_ia1wx")
 
 [node name="LabelRoot" type="Node2D" parent="." unique_id=258776368]
 unique_name_in_owner = true
@@ -560,9 +560,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -25.5
-offset_top = -58.0
+offset_top = -93.0
 offset_right = 25.5
-offset_bottom = -33.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -571,11 +571,11 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7647059)
 theme_override_constants/shadow_outline_size = 3
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("5_vniek")
-theme_override_fonts/bold_font = ExtResource("5_vniek")
-theme_override_fonts/bold_italics_font = ExtResource("5_vniek")
-theme_override_fonts/italics_font = ExtResource("5_vniek")
-theme_override_fonts/mono_font = ExtResource("5_vniek")
+theme_override_fonts/normal_font = ExtResource("5_4cu83")
+theme_override_fonts/bold_font = ExtResource("5_4cu83")
+theme_override_fonts/bold_italics_font = ExtResource("5_4cu83")
+theme_override_fonts/italics_font = ExtResource("5_4cu83")
+theme_override_fonts/mono_font = ExtResource("5_4cu83")
 theme_override_font_sizes/normal_font_size = 20
 theme_override_font_sizes/bold_font_size = 20
 theme_override_font_sizes/bold_italics_font_size = 20
@@ -591,26 +591,26 @@ vertical_alignment = 1
 [node name="HpLabel" type="Label" parent="LabelRoot" unique_id=372582553]
 unique_name_in_owner = true
 offset_left = -21.0
-offset_top = 35.0
+offset_top = 72.0
 offset_right = 21.0
-offset_bottom = 58.0
+offset_bottom = 95.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.44313726)
 theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_vniek")
+theme_override_fonts/font = ExtResource("5_4cu83")
 text = "10"
 horizontal_alignment = 1
 
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1599622870]
 unique_name_in_owner = true
-stream = ExtResource("6_7qbyo")
+stream = ExtResource("6_duoiv")
 
 [node name="death-sfx" type="AudioStreamPlayer2D" parent="." unique_id=98160918]
 unique_name_in_owner = true
-stream = ExtResource("7_ci21b")
+stream = ExtResource("7_fsd4n")
 
 [node name="hit-sfx" type="AudioStreamPlayer2D" parent="." unique_id=684487782]
 unique_name_in_owner = true
-stream = ExtResource("8_3kw7w")
+stream = ExtResource("8_jbcq4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=473145069]
 unique_name_in_owner = true

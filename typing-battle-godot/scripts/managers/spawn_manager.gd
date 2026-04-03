@@ -1,17 +1,18 @@
-# spawn_manager.gd
 extends Node
 
 const GRUNT_SCENE: PackedScene = preload("res://scenes/game/enemies/grunt_enemy.tscn")
 const SCOUT_SCENE: PackedScene = preload("res://scenes/game/enemies/scout_enemy.tscn")
 const TANK_SCENE: PackedScene = preload("res://scenes/game/enemies/tank_enemy.tscn")
+const BOSS_SCENE: PackedScene = preload("res://scenes/game/enemies/boss_enemy.tscn")
 
 const ENEMY_SCENES := {
 	"grunt": GRUNT_SCENE,
 	"scout": SCOUT_SCENE,
 	"tank": TANK_SCENE,
+	"boss": BOSS_SCENE,
 }
 
-const GruntWords = preload("res://data/words/grunt_words.gd")
+const WordLists = preload("res://data/words/word_lists.gd")
 
 @export var spawn_interval_seconds: float = 0.8
 @export var minimum_spacing_pixels: float = 72.0
@@ -19,7 +20,6 @@ const GruntWords = preload("res://data/words/grunt_words.gd")
 @onready var enemy_container: Node = %EnemyContainer
 @onready var spawn_marker: Marker2D = %EnemySpawnMarker
 @onready var enemy_path: Path2D = %EnemyPath
-@onready var base_marker: Marker2D = %BaseMarker
 @onready var wave_manager: Node = %WaveManager
 @onready var combat_manager: Node = %CombatManager
 
@@ -30,7 +30,11 @@ var wave_in_progress: bool = false
 var waiting_for_wave_enemy_data: bool = false
 var current_wave_spawn_interval: float = 0.8
 
-var used_grunt_words: Array[String] = []
+var used_easy_words: Array[String] = []
+var used_medium_words: Array[String] = []
+var used_hard_words: Array[String] = []
+var used_boss_words: Array[String] = []
+
 var enemy_spawn_serial: int = 0
 
 
@@ -80,7 +84,12 @@ func reset_for_new_run() -> void:
 	wave_in_progress = false
 	waiting_for_wave_enemy_data = false
 	current_wave_spawn_interval = spawn_interval_seconds
-	used_grunt_words.clear()
+
+	used_easy_words.clear()
+	used_medium_words.clear()
+	used_hard_words.clear()
+	used_boss_words.clear()
+
 	enemy_spawn_serial = 0
 
 	for enemy in active_enemies:
@@ -100,7 +109,11 @@ func begin_wave(_wave_index: int) -> void:
 	spawn_timer = 0.0
 	wave_in_progress = true
 	waiting_for_wave_enemy_data = false
-	used_grunt_words.clear()
+
+	used_easy_words.clear()
+	used_medium_words.clear()
+	used_hard_words.clear()
+	used_boss_words.clear()
 
 	current_wave_spawn_interval = spawn_interval_seconds
 
@@ -143,7 +156,17 @@ func get_front_most_enemy() -> Node:
 
 
 func get_word_for_enemy_type(enemy_type: String) -> String:
-	return _get_word_for_enemy_type(enemy_type)
+	match enemy_type:
+		"scout":
+			return _get_random_scout_word()
+		"grunt":
+			return _get_random_grunt_word()
+		"tank":
+			return _get_random_tank_word()
+		"boss":
+			return _get_random_boss_word()
+		_:
+			return _get_random_grunt_word()
 
 
 func _on_wave_started(wave_index: int) -> void:
@@ -178,6 +201,9 @@ func _can_spawn_next_enemy() -> bool:
 	if active_enemies.is_empty():
 		return true
 
+	if not is_instance_valid(spawn_marker):
+		return false
+
 	var spawn_x: float = spawn_marker.global_position.x
 
 	for enemy in active_enemies:
@@ -196,6 +222,12 @@ func _can_spawn_next_enemy() -> bool:
 
 func _spawn_next_enemy_from_queue() -> void:
 	if spawn_queue.is_empty():
+		return
+	if enemy_container == null or not is_instance_valid(enemy_container):
+		return
+	if spawn_marker == null or not is_instance_valid(spawn_marker):
+		return
+	if enemy_path == null or not is_instance_valid(enemy_path):
 		return
 
 	var enemy_data: Dictionary = spawn_queue.pop_front()
@@ -216,7 +248,7 @@ func _spawn_next_enemy_from_queue() -> void:
 	final_enemy_data["path_points"] = enemy_path.curve.get_baked_points()
 
 	if not final_enemy_data.has("word") or str(final_enemy_data.get("word", "")).is_empty():
-		final_enemy_data["word"] = _get_word_for_enemy_type(enemy_type)
+		final_enemy_data["word"] = get_word_for_enemy_type(enemy_type)
 
 	if enemy_instance.has_method("setup_enemy"):
 		enemy_instance.setup_enemy(final_enemy_data)
@@ -237,36 +269,50 @@ func _spawn_next_enemy_from_queue() -> void:
 		_request_next_wave_enemy()
 
 
-func _get_word_for_enemy_type(enemy_type: String) -> String:
-	match enemy_type:
-		"grunt":
-			return _get_random_grunt_word()
-		"scout":
-			return _get_random_grunt_word()
-		"tank":
-			return _get_random_grunt_word()
-		_:
-			return _get_random_grunt_word()
+func _get_easy_words() -> Array[String]:
+	return WordLists.EASY_WORDS
+
+
+func _get_medium_words() -> Array[String]:
+	return WordLists.MEDIUM_WORDS
+
+
+func _get_hard_words() -> Array[String]:
+	return WordLists.HARD_WORDS
+
+
+func _get_random_scout_word() -> String:
+	return _get_random_word_from_pool(_get_easy_words(), used_easy_words)
 
 
 func _get_random_grunt_word() -> String:
-	var all_words: Array[String] = GruntWords.WORDS
+	return _get_random_word_from_pool(_get_medium_words(), used_medium_words)
 
+
+func _get_random_tank_word() -> String:
+	return _get_random_word_from_pool(_get_hard_words(), used_hard_words)
+
+
+func _get_random_boss_word() -> String:
+	return _get_random_word_from_pool(WordLists.BOSS_WORDS, used_boss_words)
+
+
+func _get_random_word_from_pool(all_words: Array[String], used_words: Array[String]) -> String:
 	if all_words.is_empty():
 		return "word"
 
 	var available_words: Array[String] = []
 
 	for word in all_words:
-		if not used_grunt_words.has(word):
+		if not used_words.has(word):
 			available_words.append(word)
 
 	if available_words.is_empty():
-		used_grunt_words.clear()
+		used_words.clear()
 		available_words = all_words.duplicate()
 
 	var chosen_word: String = available_words[randi() % available_words.size()]
-	used_grunt_words.append(chosen_word)
+	used_words.append(chosen_word)
 	return chosen_word
 
 

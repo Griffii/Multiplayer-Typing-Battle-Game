@@ -1,4 +1,3 @@
-# combat_manager.gd
 extends Node
 
 signal base_destroyed
@@ -7,22 +6,30 @@ signal arrow_meter_changed(current_value: float, max_value: float)
 signal enemy_survived_word_hit(enemy: Node)
 signal arrow_meter_filled
 
-@export var base_hp_max: int = 50
+const ShopDefinitions = preload("res://data/shop/shop_definitions.gd")
+
+@export var base_hp_max: int = 100
 @export var word_damage: int = 10
-@export var kill_score: int = 10
-@export var kill_gold: int = 1
 @export var arrow_damage: int = 10
-@export var arrow_meter_gain_per_word: float = 25.0
+@export var arrow_meter_gain_per_word: float = 15.0
 @export var arrow_meter_max: float = 100.0
+@export var gold_gain_multiplier: float = 1.0
 
 @onready var spawn_manager: Node = %SpawnManager
 
-var base_hp: int = 50
-var score: int = 0
+var base_hp: int = 100
+
 var gold: int = 0
 var arrow_meter: float = 0.0
 
 var base_attackers: Array[Node] = []
+
+var upgrade_levels := {
+	"word_damage": 0,
+	"arrow_damage": 0,
+	"arrow_meter_gain": 0,
+	"gold_gain": 0
+}
 
 
 func _process(delta: float) -> void:
@@ -39,22 +46,19 @@ func _process(delta: float) -> void:
 func setup_run(run_config: Dictionary) -> void:
 	base_hp_max = int(run_config.get("starting_base_hp", base_hp_max))
 	word_damage = int(run_config.get("word_damage", word_damage))
-	kill_score = int(run_config.get("kill_score", kill_score))
-	kill_gold = int(run_config.get("kill_gold", kill_gold))
 	arrow_damage = int(run_config.get("arrow_damage", arrow_damage))
 	arrow_meter_gain_per_word = float(run_config.get("arrow_meter_gain_per_word", arrow_meter_gain_per_word))
 	arrow_meter_max = float(run_config.get("arrow_meter_max", arrow_meter_max))
+	gold_gain_multiplier = float(run_config.get("gold_gain_multiplier", gold_gain_multiplier))
 
 
 func reset_for_new_run() -> void:
 	base_hp = base_hp_max
-	score = 0
 	gold = 0
-	arrow_meter = 0.0
 	base_attackers.clear()
-
+	
 	_emit_hud_stats()
-	arrow_meter_changed.emit(arrow_meter, arrow_meter_max)
+	reset_arrow_meter()
 
 
 func resolve_completed_word(target_enemy: Node) -> void:
@@ -78,16 +82,11 @@ func resolve_completed_word(target_enemy: Node) -> void:
 	arrow_meter_changed.emit(arrow_meter, arrow_meter_max)
 
 	if not is_instance_valid(target_enemy):
-		score += kill_score
-		gold += kill_gold
-		_emit_hud_stats()
 		return
 
 	if target_enemy.has_method("is_enemy_dead") and target_enemy.is_enemy_dead():
 		if not was_dead_before:
-			score += kill_score
-			gold += kill_gold
-			_emit_hud_stats()
+			_award_enemy_kill_rewards(target_enemy)
 		return
 
 	if target_enemy.has_method("get_enemy_type") and spawn_manager != null and spawn_manager.has_method("get_word_for_enemy_type"):
@@ -116,16 +115,27 @@ func fire_castle_arrow_at_target(target_enemy: Node) -> void:
 	target_enemy.apply_damage(arrow_damage)
 
 	if not is_instance_valid(target_enemy):
-		score += kill_score
-		gold += kill_gold
-		_emit_hud_stats()
 		return
 
 	if target_enemy.has_method("is_enemy_dead") and target_enemy.is_enemy_dead():
 		if not was_dead_before:
-			score += kill_score
-			gold += kill_gold
-			_emit_hud_stats()
+			_award_enemy_kill_rewards(target_enemy)
+
+
+func reset_arrow_meter() -> void:
+	arrow_meter = 0.0
+	arrow_meter_changed.emit(arrow_meter, arrow_meter_max)
+
+
+func _award_enemy_kill_rewards(enemy: Node) -> void:
+	var reward_gold: int = 0
+
+	if enemy != null and is_instance_valid(enemy):
+		if enemy.has_method("get_reward_gold"):
+			reward_gold = int(enemy.get_reward_gold())
+
+	gold += int(round(reward_gold * gold_gain_multiplier))
+	_emit_hud_stats()
 
 
 func register_enemy_at_base(enemy: Node) -> void:
@@ -152,9 +162,73 @@ func apply_base_damage(amount: int) -> void:
 		base_destroyed.emit()
 
 
+func apply_upgrade_purchase(upgrade_id: String) -> bool:
+	if not ShopDefinitions.UPGRADES.has(upgrade_id):
+		return false
+
+	var def: Dictionary = ShopDefinitions.UPGRADES[upgrade_id]
+	var current_level: int = int(upgrade_levels.get(upgrade_id, 0))
+	var max_level: int = int(def.get("max_level", -1))
+
+	if max_level >= 0 and current_level >= max_level:
+		return false
+
+	var cost: int = get_upgrade_cost(upgrade_id)
+	if gold < cost:
+		return false
+
+	gold -= cost
+
+	match upgrade_id:
+		"repair_base":
+			var repair_amount: int = int(def.get("value_per_level", 0))
+			base_hp = min(base_hp_max, base_hp + repair_amount)
+
+		"word_damage":
+			word_damage += int(def.get("value_per_level", 0))
+			upgrade_levels[upgrade_id] = current_level + 1
+
+		"arrow_damage":
+			arrow_damage += int(def.get("value_per_level", 0))
+			upgrade_levels[upgrade_id] = current_level + 1
+
+		"arrow_meter_gain":
+			arrow_meter_gain_per_word += float(def.get("value_per_level", 0))
+			upgrade_levels[upgrade_id] = current_level + 1
+
+		"gold_gain":
+			gold_gain_multiplier += float(def.get("value_per_level", 0))
+			upgrade_levels[upgrade_id] = current_level + 1
+
+	_emit_hud_stats()
+	arrow_meter_changed.emit(arrow_meter, arrow_meter_max)
+	return true
+
+
+func get_upgrade_cost(upgrade_id: String) -> int:
+	if not ShopDefinitions.UPGRADES.has(upgrade_id):
+		return 999999
+
+	var def: Dictionary = ShopDefinitions.UPGRADES[upgrade_id]
+	var current_level: int = int(upgrade_levels.get(upgrade_id, 0))
+	return int(def.get("base_cost", 0)) + current_level * int(def.get("cost_scaling", 0))
+
+
+func get_shop_state() -> Dictionary:
+	return {
+		"gold": gold,
+		"base_hp": base_hp,
+		"base_hp_max": base_hp_max,
+		"upgrade_levels": upgrade_levels.duplicate(true),
+		"word_damage": word_damage,
+		"arrow_damage": arrow_damage,
+		"arrow_meter_gain_per_word": arrow_meter_gain_per_word,
+		"gold_gain_multiplier": gold_gain_multiplier
+	}
+
+
 func _emit_hud_stats() -> void:
 	hud_stats_changed.emit({
-		"score": score,
 		"gold": gold,
 		"base_hp": base_hp,
 		"base_hp_max": base_hp_max

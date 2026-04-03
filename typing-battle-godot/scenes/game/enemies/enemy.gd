@@ -5,27 +5,35 @@ signal enemy_reached_base(enemy: Node)
 
 const ENEMY_STATS := {
 	"grunt": {
-		"move_speed": 40.0,
+		"move_speed": 50.0,
 		"max_hp": 22,
 		"reward_score": 10,
-		"reward_gold": 1,
+		"reward_gold": 5,
 		"base_attack_damage": 2,
-		"base_attack_interval": 2.0,
+		"base_attack_interval": 1.5,
 	},
 	"scout": {
-		"move_speed": 65.0,
+		"move_speed": 80.0,
 		"max_hp": 11,
 		"reward_score": 15,
-		"reward_gold": 2,
+		"reward_gold": 7,
 		"base_attack_damage": 1,
 		"base_attack_interval": 1.0,
 	},
 	"tank": {
-		"move_speed": 24.0,
+		"move_speed": 30.0,
 		"max_hp": 60,
 		"reward_score": 25,
-		"reward_gold": 5,
+		"reward_gold": 10,
 		"base_attack_damage": 3,
+		"base_attack_interval": 2.0,
+	},
+	"boss": {
+		"move_speed": 20.0,
+		"max_hp": 1000,
+		"reward_score": 100,
+		"reward_gold": 100,
+		"base_attack_damage": 10,
 		"base_attack_interval": 3.0,
 	},
 }
@@ -274,18 +282,16 @@ func play_take_damage_animation() -> void:
 		return
 	if not animation_player.has_animation("take_damage"):
 		return
-
+	
 	is_damage_anim_active = true
 	animation_player.play("take_damage")
 	await animation_player.animation_finished
 	is_damage_anim_active = false
-
+	
 	if is_dead:
 		return
-
-	if has_reached_base:
-		play_attack_animation()
-	else:
+	
+	if not has_reached_base:
 		_play_walk_animation()
 
 
@@ -305,10 +311,7 @@ func play_attack_animation() -> void:
 	if is_dead:
 		return
 
-	if has_reached_base:
-		if not is_damage_anim_active:
-			animation_player.play("attack")
-	elif not has_reached_base:
+	if not has_reached_base:
 		_play_walk_animation()
 
 
