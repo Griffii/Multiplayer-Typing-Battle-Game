@@ -3,87 +3,148 @@ class_name WaveSet01
 
 const WAVES := [
 	{
+		"spawn_interval": 1.20,
+		"wave_word_list": "easy",
+		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"}
+		]
+	},
+	{
+		"spawn_interval": 1.10,
+		"wave_word_list": "easy",
 		"enemies": [
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"}
+		]
+	},
+	{
+		"spawn_interval": 1.05,
+		"wave_word_list": "easy",
+		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"}
+		]
+	},
+	{
+		"spawn_interval": 1.00,
+		"wave_word_list": "easy",
+		"enemies": [
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"}
+		]
+	},
+	{
+		"spawn_interval": 0.98,
+		"wave_word_list": "medium",
+		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout", "word_list": "easy"}
+		]
+	},
+	{
+		"spawn_interval": 0.95,
+		"wave_word_list": "medium",
+		"enemies": [
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "grunt"}
+		]
+	},
+	{
+		"spawn_interval": 0.92,
+		"wave_word_list": "medium",
+		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout", "word_list": "easy"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "tank"}
 		]
 	},
 	{
-		"spawn_interval": 0.9,
+		"spawn_interval": 0.90,
+		"wave_word_list": "medium",
 		"enemies": [
+			{"enemy_type": "tank"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "speed": 82.0},
+			{"enemy_type": "scout", "word_list": "easy"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt", "speed": 52.0},
-			{"enemy_type": "scout"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"}
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout", "word_list": "easy"}
 		]
 	},
 	{
-		"spawn_interval": 0.8,
+		"spawn_interval": 0.88,
+		"wave_word_list": "medium",
 		"enemies": [
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "speed": 84.0},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt", "speed": 54.0},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout", "speed": 86.0},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt"}
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"}
 		]
 	},
 	{
-		"spawn_interval": 0.7,
+		"spawn_interval": 1.00,
+		"wave_word_list": "medium",
 		"enemies": [
-			{"enemy_type": "grunt", "speed": 56.0},
-			{"enemy_type": "scout", "speed": 88.0},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt", "speed": 58.0},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout", "speed": 90.0},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout"},
-			{"enemy_type": "grunt", "speed": 60.0}
-		]
-	},
-	{
-		"spawn_interval": 0.6,
-		"enemies": [
-			{"enemy_type": "scout", "speed": 92.0},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt", "speed": 60.0},
-			{"enemy_type": "scout"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "speed": 94.0},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt", "speed": 62.0},
-			{"enemy_type": "scout"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "boss"},
-			{"enemy_type": "scout", "speed": 96.0},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"}
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "scout", "word_list": "easy"},
+			{"enemy_type": "tank", "word_list": "medium"},
+			{"enemy_type": "grunt", "word_list": "medium"},
+			{"enemy_type": "boss", "word_list": "boss"}
 		]
 	}
 ]

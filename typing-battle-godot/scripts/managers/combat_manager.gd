@@ -101,9 +101,8 @@ func resolve_completed_word(target_enemy: Node) -> void:
 			_award_enemy_kill_rewards(target_enemy)
 		return
 
-	if target_enemy.has_method("get_enemy_type") and spawn_manager != null and spawn_manager.has_method("get_word_for_enemy_type"):
-		var enemy_type: String = String(target_enemy.get_enemy_type())
-		var new_word: String = String(spawn_manager.get_word_for_enemy_type(enemy_type))
+	if spawn_manager != null and spawn_manager.has_method("get_replacement_word_for_enemy"):
+		var new_word: String = String(spawn_manager.get_replacement_word_for_enemy(target_enemy))
 
 		if target_enemy.has_method("assign_new_word"):
 			target_enemy.assign_new_word(new_word)

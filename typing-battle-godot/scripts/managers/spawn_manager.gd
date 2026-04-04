@@ -29,6 +29,7 @@ var spawn_timer: float = 0.0
 var wave_in_progress: bool = false
 var waiting_for_wave_enemy_data: bool = false
 var current_wave_spawn_interval: float = 0.8
+var current_wave_data: Dictionary = {}
 
 var used_easy_words: Array[String] = []
 var used_medium_words: Array[String] = []
@@ -84,6 +85,7 @@ func reset_for_new_run() -> void:
 	wave_in_progress = false
 	waiting_for_wave_enemy_data = false
 	current_wave_spawn_interval = spawn_interval_seconds
+	current_wave_data = {}
 
 	used_easy_words.clear()
 	used_medium_words.clear()
@@ -121,7 +123,14 @@ func begin_wave(_wave_index: int) -> void:
 		var wave_data: Dictionary = wave_manager.get_current_wave_data()
 		if not wave_data.is_empty():
 			current_wave_spawn_interval = float(wave_data.get("spawn_interval", spawn_interval_seconds))
-
+	
+	current_wave_data = {}
+	
+	if wave_manager != null and wave_manager.has_method("get_current_wave_data"):
+		current_wave_data = wave_manager.get_current_wave_data()
+		if not current_wave_data.is_empty():
+			current_wave_spawn_interval = float(current_wave_data.get("spawn_interval", spawn_interval_seconds))
+	
 	_request_next_wave_enemy()
 
 
@@ -248,7 +257,7 @@ func _spawn_next_enemy_from_queue() -> void:
 	final_enemy_data["path_points"] = enemy_path.curve.get_baked_points()
 
 	if not final_enemy_data.has("word") or str(final_enemy_data.get("word", "")).is_empty():
-		final_enemy_data["word"] = get_word_for_enemy_type(enemy_type)
+		final_enemy_data["word"] = get_word_for_enemy_data(final_enemy_data)
 
 	if enemy_instance.has_method("setup_enemy"):
 		enemy_instance.setup_enemy(final_enemy_data)
@@ -337,3 +346,55 @@ func _cleanup_invalid_enemies() -> void:
 	for i in range(active_enemies.size() - 1, -1, -1):
 		if not is_instance_valid(active_enemies[i]):
 			active_enemies.remove_at(i)
+
+
+
+
+func get_word_for_enemy_data(enemy_data: Dictionary) -> String:
+	if enemy_data.has("word"):
+		var explicit_word: String = str(enemy_data.get("word", ""))
+		if not explicit_word.is_empty():
+			return explicit_word
+
+	var list_name: String = ""
+
+	if enemy_data.has("word_list"):
+		list_name = str(enemy_data.get("word_list", ""))
+
+	if list_name.is_empty() and current_wave_data.has("wave_word_list"):
+		list_name = str(current_wave_data.get("wave_word_list", ""))
+
+	if not list_name.is_empty():
+		return get_word_from_list_name(list_name)
+
+	var enemy_type: String = str(enemy_data.get("enemy_type", "grunt"))
+	return get_word_for_enemy_type(enemy_type)
+
+
+func get_word_from_list_name(list_name: String) -> String:
+	match list_name:
+		"easy":
+			return _get_random_word_from_pool(_get_easy_words(), used_easy_words)
+		"medium":
+			return _get_random_word_from_pool(_get_medium_words(), used_medium_words)
+		"hard":
+			return _get_random_word_from_pool(_get_hard_words(), used_hard_words)
+		"boss":
+			return _get_random_word_from_pool(WordLists.BOSS_WORDS, used_boss_words)
+		_:
+			return _get_random_grunt_word()
+
+
+
+func get_replacement_word_for_enemy(enemy: Node) -> String:
+	if enemy == null or not is_instance_valid(enemy):
+		return "word"
+
+	if enemy.has_method("get_enemy_data"):
+		var enemy_data: Dictionary = enemy.get_enemy_data()
+		return get_word_for_enemy_data(enemy_data)
+
+	if enemy.has_method("get_enemy_type"):
+		return get_word_for_enemy_type(String(enemy.get_enemy_type()))
+
+	return "word"

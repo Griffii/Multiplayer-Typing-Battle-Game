@@ -16,7 +16,7 @@ enum RunState {
 const DEFAULT_WAVE_SET = preload("res://data/waves/wave_set_01.gd")
 const ARROW_PROJECTILE_SCENE: PackedScene = preload("res://scenes/game/projectiles/arrow_projectile.tscn")
 const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
-const TOWER_SCENE: PackedScene = preload("res://scenes/game/tower.tscn")
+const TOWER_SCENE: PackedScene = preload("res://scenes/game/towers/arrow_tower.tscn")
 
 @onready var game_hud: CanvasLayer = %GameHud
 @onready var countdown_overlay: CanvasLayer = %CountdownOverlay
@@ -348,12 +348,21 @@ func _on_hud_text_submitted(_text: String) -> void:
 		typing_manager.cancel_current_target()
 
 
-func _on_word_completed(target_enemy: Node) -> void:
+func _on_word_completed(completed_target: Node) -> void:
 	if run_state != RunState.WAVE_ACTIVE:
 		return
 
-	if combat_manager != null and combat_manager.has_method("resolve_completed_word"):
-		combat_manager.resolve_completed_word(target_enemy)
+	if completed_target == null or not is_instance_valid(completed_target):
+		return
+
+	if completed_target.is_in_group("enemies"):
+		if combat_manager != null and combat_manager.has_method("resolve_completed_word"):
+			combat_manager.resolve_completed_word(completed_target)
+		return
+
+	if completed_target.has_method("can_accept_word") and completed_target.has_method("complete_current_word"):
+		if completed_target.can_accept_word():
+			completed_target.complete_current_word()
 
 
 func _on_typing_input_cleared() -> void:
@@ -558,19 +567,13 @@ func _on_shop_build_mode_requested() -> void:
 
 
 func _on_shop_next_wave_requested() -> void:
-	print("Game Screen: _on_shop_next_wave_requested called")
 	if not run_active:
-		print("Game Screen: _on_shop_next_wave_requested returned - Not Run Active")
 		return
 	
 	if run_state != RunState.SHOP:
-		print("Game Screen: _on_shop_next_wave_requested returned - Not Shop State")
 		return
 	
-	print("Game Screen: _on_shop_next_wave_requested not returned")
-	
 	_set_run_state(RunState.COUNTDOWN)
-	print("Game Screen: State changed to: COUNTDOWN")
 	if countdown_overlay != null and countdown_overlay.has_method("play_countdown"):
 		countdown_overlay.play_countdown(3, 1.0)
 

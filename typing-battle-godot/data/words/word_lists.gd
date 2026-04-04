@@ -1,6 +1,6 @@
 class_name WordLists
 
-# EASY → high-frequency ESL, short, phonetic, common classroom vocabulary
+
 const EASY_WORDS: Array[String] = [
 	# basics
 	"cat","dog","sun","run","hat","map","red","box","tree","fish",
@@ -27,7 +27,7 @@ const EASY_WORDS: Array[String] = [
 ]
 
 
-# MEDIUM → common ESL textbook vocabulary, 2–3 syllables, practical usage
+
 const MEDIUM_WORDS: Array[String] = [
 	# general
 	"apple","stone","green","river","light","bread","cloud","train","window","garden",
@@ -54,7 +54,7 @@ const MEDIUM_WORDS: Array[String] = [
 ]
 
 
-# HARD → longer words but still realistic ESL exposure (no extreme spelling traps)
+
 const HARD_WORDS: Array[String] = [
 	# general
 	"planet","castle","forest","battle","silver","dragon","charge","shield","hunter","travel",
@@ -80,7 +80,7 @@ const HARD_WORDS: Array[String] = [
 ]
 
 
-# BOSS → reduced difficulty: longer than normal but fair, readable, commonly seen
+
 const BOSS_WORDS: Array[String] = [
 	"important",
 	"different",
@@ -107,4 +107,10 @@ const BOSS_WORDS: Array[String] = [
 	"usually",
 	"quickly",
 	"carefully"
+]
+
+
+const TOWER_WORDS: Array[String] = [
+	"arrow","storm","guard","watch","shoot","rapid","eagle","hawk",
+	"burst","flare","focus","bolt","tower","power","charge","blast"
 ]
