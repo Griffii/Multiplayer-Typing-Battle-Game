@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://mxpolmgd3vvh"]
 
-[ext_resource type="Script" uid="uid://b847mmq3ltync" path="res://scenes/game/enemies/enemy.gd" id="1_1hy27"]
+[ext_resource type="Script" uid="uid://cvh6i5dr2v1n4" path="res://scenes/game/enemies/soldier_enemy.gd" id="1_1hy27"]
 [ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/soldiers/soldier_01.png" id="2_wysbr"]
 [ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/soldiers/weapon_01.png" id="3_btfwy"]
 [ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/soldiers/shield.png" id="4_jja6d"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="5_mi6ti"]
+[ext_resource type="PackedScene" uid="uid://5ncf4s20mxcj" path="res://scenes/game/word_label_controller.tscn" id="5_wysbr"]
 [ext_resource type="AudioStream" uid="uid://d1c1qptlmsujv" path="res://assets/sfx/sword-attack-sfx.ogg" id="6_vbw0u"]
 [ext_resource type="AudioStream" uid="uid://cj0a4f0d843dj" path="res://assets/sfx/soldier-death-sfx.ogg" id="7_rr3is"]
 [ext_resource type="AudioStream" uid="uid://cxto2jug3865u" path="res://assets/sfx/soldier-take-damage-sfx.ogg" id="8_pd8my"]
@@ -547,42 +548,13 @@ texture = ExtResource("4_jja6d")
 [node name="LabelRoot" type="Node2D" parent="." unique_id=258776368 groups=["enemy"]]
 unique_name_in_owner = true
 
-[node name="WordLabel" type="RichTextLabel" parent="LabelRoot" unique_id=1401014258]
+[node name="LabelAnchor" type="Marker2D" parent="LabelRoot" unique_id=641645112]
 unique_name_in_owner = true
-clip_contents = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.5
-offset_top = -48.0
-offset_right = 25.5
-offset_bottom = -23.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7647059)
-theme_override_constants/shadow_outline_size = 3
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("5_mi6ti")
-theme_override_fonts/bold_font = ExtResource("5_mi6ti")
-theme_override_fonts/bold_italics_font = ExtResource("5_mi6ti")
-theme_override_fonts/italics_font = ExtResource("5_mi6ti")
-theme_override_fonts/mono_font = ExtResource("5_mi6ti")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/italics_font_size = 20
-theme_override_font_sizes/mono_font_size = 20
-bbcode_enabled = true
-text = "Word"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-vertical_alignment = 1
+position = Vector2(0, -56)
+
+[node name="WordLabelController" parent="LabelRoot" unique_id=1934251699 instance=ExtResource("5_wysbr")]
+unique_name_in_owner = true
+position = Vector2(0, -33)
 
 [node name="HpLabel" type="Label" parent="LabelRoot" unique_id=372582553]
 unique_name_in_owner = true
@@ -595,6 +567,7 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("5_mi6ti")
 text = "10"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1599622870]
 unique_name_in_owner = true

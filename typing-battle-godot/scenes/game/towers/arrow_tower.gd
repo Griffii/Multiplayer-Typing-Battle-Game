@@ -13,6 +13,7 @@ enum TowerState {
 @onready var range_area: Area2D = %RangeArea
 @onready var word_label: RichTextLabel = %WordLabel
 @onready var progress_bar: ProgressBar = %ProgressBar
+@onready var background: PanelContainer = %Background
 
 var slot_id: String = ""
 var combat_manager: Node = null
@@ -40,6 +41,9 @@ var used_tower_words: Array[String] = []
 var is_targeted: bool = false
 var typing_progress_text: String = ""
 
+var _layout_refresh_pending: bool = false
+var _background_padding: Vector2 = Vector2(20.0, 12.0)
+
 
 func _ready() -> void:
 	if range_area != null:
@@ -48,9 +52,16 @@ func _ready() -> void:
 	
 	if word_label != null:
 		word_label.bbcode_enabled = true
+		word_label.fit_content = true
+		word_label.scroll_active = false
+		word_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	
+	if background != null:
+		background.custom_minimum_size = Vector2.ZERO
 	
 	_assign_new_word()
 	_update_ui()
+	_queue_layout_refresh()
 	set_process(false)
 
 
@@ -237,6 +248,7 @@ func _build_word_bbcode(input_text: String) -> String:
 func _escape_bbcode(text: String) -> String:
 	return text.replace("[", "[lb]").replace("]", "[rb]")
 
+
 func _update_ui() -> void:
 	if progress_bar == null:
 		return
@@ -245,8 +257,12 @@ func _update_ui() -> void:
 		TowerState.IDLE:
 			if word_label != null:
 				word_label.visible = true
-				word_label.clear()
-				word_label.append_text(_build_word_bbcode(typing_progress_text))
+				word_label.text = _build_word_bbcode(typing_progress_text)
+				_queue_layout_refresh()
+
+			if background != null:
+				background.visible = true
+				background.modulate = Color(1, 1, 1, 1.0 if is_targeted else 0.92)
 
 			progress_bar.modulate = Color(1, 1, 1, 1)
 			progress_bar.max_value = float(charge_required)
@@ -255,7 +271,10 @@ func _update_ui() -> void:
 		TowerState.ACTIVE:
 			if word_label != null:
 				word_label.visible = false
-				word_label.clear()
+				word_label.text = ""
+
+			if background != null:
+				background.visible = false
 
 			progress_bar.modulate = Color(1, 1, 1, 1)
 			progress_bar.max_value = active_duration
@@ -264,11 +283,42 @@ func _update_ui() -> void:
 		TowerState.COOLDOWN:
 			if word_label != null:
 				word_label.visible = false
-				word_label.clear()
+				word_label.text = ""
+
+			if background != null:
+				background.visible = false
 
 			progress_bar.modulate = Color(1, 1, 1, 0.35)
 			progress_bar.max_value = cooldown_duration
 			progress_bar.value = max(state_timer, 0.0)
+
+
+func _queue_layout_refresh() -> void:
+	if _layout_refresh_pending:
+		return
+
+	_layout_refresh_pending = true
+	call_deferred("_refresh_layout")
+
+
+func _refresh_layout() -> void:
+	_layout_refresh_pending = false
+
+	if word_label == null or background == null:
+		return
+
+	await get_tree().process_frame
+
+	var text_size: Vector2 = word_label.get_combined_minimum_size()
+	var final_size: Vector2 = text_size + _background_padding
+	final_size.x = max(final_size.x, 24.0)
+	final_size.y = max(final_size.y, 24.0)
+
+	background.custom_minimum_size = final_size
+	background.size = final_size
+	background.position = -final_size * 0.5
+
+	word_label.position = -text_size * 0.5
 
 
 func _cleanup_targets() -> void:
@@ -393,6 +443,7 @@ func _on_range_body_exited(body: Node) -> void:
 
 func set_targeted(targeted: bool) -> void:
 	is_targeted = targeted
+	_update_ui()
 
 
 func set_typing_progress(text: String) -> void:

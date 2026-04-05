@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3f1l2j46ds7y"
-path="res://.godot/imported/heart_icon.png-110a8cd7f7669c4a493e33bc960d49f5.ctex"
+uid="uid://bbsbgkdeoma4g"
+path="res://.godot/imported/skull_hover.png-18b09e47383fb88c27c2e58f6d517ed0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/heart_icon.png"
-dest_files=["res://.godot/imported/heart_icon.png-110a8cd7f7669c4a493e33bc960d49f5.ctex"]
+source_file="res://assets/images/icons/skull_hover.png"
+dest_files=["res://.godot/imported/skull_hover.png-18b09e47383fb88c27c2e58f6d517ed0.ctex"]
 
 [params]
 

@@ -203,6 +203,7 @@ func _update_ui() -> void:
 	gold_gain_button.disabled = _is_upgrade_disabled("gold_gain")
 
 	description_label.text = _build_description_text()
+	description_label.size = description_label.get_combined_minimum_size()
 
 
 func _build_repair_button_text() -> String:

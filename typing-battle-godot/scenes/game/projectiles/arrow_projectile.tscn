@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bemiv1qu52bm3"]
 
 [ext_resource type="Script" uid="uid://bkvwc1grmniku" path="res://scenes/game/projectiles/arrow.gd" id="1_2od34"]
-[ext_resource type="Texture2D" uid="uid://dbs106u6c2tv" path="res://assets/images/arrow.png" id="2_as85i"]
+[ext_resource type="Texture2D" uid="uid://dbs106u6c2tv" path="res://assets/images/towers/arrow.png" id="2_as85i"]
 [ext_resource type="AudioStream" uid="uid://b34acd123tgn6" path="res://assets/sfx/arrow_hit.mp3" id="3_0vbn6"]
 [ext_resource type="AudioStream" uid="uid://b68w6soxh2uuv" path="res://assets/sfx/arrow_shoot.mp3" id="4_xhyyy"]
 

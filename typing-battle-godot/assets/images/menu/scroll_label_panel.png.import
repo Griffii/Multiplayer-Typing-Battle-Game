@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj5akasmqynae"
-path="res://.godot/imported/build_icon.png-d002907e0204ba0cac82c6cb16bfef27.ctex"
+uid="uid://rb4720ggs5up"
+path="res://.godot/imported/scroll_label_panel.png-793528293a2150cdbe51065881e993a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/build_icon.png"
-dest_files=["res://.godot/imported/build_icon.png-d002907e0204ba0cac82c6cb16bfef27.ctex"]
+source_file="res://assets/images/menu/scroll_label_panel.png"
+dest_files=["res://.godot/imported/scroll_label_panel.png-793528293a2150cdbe51065881e993a9.ctex"]
 
 [params]
 

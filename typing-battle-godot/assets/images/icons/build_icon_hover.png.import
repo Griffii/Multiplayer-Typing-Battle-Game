@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0gcpcg1pnbc8"
-path="res://.godot/imported/upgrade_plus.png-59801922a31e1648675d280078a9a8cf.ctex"
+uid="uid://g1etfgg7s1qt"
+path="res://.godot/imported/build_icon_hover.png-3f528ce564280fc9477a86028b46c3ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/upgrade_plus.png"
-dest_files=["res://.godot/imported/upgrade_plus.png-59801922a31e1648675d280078a9a8cf.ctex"]
+source_file="res://assets/images/icons/build_icon_hover.png"
+dest_files=["res://.godot/imported/build_icon_hover.png-3f528ce564280fc9477a86028b46c3ee.ctex"]
 
 [params]
 

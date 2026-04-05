@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbsbgkdeoma4g"
-path="res://.godot/imported/skull_hover.png-3fc3f931d041ef816bda3c44f841805b.ctex"
+uid="uid://b0gcpcg1pnbc8"
+path="res://.godot/imported/upgrade_plus.png-4453e5dbdb880975f76c97822daccd89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/skull_hover.png"
-dest_files=["res://.godot/imported/skull_hover.png-3fc3f931d041ef816bda3c44f841805b.ctex"]
+source_file="res://assets/images/icons/upgrade_plus.png"
+dest_files=["res://.godot/imported/upgrade_plus.png-4453e5dbdb880975f76c97822daccd89.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vq5kd1kupw7b"
-path="res://.godot/imported/gold_coin_hover.png-4b413573cdaee667a453c7645f6761f4.ctex"
+uid="uid://dbs106u6c2tv"
+path="res://.godot/imported/arrow.png-57cb86618cefa90213d36f3f2a79c012.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/gold_coin_hover.png"
-dest_files=["res://.godot/imported/gold_coin_hover.png-4b413573cdaee667a453c7645f6761f4.ctex"]
+source_file="res://assets/images/towers/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-57cb86618cefa90213d36f3f2a79c012.ctex"]
 
 [params]
 

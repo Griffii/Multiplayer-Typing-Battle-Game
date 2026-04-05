@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dqjc2e26onl3v" path="res://assets/images/menu/buttonSquare_brown_pressed.png" id="6_1jpwt"]
 [ext_resource type="Texture2D" uid="uid://6lcwpgiafsmk" path="res://assets/images/card_01.png" id="7_87ymt"]
 [ext_resource type="PackedScene" uid="uid://cw0dchu1xjkuq" path="res://scenes/game/towers/tower_area_ring.tscn" id="7_p6amu"]
-[ext_resource type="Texture2D" uid="uid://bd3nhyopixmid" path="res://assets/images/gold_coin.png" id="7_rmrjr"]
-[ext_resource type="Texture2D" uid="uid://vq5kd1kupw7b" path="res://assets/images/gold_coin_hover.png" id="7_yamvf"]
-[ext_resource type="Texture2D" uid="uid://b0gcpcg1pnbc8" path="res://assets/images/upgrade_plus.png" id="9_yamvf"]
+[ext_resource type="Texture2D" uid="uid://bd3nhyopixmid" path="res://assets/images/icons/gold_coin.png" id="7_rmrjr"]
+[ext_resource type="Texture2D" uid="uid://vq5kd1kupw7b" path="res://assets/images/icons/gold_coin_hover.png" id="7_yamvf"]
+[ext_resource type="Texture2D" uid="uid://b0gcpcg1pnbc8" path="res://assets/images/icons/upgrade_plus.png" id="9_yamvf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e1sc8"]
 texture = ExtResource("5_yamvf")
@@ -137,18 +137,23 @@ theme_override_font_sizes/font_size = 22
 text = "9999 G"
 horizontal_alignment = 1
 
-[node name="SlotsContainer" type="Control" parent="." unique_id=143945337]
+[node name="ModesContainer" type="Control" parent="." unique_id=1221132106]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Slot01" type="Node2D" parent="SlotsContainer" unique_id=1236485525]
+[node name="NormalModeSlots" type="Control" parent="ModesContainer" unique_id=143945337]
+anchors_preset = 0
+
+[node name="Slot01" type="Node2D" parent="ModesContainer/NormalModeSlots" unique_id=1236485525]
 position = Vector2(724, 147)
 
-[node name="Slot01AreaRing" parent="SlotsContainer/Slot01" unique_id=116692627 instance=ExtResource("7_p6amu")]
+[node name="Slot01AreaRing" parent="ModesContainer/NormalModeSlots/Slot01" unique_id=116692627 instance=ExtResource("7_p6amu")]
 unique_name_in_owner = true
 position = Vector2(0, 113)
 
-[node name="Slot01InfoCard" type="PanelContainer" parent="SlotsContainer/Slot01" unique_id=84662604]
+[node name="Slot01InfoCard" type="PanelContainer" parent="ModesContainer/NormalModeSlots/Slot01" unique_id=84662604]
 unique_name_in_owner = true
 offset_left = 51.0
 offset_top = -9.0
@@ -158,28 +163,28 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_p6amu")
 
-[node name="MarginContainer" type="MarginContainer" parent="SlotsContainer/Slot01/Slot01InfoCard" unique_id=1337663276]
+[node name="MarginContainer" type="MarginContainer" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard" unique_id=1337663276]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Slot01Info" type="VBoxContainer" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer" unique_id=991295979]
+[node name="Slot01Info" type="VBoxContainer" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer" unique_id=991295979]
 layout_mode = 2
 alignment = 1
 
-[node name="GoldHBox" type="HBoxContainer" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=1388899965]
+[node name="GoldHBox" type="HBoxContainer" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=1388899965]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="GoldIcon" type="TextureRect" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer/Slot01Info/GoldHBox" unique_id=790562945]
+[node name="GoldIcon" type="TextureRect" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer/Slot01Info/GoldHBox" unique_id=790562945]
 layout_mode = 2
 texture = ExtResource("7_rmrjr")
 expand_mode = 3
 
-[node name="Slot01Cost" type="Label" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer/Slot01Info/GoldHBox" unique_id=1463327108]
+[node name="Slot01Cost" type="Label" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer/Slot01Info/GoldHBox" unique_id=1463327108]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -191,14 +196,14 @@ theme_override_font_sizes/font_size = 16
 text = "10 G"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=312137798]
+[node name="HSeparator" type="HSeparator" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=312137798]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_yamvf")
 
-[node name="Slot01Stats" type="Label" parent="SlotsContainer/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=1957499951]
+[node name="Slot01Stats" type="Label" parent="ModesContainer/NormalModeSlots/Slot01/Slot01InfoCard/MarginContainer/Slot01Info" unique_id=1957499951]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -217,7 +222,7 @@ Rate: 10
 Range: 200"
 horizontal_alignment = 1
 
-[node name="Slot01Button" type="TextureButton" parent="SlotsContainer/Slot01" unique_id=2080466295]
+[node name="Slot01Button" type="TextureButton" parent="ModesContainer/NormalModeSlots/Slot01" unique_id=2080466295]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -230,6 +235,7 @@ offset_right = -44.0
 offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_yamvf")
 texture_pressed = ExtResource("9_yamvf")
 texture_hover = ExtResource("9_yamvf")
@@ -237,14 +243,14 @@ texture_disabled = ExtResource("9_yamvf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Slot02" type="Node2D" parent="SlotsContainer" unique_id=135548210]
+[node name="Slot02" type="Node2D" parent="ModesContainer/NormalModeSlots" unique_id=135548210]
 position = Vector2(401, 25)
 
-[node name="Slot02AreaRing" parent="SlotsContainer/Slot02" unique_id=1782920259 instance=ExtResource("7_p6amu")]
+[node name="Slot02AreaRing" parent="ModesContainer/NormalModeSlots/Slot02" unique_id=1782920259 instance=ExtResource("7_p6amu")]
 unique_name_in_owner = true
 position = Vector2(0, 110)
 
-[node name="Slot02InfoCard" type="PanelContainer" parent="SlotsContainer/Slot02" unique_id=642816236]
+[node name="Slot02InfoCard" type="PanelContainer" parent="ModesContainer/NormalModeSlots/Slot02" unique_id=642816236]
 unique_name_in_owner = true
 offset_left = 52.0
 offset_right = 176.0
@@ -253,25 +259,25 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_p6amu")
 
-[node name="MarginContainer" type="MarginContainer" parent="SlotsContainer/Slot02/Slot02InfoCard" unique_id=1495297839]
+[node name="MarginContainer" type="MarginContainer" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard" unique_id=1495297839]
 layout_mode = 2
 
-[node name="Slot02Info" type="VBoxContainer" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer" unique_id=665070900]
+[node name="Slot02Info" type="VBoxContainer" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer" unique_id=665070900]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="GoldHBox" type="HBoxContainer" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=1004323004]
+[node name="GoldHBox" type="HBoxContainer" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=1004323004]
 layout_mode = 2
 alignment = 1
 
-[node name="GoldIcon" type="TextureRect" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer/Slot02Info/GoldHBox" unique_id=1570305528]
+[node name="GoldIcon" type="TextureRect" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer/Slot02Info/GoldHBox" unique_id=1570305528]
 layout_mode = 2
 texture = ExtResource("7_rmrjr")
 expand_mode = 3
 
-[node name="Slot02Cost" type="Label" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer/Slot02Info/GoldHBox" unique_id=266223959]
+[node name="Slot02Cost" type="Label" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer/Slot02Info/GoldHBox" unique_id=266223959]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -283,11 +289,11 @@ theme_override_font_sizes/font_size = 16
 text = "10 G"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=47530108]
+[node name="HSeparator" type="HSeparator" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=47530108]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_yamvf")
 
-[node name="Slot02Stats" type="Label" parent="SlotsContainer/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=760306327]
+[node name="Slot02Stats" type="Label" parent="ModesContainer/NormalModeSlots/Slot02/Slot02InfoCard/MarginContainer/Slot02Info" unique_id=760306327]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -306,7 +312,7 @@ Rate: 10
 Range: 200"
 horizontal_alignment = 1
 
-[node name="Slot02Button" type="TextureButton" parent="SlotsContainer/Slot02" unique_id=172571751]
+[node name="Slot02Button" type="TextureButton" parent="ModesContainer/NormalModeSlots/Slot02" unique_id=172571751]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -319,6 +325,7 @@ offset_right = -44.0
 offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_yamvf")
 texture_pressed = ExtResource("9_yamvf")
 texture_hover = ExtResource("9_yamvf")
@@ -326,14 +333,14 @@ texture_disabled = ExtResource("9_yamvf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Slot03" type="Node2D" parent="SlotsContainer" unique_id=1138934213]
+[node name="Slot03" type="Node2D" parent="ModesContainer/NormalModeSlots" unique_id=1138934213]
 position = Vector2(316, 319)
 
-[node name="Slot03AreaRing" parent="SlotsContainer/Slot03" unique_id=1029134687 instance=ExtResource("7_p6amu")]
+[node name="Slot03AreaRing" parent="ModesContainer/NormalModeSlots/Slot03" unique_id=1029134687 instance=ExtResource("7_p6amu")]
 unique_name_in_owner = true
 position = Vector2(0, 110)
 
-[node name="Slot03InfoCard" type="PanelContainer" parent="SlotsContainer/Slot03" unique_id=1608794324]
+[node name="Slot03InfoCard" type="PanelContainer" parent="ModesContainer/NormalModeSlots/Slot03" unique_id=1608794324]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -350,20 +357,20 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_p6amu")
 
-[node name="Slot03Info" type="VBoxContainer" parent="SlotsContainer/Slot03/Slot03InfoCard" unique_id=1499246699]
+[node name="Slot03Info" type="VBoxContainer" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard" unique_id=1499246699]
 layout_mode = 2
 alignment = 1
 
-[node name="GoldHBox" type="HBoxContainer" parent="SlotsContainer/Slot03/Slot03InfoCard/Slot03Info" unique_id=1837533662]
+[node name="GoldHBox" type="HBoxContainer" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard/Slot03Info" unique_id=1837533662]
 layout_mode = 2
 alignment = 1
 
-[node name="GoldIcon" type="TextureRect" parent="SlotsContainer/Slot03/Slot03InfoCard/Slot03Info/GoldHBox" unique_id=772592161]
+[node name="GoldIcon" type="TextureRect" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard/Slot03Info/GoldHBox" unique_id=772592161]
 layout_mode = 2
 texture = ExtResource("7_rmrjr")
 expand_mode = 3
 
-[node name="Slot03Cost" type="Label" parent="SlotsContainer/Slot03/Slot03InfoCard/Slot03Info/GoldHBox" unique_id=604372454]
+[node name="Slot03Cost" type="Label" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard/Slot03Info/GoldHBox" unique_id=604372454]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -375,11 +382,11 @@ theme_override_font_sizes/font_size = 16
 text = "10 G"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="SlotsContainer/Slot03/Slot03InfoCard/Slot03Info" unique_id=1285666424]
+[node name="HSeparator" type="HSeparator" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard/Slot03Info" unique_id=1285666424]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_yamvf")
 
-[node name="Slot03Stats" type="Label" parent="SlotsContainer/Slot03/Slot03InfoCard/Slot03Info" unique_id=1656186239]
+[node name="Slot03Stats" type="Label" parent="ModesContainer/NormalModeSlots/Slot03/Slot03InfoCard/Slot03Info" unique_id=1656186239]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -398,7 +405,7 @@ Rate: 10
 Range: 200"
 horizontal_alignment = 1
 
-[node name="Slot03Button" type="TextureButton" parent="SlotsContainer/Slot03" unique_id=1246843197]
+[node name="Slot03Button" type="TextureButton" parent="ModesContainer/NormalModeSlots/Slot03" unique_id=1246843197]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -411,6 +418,7 @@ offset_right = -44.0
 offset_bottom = 129.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_yamvf")
 texture_pressed = ExtResource("9_yamvf")
 texture_hover = ExtResource("9_yamvf")
