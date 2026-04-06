@@ -12,13 +12,13 @@ enum RunState {
 	DEFEAT
 }
 
-const DEFAULT_WAVE_SET = preload("res://data/waves/wave_set_01.gd")
-#SLIME MODE: preload("res://data/waves/wave_set_slime_01.gd")
-const ARROW_PROJECTILE_SCENE: PackedScene = preload("res://scenes/game/projectiles/arrow_projectile.tscn")
-const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
-const TOWER_SCENE: PackedScene = preload("res://scenes/game/towers/arrow_tower.tscn")
 
-@onready var castle: Node = %Castle
+const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
+
+var selected_level_scene: PackedScene = null
+var selected_wave_defs: Array = []
+
+@onready var battlefield: Node = %Battlefield
 
 @onready var game_hud: CanvasLayer = %GameHud
 @onready var countdown_overlay: CanvasLayer = %CountdownOverlay
@@ -28,52 +28,32 @@ const TOWER_SCENE: PackedScene = preload("res://scenes/game/towers/arrow_tower.t
 @onready var build_overlay: CanvasLayer = %BuildOverlay
 
 @onready var projectile_container: Node = %ProjectileContainer
-@onready var tower_container: Node = %TowerContainer
-
-@onready var enemy_path: Path2D = %EnemyPath
 
 @onready var wave_manager: Node = %WaveManager
 @onready var spawn_manager: Node = %SpawnManager
 @onready var typing_manager: Node = %TypingManager
 @onready var combat_manager: Node = %CombatManager
 
-## Debug Stuff
 @onready var skip_wave_button: Button = %DEBUG_SkipWave
 
+var current_level: BattlefieldLevel = null
 
 var run_state: RunState = RunState.PRE_WAVE
 var current_wave_index: int = 0
 var total_waves: int = 0
 var run_active: bool = false
 var wave_set: Array = []
+
 var is_game_menu_open: bool = false
 var is_shop_open: bool = false
 var is_build_open: bool = false
-var tower_nodes := {}
 
 var current_gold: int = 0
 
 
 func _ready() -> void:
 	_connect_signals()
-	_load_default_wave_set()
-	_reset_run()
-
-
-func setup_run(run_config: Dictionary) -> void:
-	wave_set = []
-
-	if run_config.has("wave_definitions"):
-		var defs: Variant = run_config.get("wave_definitions", [])
-		if typeof(defs) == TYPE_ARRAY:
-			wave_set = defs as Array
-
-	if wave_set.is_empty():
-		_load_default_wave_set()
-
-	if combat_manager != null and combat_manager.has_method("setup_run"):
-		combat_manager.setup_run(run_config)
-
+	_load_selected_run_content()
 	_reset_run()
 
 
@@ -145,15 +125,92 @@ func _connect_signals() -> void:
 			typing_manager.input_cleared.connect(_on_typing_input_cleared)
 
 
-func _load_default_wave_set() -> void:
-	if DEFAULT_WAVE_SET == null:
-		wave_set = []
-		total_waves = 0
-		push_warning("GameScreen: DEFAULT_WAVE_SET is null.")
+func _load_selected_run_content() -> void:
+	print("[GameScreen] _load_selected_run_content()")
+
+	selected_level_scene = GameSelection.get_level_scene()
+	selected_wave_defs = GameSelection.get_wave_definitions()
+
+	print("[GameScreen] selected_level_scene = ", GameSelection._describe_resource(selected_level_scene))
+	print("[GameScreen] selected_wave_defs.size() = ", selected_wave_defs.size())
+
+	if selected_level_scene == null:
+		push_warning("GameScreen: selected_level_scene was null.")
 		return
 
-	wave_set = DEFAULT_WAVE_SET.WAVES
+	load_level(selected_level_scene)
+
+	wave_set = selected_wave_defs.duplicate(true)
 	total_waves = wave_set.size()
+
+	print("[GameScreen] final wave_set size = ", wave_set.size())
+
+	if combat_manager != null and combat_manager.has_method("setup_run"):
+		combat_manager.setup_run({
+			"wave_definitions": wave_set
+		})
+
+
+
+func load_level(level_scene: PackedScene) -> void:
+	if current_level != null and is_instance_valid(current_level):
+		current_level.queue_free()
+		current_level = null
+
+	if level_scene == null:
+		push_warning("GameScreen: level_scene was null.")
+		return
+
+	current_level = level_scene.instantiate() as BattlefieldLevel
+
+	if current_level == null:
+		push_warning("GameScreen: Loaded level is not a BattlefieldLevel.")
+		return
+
+	battlefield.add_child(current_level)
+
+	if current_level.has_method("setup_level"):
+		current_level.setup_level(projectile_container)
+
+	if current_level.has_signal("castle_projectile_impact"):
+		if not current_level.castle_projectile_impact.is_connected(_on_arrow_projectile_impact):
+			current_level.castle_projectile_impact.connect(_on_arrow_projectile_impact)
+
+	_apply_level_references_to_systems()
+
+
+func _apply_level_references_to_systems() -> void:
+	if current_level == null:
+		return
+
+	if spawn_manager != null:
+		if spawn_manager.has_method("set_enemy_path") and current_level.has_method("get_enemy_path"):
+			spawn_manager.set_enemy_path(current_level.get_enemy_path())
+
+		if spawn_manager.has_method("set_enemy_spawn_marker") and current_level.has_method("get_enemy_spawn_marker"):
+			spawn_manager.set_enemy_spawn_marker(current_level.get_enemy_spawn_marker())
+
+	if typing_manager != null and typing_manager.has_method("set_level"):
+		typing_manager.set_level(current_level)
+
+	if build_overlay != null and build_overlay.has_method("set_level"):
+		build_overlay.set_level(current_level)
+
+
+func setup_run(run_config: Dictionary) -> void:
+	wave_set = []
+
+	if run_config.has("wave_definitions"):
+		var defs: Variant = run_config.get("wave_definitions", [])
+		if typeof(defs) == TYPE_ARRAY:
+			wave_set = defs as Array
+
+	total_waves = wave_set.size()
+
+	if combat_manager != null and combat_manager.has_method("setup_run"):
+		combat_manager.setup_run(run_config)
+
+	_reset_run()
 
 
 func _reset_run() -> void:
@@ -187,14 +244,19 @@ func _reset_run() -> void:
 
 	if game_menu_overlay != null and game_menu_overlay.has_method("hide_overlay"):
 		game_menu_overlay.hide_overlay()
-	
+
 	if shop_overlay != null and shop_overlay.has_method("hide_overlay"):
 		shop_overlay.hide_overlay()
 
 	if build_overlay != null and build_overlay.has_method("hide_overlay"):
 		build_overlay.hide_overlay()
 
-	_refresh_all_towers()
+	if current_level != null and current_level.has_method("reset_level_state"):
+		current_level.reset_level_state()
+
+	if current_level != null and current_level.has_method("refresh_all_towers"):
+		current_level.refresh_all_towers(combat_manager)
+
 	_refresh_gold_ui()
 	_set_run_state(RunState.PRE_WAVE)
 	_refresh_wave_ui()
@@ -310,9 +372,9 @@ func _on_wave_cleared(wave_index: int) -> void:
 
 	if combat_manager != null and combat_manager.has_method("reset_arrow_meter"):
 		combat_manager.reset_arrow_meter()
-	
-	if castle != null and castle.has_method("reset_arrow_meter"):
-		castle.reset_arrow_meter()
+
+	if current_level != null and current_level.has_method("reset_arrow_meter"):
+		current_level.reset_arrow_meter()
 
 	current_wave_index = wave_index + 1
 	_refresh_wave_ui()
@@ -343,10 +405,10 @@ func _on_base_destroyed() -> void:
 func _on_hud_text_changed(text: String) -> void:
 	if run_state != RunState.WAVE_ACTIVE:
 		return
-	
+
 	if is_game_menu_open or is_shop_open:
 		return
-	
+
 	if typing_manager != null and typing_manager.has_method("process_input_text"):
 		typing_manager.process_input_text(text)
 
@@ -405,37 +467,21 @@ func _on_hud_stats_changed(stats: Dictionary) -> void:
 
 
 func _on_arrow_meter_changed(current_value: float, max_value: float) -> void:
-	if castle != null and castle.has_method("set_arrow_meter"):
-		castle.set_arrow_meter(current_value, max_value)
+	if current_level != null and current_level.has_method("set_arrow_meter"):
+		current_level.set_arrow_meter(current_value, max_value)
 
 
 func _on_arrow_meter_filled() -> void:
 	if spawn_manager == null or not spawn_manager.has_method("get_front_most_enemy"):
+		return
+	if current_level == null or not current_level.has_method("fire_castle_projectile"):
 		return
 
 	var target_enemy: Node = spawn_manager.get_front_most_enemy()
 	if target_enemy == null or not is_instance_valid(target_enemy):
 		return
 
-	_spawn_arrow_projectile(target_enemy)
-
-
-func _spawn_arrow_projectile(target_enemy: Node) -> void:
-	if castle == null or not castle.has_method("get_arrow_spawn_position"):
-		return
-	if not is_instance_valid(projectile_container):
-		return
-
-	var spawn_position: Vector2 = castle.get_arrow_spawn_position()
-
-	var arrow: Node = ARROW_PROJECTILE_SCENE.instantiate()
-	projectile_container.add_child(arrow)
-
-	if arrow.has_signal("impact_reached"):
-		arrow.impact_reached.connect(_on_arrow_projectile_impact)
-
-	if arrow.has_method("fire"):
-		arrow.fire(spawn_position, target_enemy, 0.35, 48.0)
+	current_level.fire_castle_projectile(target_enemy)
 
 
 func _on_arrow_projectile_impact(target_enemy: Node) -> void:
@@ -449,10 +495,8 @@ func debug_skip_wave() -> void:
 	if spawn_manager == null or not spawn_manager.has_method("debug_force_spawn_all_remaining_enemies"):
 		return
 
-	# Step 1: Force spawn everything remaining in the wave
 	spawn_manager.debug_force_spawn_all_remaining_enemies()
 
-	# Step 2: Get all active enemies directly from the container
 	if spawn_manager == null or not spawn_manager.has_node("%EnemyContainer"):
 		return
 
@@ -462,7 +506,6 @@ func debug_skip_wave() -> void:
 
 	var enemies: Array = enemy_container.get_children()
 
-	# Step 3: Kill everything and give gold
 	for enemy in enemies:
 		if enemy == null or not is_instance_valid(enemy):
 			continue
@@ -472,12 +515,9 @@ func debug_skip_wave() -> void:
 
 		if enemy.has_method("apply_damage"):
 			enemy.apply_damage(9999)
-		
+
 		if combat_manager and combat_manager.has_method("_award_enemy_kill_rewards"):
 			combat_manager._award_enemy_kill_rewards(enemy)
-
-
-
 
 
 func _show_game_over(did_win: bool) -> void:
@@ -567,13 +607,9 @@ func _on_back_to_menu_pressed() -> void:
 	back_to_menu_requested.emit()
 
 
-############################################################
-## Shop Menu Helpers ######################################
-###########################################################
-
 func _show_shop() -> void:
 	is_shop_open = true
-	
+
 	if shop_overlay == null or combat_manager == null:
 		return
 
@@ -586,7 +622,7 @@ func _show_shop() -> void:
 
 func _hide_shop() -> void:
 	is_shop_open = false
-	
+
 	if shop_overlay != null and shop_overlay.has_method("hide_overlay"):
 		shop_overlay.hide_overlay()
 
@@ -618,25 +654,21 @@ func _on_shop_purchase_requested(upgrade_id: String) -> void:
 func _on_shop_build_mode_requested() -> void:
 	if run_state != RunState.SHOP:
 		return
-	
+
 	_set_run_state(RunState.BUILD)
 
 
 func _on_shop_next_wave_requested() -> void:
 	if not run_active:
 		return
-	
+
 	if run_state != RunState.SHOP:
 		return
-	
+
 	_set_run_state(RunState.COUNTDOWN)
 	if countdown_overlay != null and countdown_overlay.has_method("play_countdown"):
 		countdown_overlay.play_countdown(3, 1.0)
 
-
-####################################################
-### Build Menu Helpers ############################
-####################################################
 
 func _show_build() -> void:
 	is_build_open = true
@@ -682,43 +714,17 @@ func _on_build_tower_purchase_requested(slot_id: String) -> void:
 	if purchased:
 		_refresh_build()
 		_refresh_shop()
-		_refresh_all_towers()
+
+		if current_level != null and current_level.has_method("refresh_all_towers"):
+			current_level.refresh_all_towers(combat_manager)
 
 
 func _on_tower_state_changed() -> void:
-	_refresh_all_towers()
+	if current_level != null and current_level.has_method("refresh_all_towers"):
+		current_level.refresh_all_towers(combat_manager)
 
 	if is_build_open:
 		_refresh_build()
 
 	if is_shop_open:
 		_refresh_shop()
-
-
-func _refresh_all_towers() -> void:
-	if combat_manager == null or tower_container == null or projectile_container == null:
-		return
-
-	for slot_id in combat_manager.tower_levels.keys():
-		var level: int = combat_manager.get_tower_level(slot_id)
-
-		if level <= 0:
-			if tower_nodes.has(slot_id) and is_instance_valid(tower_nodes[slot_id]):
-				tower_nodes[slot_id].queue_free()
-			tower_nodes.erase(slot_id)
-			continue
-
-		var tower: Node2D = tower_nodes.get(slot_id, null)
-
-		if tower == null or not is_instance_valid(tower):
-			var marker: Marker2D = tower_container.get_node_or_null(slot_id)
-			if marker == null:
-				continue
-
-			tower = TOWER_SCENE.instantiate()
-			tower_container.add_child(tower)
-			tower.global_position = marker.global_position
-			tower_nodes[slot_id] = tower
-
-		if tower.has_method("setup_tower"):
-			tower.setup_tower(slot_id, combat_manager, projectile_container)

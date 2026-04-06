@@ -56,6 +56,12 @@ func setup_run(run_config: Dictionary) -> void:
 	gold_gain_multiplier = float(run_config.get("gold_gain_multiplier", gold_gain_multiplier))
 
 
+func set_available_tower_slots(slot_ids: Array[String]) -> void:
+	tower_levels.clear()
+	for slot_id in slot_ids:
+		tower_levels[slot_id] = 0
+
+
 func reset_for_new_run() -> void:
 	base_hp = base_hp_max
 	gold = 0

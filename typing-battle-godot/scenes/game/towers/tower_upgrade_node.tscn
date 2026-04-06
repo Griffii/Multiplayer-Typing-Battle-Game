@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://x6w72swh8aid"]
+
+[ext_resource type="PackedScene" uid="uid://cw0dchu1xjkuq" path="res://scenes/game/towers/tower_area_ring.tscn" id="1_j0pr8"]
+[ext_resource type="Script" uid="uid://di7m1vte66vcr" path="res://scenes/game/towers/tower_upgrade_node.gd" id="1_relvm"]
+[ext_resource type="Texture2D" uid="uid://6lcwpgiafsmk" path="res://assets/images/card_01.png" id="2_relvm"]
+[ext_resource type="Texture2D" uid="uid://bd3nhyopixmid" path="res://assets/images/icons/gold_coin.png" id="3_sxqdd"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="4_tkwek"]
+[ext_resource type="Texture2D" uid="uid://b0gcpcg1pnbc8" path="res://assets/images/icons/upgrade_plus.png" id="5_5nkwm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p6amu"]
+texture = ExtResource("2_relvm")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(8, 0, 48, 64)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yamvf"]
+color = Color(0.83137256, 0.7764706, 0.57254905, 1)
+grow_begin = -3.0
+thickness = 2
+
+[node name="TowerUpgradeNode" type="Node2D" unique_id=459411334]
+z_index = 1
+script = ExtResource("1_relvm")
+
+[node name="AreaRing" parent="." unique_id=116692627 instance=ExtResource("1_j0pr8")]
+unique_name_in_owner = true
+position = Vector2(4.1902065e-05, 0)
+
+[node name="InfoCard" type="PanelContainer" parent="." unique_id=1469916188]
+unique_name_in_owner = true
+offset_left = 51.000042
+offset_top = -122.0
+offset_right = 191.00005
+offset_bottom = 108.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p6amu")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoCard" unique_id=1548179553]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="InfoVBox" type="VBoxContainer" parent="InfoCard/MarginContainer" unique_id=430295469]
+layout_mode = 2
+alignment = 1
+
+[node name="GoldHBox" type="HBoxContainer" parent="InfoCard/MarginContainer/InfoVBox" unique_id=409542778]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="InfoCard/MarginContainer/InfoVBox/GoldHBox" unique_id=450595391]
+layout_mode = 2
+texture = ExtResource("3_sxqdd")
+expand_mode = 3
+
+[node name="CostLabel" type="Label" parent="InfoCard/MarginContainer/InfoVBox/GoldHBox" unique_id=400822800]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("4_tkwek")
+theme_override_font_sizes/font_size = 16
+text = "10 G"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InfoCard/MarginContainer/InfoVBox" unique_id=2052187245]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_yamvf")
+
+[node name="StatsLabel" type="Label" parent="InfoCard/MarginContainer/InfoVBox" unique_id=32118282]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.37254903)
+theme_override_colors/font_outline_color = Color(0.23921569, 0.2, 0.2, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("4_tkwek")
+theme_override_font_sizes/font_size = 16
+text = "LV 1 / 3
+DMG: 4
+Charge: 3
+Duration: 5
+Cooldown: 5
+Rate: 10
+Range: 200"
+horizontal_alignment = 1
+
+[node name="PurchaseButton" type="TextureButton" parent="." unique_id=963352901]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.999958
+offset_top = 27.0
+offset_right = 20.000042
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_5nkwm")
+texture_pressed = ExtResource("5_5nkwm")
+texture_hover = ExtResource("5_5nkwm")
+texture_disabled = ExtResource("5_5nkwm")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BuildSfx" type="AudioStreamPlayer2D" parent="." unique_id=1464178270]
+unique_name_in_owner = true
+
+[node name="UpgradeSfx" type="AudioStreamPlayer2D" parent="." unique_id=527060300]
+unique_name_in_owner = true

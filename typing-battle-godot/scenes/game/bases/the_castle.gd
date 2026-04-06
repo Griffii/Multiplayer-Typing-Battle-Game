@@ -1,5 +1,13 @@
 extends Node2D
 
+const DEFAULT_ARROW_PROJECTILE_SCENE: PackedScene = preload("res://scenes/game/projectiles/arrow_projectile.tscn")
+
+signal castle_projectile_impact(target_enemy: Node)
+
+@export var projectile_scene: PackedScene = DEFAULT_ARROW_PROJECTILE_SCENE
+@export var projectile_travel_duration: float = 0.35
+@export var projectile_arc_height: float = 48.0
+
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var arrow_spawn_marker: Marker2D = %ArrowSpawnMarker
 @onready var base_marker: Marker2D = %BaseMarker
@@ -38,3 +46,32 @@ func get_base_position() -> Vector2:
 		return global_position
 
 	return base_marker.global_position
+
+
+func fire_castle_projectile(target_enemy: Node, projectile_container: Node) -> void:
+	if target_enemy == null or not is_instance_valid(target_enemy):
+		return
+	if projectile_container == null or not is_instance_valid(projectile_container):
+		return
+	if projectile_scene == null:
+		return
+
+	var spawn_position: Vector2 = get_arrow_spawn_position()
+
+	var projectile: Node = projectile_scene.instantiate()
+	projectile_container.add_child(projectile)
+
+	if projectile.has_signal("impact_reached"):
+		projectile.impact_reached.connect(_on_projectile_impact)
+
+	if projectile.has_method("fire"):
+		projectile.fire(
+			spawn_position,
+			target_enemy,
+			projectile_travel_duration,
+			projectile_arc_height
+		)
+
+
+func _on_projectile_impact(target_enemy: Node) -> void:
+	castle_projectile_impact.emit(target_enemy)

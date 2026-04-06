@@ -4,7 +4,7 @@ extends Enemy
 
 const SLIME_COLORS: Array[String] = [
 	"blue",
-	#"grey",
+	"grey",
 	#"green",
 	#"yellow",
 	#"orange",

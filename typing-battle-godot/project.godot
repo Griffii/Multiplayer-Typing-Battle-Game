@@ -18,6 +18,7 @@ boot_splash/image="uid://n54m58d228ns"
 [autoload]
 
 UiSfxManager="*uid://djhi43b2iy1oq"
+GameSelection="*uid://bwa2ushl5h3ue"
 
 [display]
 

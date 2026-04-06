@@ -7,11 +7,22 @@ signal word_completed(target_enemy: Node)
 signal input_cleared
 
 @onready var spawn_manager: Node = %SpawnManager
-@onready var tower_container: Node = %TowerContainer
+
+var current_level: BattlefieldLevel = null
+var tower_container: Node = null
 
 var is_active: bool = false
 var active_target: Node = null
 var input_buffer: String = ""
+
+
+
+func set_level(level: BattlefieldLevel) -> void:
+	current_level = level
+	tower_container = null
+
+	if current_level != null and current_level.has_method("get_tower_container"):
+		tower_container = current_level.get_tower_container()
 
 
 func reset_for_new_run() -> void:

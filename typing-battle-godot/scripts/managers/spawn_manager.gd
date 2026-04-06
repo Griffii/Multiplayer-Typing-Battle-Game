@@ -20,11 +20,11 @@ const WordLists = preload("res://data/words/word_lists.gd")
 @export var minimum_spacing_pixels: float = 72.0
 
 @onready var enemy_container: Node = %EnemyContainer
-@onready var spawn_marker: Marker2D = %EnemySpawnMarker
-@onready var enemy_path: Path2D = %EnemyPath
 @onready var wave_manager: Node = %WaveManager
 @onready var combat_manager: Node = %CombatManager
 
+var spawn_marker: Marker2D = null
+var enemy_path: Path2D = null
 var active_enemies: Array[Node] = []
 var spawn_queue: Array[Dictionary] = []
 var spawn_timer: float = 0.0
@@ -105,6 +105,13 @@ func reset_for_new_run() -> void:
 		for child in enemy_container.get_children():
 			if is_instance_valid(child):
 				child.queue_free()
+
+
+func set_enemy_spawn_marker(value: Marker2D) -> void:
+	spawn_marker = value
+
+func set_enemy_path(value: Path2D) -> void:
+	enemy_path = value
 
 
 func begin_wave(_wave_index: int) -> void:

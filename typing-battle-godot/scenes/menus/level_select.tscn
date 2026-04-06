@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://blch7qihnyihy"]
+
+[ext_resource type="Script" uid="uid://dly8iefw4a0dq" path="res://scenes/menus/level_select.gd" id="1_xqyeo"]
+
+[node name="LevelSelect" type="Control" unique_id=1046910368]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xqyeo")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2101064478]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1105315222]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="LevelsBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1123599676]
+layout_mode = 2
+alignment = 1
+
+[node name="GrasslandsButton" type="Button" parent="MarginContainer/VBoxContainer/LevelsBox" unique_id=1411026294]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Grasslands"
+
+[node name="SeasideFarmButton" type="Button" parent="MarginContainer/VBoxContainer/LevelsBox" unique_id=354838541]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Seaside Farm"
+
+[node name="EnemiesBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=451194601]
+layout_mode = 2
+alignment = 1
+
+[node name="SoldiersButton" type="Button" parent="MarginContainer/VBoxContainer/EnemiesBox" unique_id=1016297262]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Soldiers"
+
+[node name="SlimesButton" type="Button" parent="MarginContainer/VBoxContainer/EnemiesBox" unique_id=371014458]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Slimes"
+
+[node name="FinishButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=588910619]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Finish"
+
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=2131416464]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
