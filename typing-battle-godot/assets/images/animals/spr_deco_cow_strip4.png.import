@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfdh6bl5ijki2"
-path="res://.godot/imported/Castle.png-876aa6ad3a26ca808fb48b98d7bbdbfb.ctex"
+uid="uid://d0w15v7eonj8a"
+path="res://.godot/imported/spr_deco_cow_strip4.png-74d4f3afa02cb1521de289880975f092.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Castle.png"
-dest_files=["res://.godot/imported/Castle.png-876aa6ad3a26ca808fb48b98d7bbdbfb.ctex"]
+source_file="res://assets/images/animals/spr_deco_cow_strip4.png"
+dest_files=["res://.godot/imported/spr_deco_cow_strip4.png-74d4f3afa02cb1521de289880975f092.ctex"]
 
 [params]
 

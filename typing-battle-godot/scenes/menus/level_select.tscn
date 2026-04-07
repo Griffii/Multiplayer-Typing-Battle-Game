@@ -1,6 +1,268 @@
 [gd_scene format=3 uid="uid://blch7qihnyihy"]
 
 [ext_resource type="Script" uid="uid://dly8iefw4a0dq" path="res://scenes/menus/level_select.gd" id="1_xqyeo"]
+[ext_resource type="PackedScene" uid="uid://d36h1rtkqgva4" path="res://scenes/game/levels/grasslands.tscn" id="2_bjs8j"]
+[ext_resource type="PackedScene" uid="uid://bx4vrgw3koyaf" path="res://scenes/game/levels/seaside_farm.tscn" id="3_6lkes"]
+[ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/soldiers/soldier_01.png" id="4_rm37b"]
+[ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/soldiers/weapon_01.png" id="5_d52we"]
+[ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/soldiers/shield.png" id="6_o3ryw"]
+[ext_resource type="Texture2D" uid="uid://csajkcdbq6r3" path="res://assets/images/soldiers/soldier_03.png" id="7_3nlwe"]
+[ext_resource type="Texture2D" uid="uid://cqi2eoyspmkgn" path="res://assets/images/soldiers/weapon_03.png" id="8_if2tv"]
+[ext_resource type="Texture2D" uid="uid://bmssjb6jyu2px" path="res://assets/images/soldiers/soldier_02.png" id="9_10jtx"]
+[ext_resource type="Texture2D" uid="uid://emfdppmqxmp" path="res://assets/images/slimes/slime_idle2.png" id="10_2uik4"]
+[ext_resource type="Texture2D" uid="uid://c5t858ksierir" path="res://assets/images/slimes/slime_jump.png" id="11_pi4ua"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="12_2kfc6"]
+[ext_resource type="Texture2D" uid="uid://dl8g1tdf1vman" path="res://assets/images/menu/buttonSquare_beige.png" id="13_d52we"]
+[ext_resource type="Texture2D" uid="uid://bcnxf7smfd0r6" path="res://assets/images/menu/buttonSquare_brown.png" id="13_glcn7"]
+[ext_resource type="Texture2D" uid="uid://dqjc2e26onl3v" path="res://assets/images/menu/buttonSquare_brown_pressed.png" id="14_0ds72"]
+[ext_resource type="Texture2D" uid="uid://cx2ovcmvgohjs" path="res://assets/images/menu/buttonSquare_beige_pressed.png" id="14_o3ryw"]
+[ext_resource type="Texture2D" uid="uid://bm3bbs2s8c15" path="res://assets/images/menu/confirm.png" id="15_3nlwe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d52we"]
+bg_color = Color(0, 0, 0, 0.50980395)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.99839514, 0.7544304, 0.27873912, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3ryw"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.99839514, 0.7544304, 0.27873912, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nlwe"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.99839514, 0.7544304, 0.27873912, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgcbf"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(0, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6lfc"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(80, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70l6n"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(160, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilwhj"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(240, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ase7r"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(320, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtltp"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(400, 216, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u4nx"]
+atlas = ExtResource("10_2uik4")
+region = Rect2(480, 216, 80, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pumrs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgcbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6lfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70l6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilwhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ase7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtltp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8u4nx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yixkv"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(0, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmx3p"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(80, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgixs"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(160, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el57h"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(240, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogp34"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(320, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1td6"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(400, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqa14"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(480, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ppcu"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(560, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5xjm"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(640, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oipxj"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(720, 72, 80, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5grt"]
+atlas = ExtResource("11_pi4ua")
+region = Rect2(800, 72, 80, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buvdm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yixkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmx3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgixs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el57h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogp34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1td6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqa14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ppcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5xjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oipxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5grt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if2tv"]
+texture = ExtResource("13_d52we")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_10jtx"]
+texture = ExtResource("14_o3ryw")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2uik4"]
+texture = ExtResource("13_d52we")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0.85606754, 0.85606724, 0.85606724, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pi4ua"]
+texture = ExtResource("13_d52we")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.50980395)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2kfc6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_14osn"]
+texture = ExtResource("13_glcn7")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q3c3q"]
+texture = ExtResource("14_0ds72")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gdjv8"]
+texture = ExtResource("13_glcn7")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+modulate_color = Color(0.8431839, 0.8431839, 0.84318376, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgur4"]
+texture = ExtResource("13_glcn7")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.50980395)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb1vu"]
 
 [node name="LevelSelect" type="Control" unique_id=1046910368]
 layout_mode = 3
@@ -10,6 +272,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xqyeo")
+
+[node name="BGContainer" type="Node2D" parent="." unique_id=1222301614]
+z_index = -1
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=474047434]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.50980395)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2101064478]
 layout_mode = 1
@@ -23,57 +297,221 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1105315222]
-layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
-
-[node name="LevelsBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1123599676]
-layout_mode = 2
-alignment = 1
-
-[node name="GrasslandsButton" type="Button" parent="MarginContainer/VBoxContainer/LevelsBox" unique_id=1411026294]
-unique_name_in_owner = true
+[node name="RootVbox" type="VBoxContainer" parent="MarginContainer" unique_id=1105315222]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 38
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RootVbox" unique_id=1403110319]
+layout_mode = 2
+
+[node name="LevelSelectLabel" type="RichTextLabel" parent="MarginContainer/RootVbox/VBoxContainer" unique_id=328463030]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8352941)
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/normal_font = ExtResource("12_2kfc6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Pick a level:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelsBox" type="HBoxContainer" parent="MarginContainer/RootVbox/VBoxContainer" unique_id=1123599676]
+layout_mode = 2
+alignment = 1
+
+[node name="GrasslandsContainer" type="MarginContainer" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox" unique_id=1262312113]
+clip_contents = true
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Grasslands" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox/GrasslandsContainer" unique_id=1777634157 instance=ExtResource("2_bjs8j")]
+scale = Vector2(0.22, 0.22)
+
+[node name="GrasslandsButton" type="Button" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox/GrasslandsContainer" unique_id=1411026294]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d52we")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o3ryw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nlwe")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o3ryw")
 text = "Grasslands"
 
-[node name="SeasideFarmButton" type="Button" parent="MarginContainer/VBoxContainer/LevelsBox" unique_id=354838541]
+[node name="SeasideFarmContainer" type="MarginContainer" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox" unique_id=1061794492]
+clip_contents = true
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="Seaside_Farm" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox/SeasideFarmContainer" unique_id=1439470031 instance=ExtResource("3_6lkes")]
+scale = Vector2(0.22, 0.22)
+
+[node name="SeasideFarmButton" type="Button" parent="MarginContainer/RootVbox/VBoxContainer/LevelsBox/SeasideFarmContainer" unique_id=354838541]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d52we")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o3ryw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nlwe")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o3ryw")
+text = "Seaside Farm"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/RootVbox" unique_id=113849658]
+layout_mode = 2
+
+[node name="EnemySelectLabel" type="RichTextLabel" parent="MarginContainer/RootVbox/VBoxContainer2" unique_id=1119939082]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Seaside Farm"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8352941)
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/normal_font = ExtResource("12_2kfc6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Pick an Enemy Type:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="EnemiesBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=451194601]
+[node name="EnemiesBox" type="HBoxContainer" parent="MarginContainer/RootVbox/VBoxContainer2" unique_id=451194601]
 layout_mode = 2
 alignment = 1
 
-[node name="SoldiersButton" type="Button" parent="MarginContainer/VBoxContainer/EnemiesBox" unique_id=1016297262]
-unique_name_in_owner = true
+[node name="SoldiersContainer" type="MarginContainer" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox" unique_id=1401735939]
+clip_contents = true
+custom_minimum_size = Vector2(200, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Soldier01" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer" unique_id=454307944]
+position = Vector2(30, 94)
+scale = Vector2(3, 3)
+texture = ExtResource("4_rm37b")
+
+[node name="Weapon01" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer/Soldier01" unique_id=763381381]
+position = Vector2(11.000004, 1)
+rotation = 0.7853982
+texture = ExtResource("5_d52we")
+flip_h = true
+
+[node name="Shield" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer/Soldier01" unique_id=800102430]
+position = Vector2(-7, 4.666664)
+texture = ExtResource("6_o3ryw")
+
+[node name="Soldier03" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer" unique_id=1584436263]
+position = Vector2(172, 93)
+scale = Vector2(3, 3)
+texture = ExtResource("7_3nlwe")
+flip_h = true
+
+[node name="Weapon03" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer/Soldier03" unique_id=1701077970]
+position = Vector2(-10.666662, 1.6666718)
+rotation = -0.7853982
+texture = ExtResource("8_if2tv")
+
+[node name="Soldier02" type="Sprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer" unique_id=372422271]
+position = Vector2(99, 95)
+scale = Vector2(3, 3)
+texture = ExtResource("9_10jtx")
+
+[node name="SoldiersButton" type="Button" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SoldiersContainer" unique_id=1016297262]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d52we")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o3ryw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nlwe")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o3ryw")
 text = "Soldiers"
 
-[node name="SlimesButton" type="Button" parent="MarginContainer/VBoxContainer/EnemiesBox" unique_id=371014458]
+[node name="SlimesContainer" type="MarginContainer" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox" unique_id=360013673]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+
+[node name="SlimeDemo" type="AnimatedSprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SlimesContainer" unique_id=1524378349]
+position = Vector2(52, 95)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_pumrs")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.25020576
+
+[node name="SlimeDemo2" type="AnimatedSprite2D" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SlimesContainer" unique_id=1248910445]
+position = Vector2(142, 95)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_buvdm")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.61564636
+flip_h = true
+
+[node name="SlimesButton" type="Button" parent="MarginContainer/RootVbox/VBoxContainer2/EnemiesBox/SlimesContainer" unique_id=371014458]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d52we")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o3ryw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3nlwe")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o3ryw")
 text = "Slimes"
 
-[node name="FinishButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=588910619]
+[node name="FinishButton" type="Button" parent="MarginContainer/RootVbox" unique_id=413449476]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Finish"
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxTexture_if2tv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_10jtx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2uik4")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_pi4ua")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2kfc6")
+text = "Ready"
+icon = ExtResource("15_3nlwe")
+expand_icon = true
 
-[node name="BackButton" type="Button" parent="MarginContainer" unique_id=2131416464]
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=902274376]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("12_2kfc6")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_14osn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_q3c3q")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gdjv8")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_lgur4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qb1vu")
 text = "Back"

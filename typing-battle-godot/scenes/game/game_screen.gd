@@ -15,6 +15,9 @@ enum RunState {
 
 const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
 
+# Turn this to false before packaging for itch
+var DEV_MODE: bool = false
+
 var selected_level_scene: PackedScene = null
 var selected_wave_defs: Array = []
 
@@ -34,6 +37,8 @@ var selected_wave_defs: Array = []
 @onready var typing_manager: Node = %TypingManager
 @onready var combat_manager: Node = %CombatManager
 
+#Dev Stuff
+@onready var dev_stuff: CanvasLayer = %DevStuff
 @onready var skip_wave_button: Button = %DEBUG_SkipWave
 
 var current_level: BattlefieldLevel = null
@@ -55,7 +60,11 @@ func _ready() -> void:
 	_connect_signals()
 	_load_selected_run_content()
 	_reset_run()
-
+	
+	if DEV_MODE:
+		dev_stuff.visible = true
+	else:
+		dev_stuff.visible = false
 
 func _connect_signals() -> void:
 	if game_hud != null:

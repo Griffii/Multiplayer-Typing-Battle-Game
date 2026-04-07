@@ -7,10 +7,9 @@ const WAVES := [
 		"wave_word_list": "easy",
 		"enemies": [
 			{"enemy_type": "grunt"},
-			{"enemy_type": "slime", "word_list": "cute"},
 			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "slime", "word_list": "cute"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"}
 		]
@@ -21,11 +20,10 @@ const WAVES := [
 		"enemies": [
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
-			{"enemy_type": "slime"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "slime"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"}
 		]
 	},
@@ -35,12 +33,11 @@ const WAVES := [
 		"enemies": [
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "tank", "word_list": "school"},
+			{"enemy_type": "tank"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "slime"}
+			{"enemy_type": "tank"}
 		]
 	},
 	{
@@ -50,103 +47,102 @@ const WAVES := [
 			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "tank", "word_list": "action"},
+			{"enemy_type": "tank"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "scout"},
-			{"enemy_type": "grunt"}
-		]
-	},
-	{
-		"spawn_interval": 0.98,
-		"wave_word_list": "compliments",
-		"enemies": [
 			{"enemy_type": "grunt"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"}
-		]
-	},
-	{
-		"spawn_interval": 0.95,
-		"wave_word_list": "holidays",
-		"enemies": [
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "slime"}
-		]
-	},
-	{
-		"spawn_interval": 0.92,
-		"wave_word_list": "scary",
-		"enemies": [
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "slime"},
 			{"enemy_type": "tank"}
 		]
 	},
 	{
-		"spawn_interval": 0.90,
-		"wave_word_list": "school",
+		"spawn_interval": 0.96,
+		"wave_word_list": "compliments",
 		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "boss", "word_list": "boss"}
+		]
+	},
+	{
+		"spawn_interval": 0.92,
+		"wave_word_list": "holidays",
+		"enemies": [
+			{"enemy_type": "scout"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "slime"},
 			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "tank"}
 		]
 	},
 	{
 		"spawn_interval": 0.88,
-		"wave_word_list": "action",
+		"wave_word_list": "scary",
 		"enemies": [
 			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
-			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "tank"},
 			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
-			{"enemy_type": "slime"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout"}
+		]
+	},
+	{
+		"spawn_interval": 0.84,
+		"wave_word_list": "boss",
+		"enemies": [
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"}
+		]
+	},
+	{
+		"spawn_interval": 0.80,
+		"wave_word_list": "boss",
+		"enemies": [
+			{"enemy_type": "grunt"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "grunt"},
+			{"enemy_type": "tank"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "tank"},
 			{"enemy_type": "grunt"}
 		]
 	},
 	{
-		"spawn_interval": 1.00,
-		"wave_word_list": "scary",
+		"spawn_interval": 0.90,
+		"wave_word_list": "boss",
 		"enemies": [
 			{"enemy_type": "grunt"},
-			{"enemy_type": "scout", "word_list": "cute"},
+			{"enemy_type": "scout"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
 			{"enemy_type": "grunt"},
 			{"enemy_type": "tank"},
-			{"enemy_type": "slime"},
+			{"enemy_type": "boss", "word_list": "boss"},
+			{"enemy_type": "scout"},
+			{"enemy_type": "boss", "word_list": "boss"},
+			{"enemy_type": "tank"},
 			{"enemy_type": "boss", "word_list": "boss"}
 		]
 	}

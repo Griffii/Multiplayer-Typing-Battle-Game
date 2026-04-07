@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dl8g1tdf1vman" path="res://assets/images/menu/buttonSquare_beige.png" id="3_8r73w"]
 [ext_resource type="Texture2D" uid="uid://cx2ovcmvgohjs" path="res://assets/images/menu/buttonSquare_beige_pressed.png" id="4_1hnlc"]
 [ext_resource type="TileSet" uid="uid://381uk2yd5j73" path="res://assets/tilesets/tiny-town-tileset.tres" id="5_imvie"]
+[ext_resource type="PackedScene" uid="uid://cce64clndfd8h" path="res://scenes/environment/animals/sheep.tscn" id="6_ng0o5"]
+[ext_resource type="Texture2D" uid="uid://d0w15v7eonj8a" path="res://assets/images/animals/spr_deco_cow_strip4.png" id="7_8r73w"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ng0o5"]
 texture = ExtResource("3_8r73w")
@@ -57,6 +59,42 @@ texture_margin_bottom = 8.0
 modulate_color = Color(1, 1, 1, 0.50980395)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8r73w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpbr0"]
+atlas = ExtResource("7_8r73w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3iyv"]
+atlas = ExtResource("7_8r73w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1ruo"]
+atlas = ExtResource("7_8r73w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp8rk"]
+atlas = ExtResource("7_8r73w")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hnlc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpbr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3iyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1ruo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp8rk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [node name="MainMenu" type="Control" unique_id=86599386]
 layout_mode = 3
@@ -170,6 +208,23 @@ tile_set = ExtResource("5_imvie")
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAABAAAAAAAKAAEAAAABAAEAAAAKAAEAAAAIAAIAAAADAAAAAAAIAAMAAAADAAEAAAAAAAEAAAAKAAEAAAAAAAIAAAAKAAEAAAABAAMAAAAKAAEAAAACAAIAAAAKAAEAAAADAAEAAAAKAAEAAAAEAAAAAAAKAAEAAAAAAAMAAAAKAAEAAAABAAQAAAAKAAIAAAACAAMAAAALAAIAAAAEAAEAAAALAAIAAAADAAAAAAAKAAEAAAACAAAAAAAKAAEAAAACAAEAAAAKAAEAAAABAAIAAAAKAAEAAAAAAAAAAAAKAAEAAAAAAAQAAAALAAIAAAAFAAAAAAALAAEAAAABAAwAAAAFAAIAAAAQAAIAAAAEAAAAAAABAAoAAAAJAAQAAAAFAAEAAAAJAAAAAAAFAAIAAAAKAAIAAAAGAAEAAAALAAAAAAAGAAIAAAAKAAIAAAADAAIAAAALAAIAAAAHAAAAAAALAAEAAAAGAAAAAAAJAAEAAAAXAAEAAAAGAAEAAAAYAAEAAAAIAAEAAAAZAAAAAAAGAAEAAAAaAAAAAAAHAAEAAAAaAAEAAAAGAAIAAAAaAAIAAAAGAAEAAAAbAAAAAAAHAAEAAAAbAAEAAAAHAAEAAAAbAAIAAAAHAAEAAAAbAAMAAAAGAAIAAAAcAAAAAAAHAAEAAAAcAAEAAAAHAAEAAAAcAAIAAAAHAAEAAAAcAAMAAAAHAAEAAAAcAAQAAAAGAAIAAAAdAAAAAAAHAAEAAAAdAAEAAAAHAAEAAAAdAAIAAAAHAAEAAAAdAAMAAAAHAAEAAAAdAAQAAAAHAAEAAAAdAAUAAAAHAAIAAAAQAAMAAAAEAAEAAAAUAAAAAAAEAAAAAAAUAAEAAAAEAAEAAAAIAA8AAAAFAAEAAAALAA4AAAAJAAMAAAASAA4AAAAJAAMAAAATAA4AAAAJAAMAAAATAA8AAAAFAAIAAAAUAA4AAAAJAAMAAAAMAA4AAAAJAAMAAAANAA4AAAAJAAMAAAAOAA4AAAAJAAMAAAAPAA4AAAAJAAMAAAAQAA4AAAAJAAMAAAATAAoAAAAJAAMAAAAUAAoAAAAJAAMAAAALAAoAAAAJAAMAAAAMAAoAAAAJAAMAAAANAAoAAAAJAAMAAAAOAAoAAAAKAAYAAAAPAAoAAAAIAAYAAAAQAAoAAAAJAAMAAAARAAoAAAAJAAMAAAASAAoAAAAJAAMAAAARAA4AAAAJAAMAAAAbAA4AAAAKAAgAAAAcAAwAAAADAAAAAAAcAA0AAAADAAEAAAAdAAsAAAAEAAAAAAAdAAwAAAAEAAEAAAADAA0AAAADAAAAAAADAA4AAAADAAEAAAAHAAoAAAAJAAMAAAAHAA4AAAAJAAMAAAAEAAoAAAAIAAMAAAAEAAsAAAAIAAQAAAAEAAwAAAAIAAQAAAAEAA0AAAAIAAQAAAAEAA4AAAAIAAUAAAAFAAoAAAAJAAMAAAAFAA4AAAAJAAMAAAAGAAoAAAAJAAMAAAAGAA4AAAAJAAMAAAAZAAoAAAAKAAMAAAAZAA4AAAAKAAUAAAAKAA4AAAAJAAMAAAAJAA4AAAAJAAMAAAAIAA4AAAAJAAMAAAAIAAoAAAAJAAMAAAAJAAoAAAAJAAMAAAAKAAoAAAAJAAMAAAAVAAoAAAAJAAMAAAAWAAoAAAAJAAMAAAAXAAoAAAAJAAMAAAAYAAoAAAAJAAMAAAAYAA4AAAAJAAMAAAAXAA4AAAAJAAMAAAAWAA4AAAAJAAMAAAAVAA4AAAAJAAMAAAAZAAsAAAAKAAQAAAAZAAwAAAAKAAQAAAAZAA0AAAAKAAQAAAAYAA0AAAABAAAAAAAOAAsAAAAAAAAAAAAdABAAAAAHAAMAAAAcAA8AAAAHAAMAAAAcABAAAAAHAAMAAAAaAA8AAAAHAAMAAAAEAAIAAAAIAAcAAAAEAAMAAAAIAAgAAAA=")
 tile_set = ExtResource("5_imvie")
+
+[node name="SheepContainer" type="Node2D" parent="." unique_id=711948835]
+
+[node name="Sheep" parent="SheepContainer" unique_id=1144505600 instance=ExtResource("6_ng0o5")]
+position = Vector2(97, 194)
+scale = Vector2(1.6, 1.6)
+flip_h = true
+
+[node name="Sheep2" parent="SheepContainer" unique_id=1399215117 instance=ExtResource("6_ng0o5")]
+position = Vector2(873, 353)
+scale = Vector2(1.5, 1.5)
+
+[node name="AnimatedCow" type="AnimatedSprite2D" parent="SheepContainer" unique_id=1120453797]
+position = Vector2(755, 507)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_1hnlc")
+frame_progress = 0.4447411
 
 [node name="MainMenuBGM" type="AudioStreamPlayer" parent="." unique_id=1557332651]
 volume_db = -24.0

@@ -128,6 +128,7 @@ unique_name_in_owner = true
 stream = ExtResource("7_fxpxx")
 
 [node name="DevStuff" type="CanvasLayer" parent="." unique_id=1547193028]
+unique_name_in_owner = true
 
 [node name="DEBUG_SkipWave" type="Button" parent="DevStuff" unique_id=168527252]
 unique_name_in_owner = true

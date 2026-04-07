@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boloplsrx54db"
-path="res://.godot/imported/castle-flaticon.png-afb7b4d58631a4bb29abb360494aba72.ctex"
+uid="uid://dtu3uotsxn0ur"
+path="res://.godot/imported/spr_waiting_strip9.png-cc047cb02a498ef288b63ba34ec62370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/castle-flaticon.png"
-dest_files=["res://.godot/imported/castle-flaticon.png-afb7b4d58631a4bb29abb360494aba72.ctex"]
+source_file="res://assets/images/animals/spr_waiting_strip9.png"
+dest_files=["res://.godot/imported/spr_waiting_strip9.png-cc047cb02a498ef288b63ba34ec62370.ctex"]
 
 [params]
 
