@@ -12,11 +12,11 @@ var has_finished: bool = false
 func fire(on_pos: Vector2, target: Node = null) -> void:
 	target_enemy = target
 	global_position = on_pos
-
+	
 	if animated_sprite != null:
 		if not animated_sprite.animation_finished.is_connected(_on_animation_finished):
 			animated_sprite.animation_finished.connect(_on_animation_finished)
-
+	
 		animated_sprite.visible = true
 		animated_sprite.play()
 	else:

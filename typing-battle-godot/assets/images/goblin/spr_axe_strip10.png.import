@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drpy53jgkf02a"
-path="res://.godot/imported/spr_idle_strip9.png-f1d466344beec7ae9efb52c0d1e29af0.ctex"
+uid="uid://da4ydkusp7716"
+path="res://.godot/imported/spr_axe_strip10.png-cce3cc7d94b449ff3d728e24283d8f5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/animals/spr_idle_strip9.png"
-dest_files=["res://.godot/imported/spr_idle_strip9.png-f1d466344beec7ae9efb52c0d1e29af0.ctex"]
+source_file="res://assets/images/goblin/spr_axe_strip10.png"
+dest_files=["res://.godot/imported/spr_axe_strip10.png-cce3cc7d94b449ff3d728e24283d8f5a.ctex"]
 
 [params]
 

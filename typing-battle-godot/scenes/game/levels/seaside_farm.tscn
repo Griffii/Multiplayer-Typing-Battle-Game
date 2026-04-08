@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://cd37qxn60aorr" path="res://assets/images/environment/spr_deco_tree_02_strip4.png" id="7_3oc8o"]
 [ext_resource type="Texture2D" uid="uid://dfbvqv28n61ku" path="res://assets/images/environment/spr_deco_mushroom_red_01_strip4.png" id="7_qt2p4"]
 [ext_resource type="Texture2D" uid="uid://d0w15v7eonj8a" path="res://assets/images/animals/spr_deco_cow_strip4.png" id="8_qt2p4"]
-[ext_resource type="Texture2D" uid="uid://c1qd808w4a3gk" path="res://assets/images/animals/spr_reeling_strip13.png" id="9_08sba"]
-[ext_resource type="Texture2D" uid="uid://dtu3uotsxn0ur" path="res://assets/images/animals/spr_waiting_strip9.png" id="10_onrtr"]
+[ext_resource type="Texture2D" uid="uid://c1qd808w4a3gk" path="res://assets/images/goblin/spr_reeling_strip13.png" id="9_08sba"]
+[ext_resource type="Texture2D" uid="uid://dtu3uotsxn0ur" path="res://assets/images/goblin/spr_waiting_strip9.png" id="10_onrtr"]
 [ext_resource type="Script" uid="uid://c3y07nmlqop55" path="res://scenes/game/levels/animated_goblin.gd" id="11_f1jwk"]
-[ext_resource type="Texture2D" uid="uid://drpy53jgkf02a" path="res://assets/images/animals/spr_idle_strip9.png" id="12_c4tgt"]
-[ext_resource type="Texture2D" uid="uid://cwypp2qdi07la" path="res://assets/images/animals/spr_watering_strip5.png" id="13_a3iyv"]
+[ext_resource type="Texture2D" uid="uid://drpy53jgkf02a" path="res://assets/images/goblin/spr_idle_strip9.png" id="12_c4tgt"]
+[ext_resource type="Texture2D" uid="uid://cwypp2qdi07la" path="res://assets/images/goblin/spr_watering_strip5.png" id="13_a3iyv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pix2p"]
 shader = ExtResource("2_xd7uw")
@@ -21,7 +21,7 @@ shader_parameter/wave_speed = 0.5
 shader_parameter/wave_strength = 0.1
 shader_parameter/wave_scale = 5.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xd7uw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_08sba"]
 texture = ExtResource("1_ekq4y")
 12:0/0 = 0
 13:0/0 = 0
@@ -1765,7 +1765,7 @@ texture = ExtResource("1_ekq4y")
 43:49/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_2ljfr"]
-sources/0 = SubResource("TileSetAtlasSource_xd7uw")
+sources/0 = SubResource("TileSetAtlasSource_08sba")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3oc8o"]
 atlas = ExtResource("6_pyg4l")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfdh6bl5ijki2"
-path="res://.godot/imported/castle.png-845c3c82761741958cba0d800a86e7e8.ctex"
+uid="uid://dhae1844c5efj"
+path="res://.godot/imported/frame0007.png-f80c15e999de472fc28ab30fde2d0cc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/castle.png"
-dest_files=["res://.godot/imported/castle.png-845c3c82761741958cba0d800a86e7e8.ctex"]
+source_file="res://assets/images/impact_effects/symbol_alert_001_large_red/frame0007.png"
+dest_files=["res://.godot/imported/frame0007.png-f80c15e999de472fc28ab30fde2d0cc3.ctex"]
 
 [params]
 

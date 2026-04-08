@@ -96,30 +96,43 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="TopBarsBox" type="VBoxContainer" parent="MarginContainer" unique_id=269322408]
+[node name="TopBarsBox" type="VBoxContainer" parent="MarginContainer" unique_id=2132068476]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/TopBarsBox" unique_id=1294491608]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_g1fq1")
+theme_override_font_sizes/font_size = 20
+text = "Status label"
+horizontal_alignment = 1
+
+[node name="BottomBarsBox" type="VBoxContainer" parent="MarginContainer" unique_id=269322408]
 layout_mode = 2
 theme_override_constants/separation = 14
+alignment = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/TopBarsBox" unique_id=698085684]
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/BottomBarsBox" unique_id=698085684]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 8
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="HpContainer" type="HBoxContainer" parent="MarginContainer/TopBarsBox/TopBar" unique_id=133155919]
+[node name="HpContainer" type="HBoxContainer" parent="MarginContainer/BottomBarsBox/BottomBar" unique_id=133155919]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HeartIcon" type="TextureRect" parent="MarginContainer/TopBarsBox/TopBar/HpContainer" unique_id=1618412900]
+[node name="HeartIcon" type="TextureRect" parent="MarginContainer/BottomBarsBox/BottomBar/HpContainer" unique_id=1618412900]
 layout_mode = 2
 texture = ExtResource("2_i4r04")
 expand_mode = 3
 
-[node name="BaseHpLabel" type="Label" parent="MarginContainer/TopBarsBox/TopBar/HpContainer" unique_id=1911789980]
+[node name="BaseHpLabel" type="Label" parent="MarginContainer/BottomBarsBox/BottomBar/HpContainer" unique_id=1911789980]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -129,7 +142,7 @@ theme_override_font_sizes/font_size = 22
 text = "100/100"
 horizontal_alignment = 1
 
-[node name="GoldContainer" type="HBoxContainer" parent="MarginContainer/TopBarsBox/TopBar" unique_id=806754557]
+[node name="GoldContainer" type="HBoxContainer" parent="MarginContainer/BottomBarsBox/BottomBar" unique_id=806754557]
 clip_contents = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -137,12 +150,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="GoldIcon" type="TextureRect" parent="MarginContainer/TopBarsBox/TopBar/GoldContainer" unique_id=1520096379]
+[node name="GoldIcon" type="TextureRect" parent="MarginContainer/BottomBarsBox/BottomBar/GoldContainer" unique_id=1520096379]
 layout_mode = 2
 texture = ExtResource("4_04ufq")
 expand_mode = 3
 
-[node name="GoldLabel" type="Label" parent="MarginContainer/TopBarsBox/TopBar/GoldContainer" unique_id=581783441]
+[node name="GoldLabel" type="Label" parent="MarginContainer/BottomBarsBox/BottomBar/GoldContainer" unique_id=581783441]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -152,19 +165,19 @@ theme_override_font_sizes/font_size = 22
 text = "0 G"
 horizontal_alignment = 1
 
-[node name="WaveContainer" type="HBoxContainer" parent="MarginContainer/TopBarsBox/TopBar" unique_id=1856605155]
+[node name="WaveContainer" type="HBoxContainer" parent="MarginContainer/BottomBarsBox/BottomBar" unique_id=1856605155]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="SkullIcon" type="TextureRect" parent="MarginContainer/TopBarsBox/TopBar/WaveContainer" unique_id=1595235631]
+[node name="SkullIcon" type="TextureRect" parent="MarginContainer/BottomBarsBox/BottomBar/WaveContainer" unique_id=1595235631]
 layout_mode = 2
 texture = ExtResource("5_04ufq")
 expand_mode = 3
 
-[node name="WaveLabel" type="Label" parent="MarginContainer/TopBarsBox/TopBar/WaveContainer" unique_id=1906521562]
+[node name="WaveLabel" type="Label" parent="MarginContainer/BottomBarsBox/BottomBar/WaveContainer" unique_id=1906521562]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.56078434)
@@ -172,15 +185,6 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("2_g1fq1")
 theme_override_font_sizes/font_size = 22
 text = "Wave 1/1"
-horizontal_alignment = 1
-
-[node name="StatusLabel" type="Label" parent="MarginContainer/TopBarsBox" unique_id=1294491608]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
-theme_override_fonts/font = ExtResource("2_g1fq1")
-theme_override_font_sizes/font_size = 20
-text = "Status label"
 horizontal_alignment = 1
 
 [node name="CenterOverlay" type="Control" parent="MarginContainer" unique_id=1297231550]
@@ -252,7 +256,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -63.0
+offset_top = -107.0
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4

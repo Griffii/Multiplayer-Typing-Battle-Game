@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1qd808w4a3gk"
-path="res://.godot/imported/spr_reeling_strip13.png-c5cd58d845ef77712bff864042367b0f.ctex"
+uid="uid://d3lechcq7yo5g"
+path="res://.godot/imported/frame0013.png-69024fd8ed23360ed7108ee7d1d3f731.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/animals/spr_reeling_strip13.png"
-dest_files=["res://.godot/imported/spr_reeling_strip13.png-c5cd58d845ef77712bff864042367b0f.ctex"]
+source_file="res://assets/images/icons/symbol_alert_001_large_red/frame0013.png"
+dest_files=["res://.godot/imported/frame0013.png-69024fd8ed23360ed7108ee7d1d3f731.ctex"]
 
 [params]
 

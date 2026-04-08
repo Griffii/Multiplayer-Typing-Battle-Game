@@ -3,6 +3,7 @@ extends Node2D
 const TOWER_PROJECTILE_SCENE: PackedScene = preload("res://scenes/game/projectiles/lightning_projectile.tscn")
 const WordLists = preload("res://data/words/word_lists.gd")
 
+
 enum TowerState {
 	IDLE,
 	ACTIVE,
