@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://vjau7wdcbhe7"]
 
-[ext_resource type="Texture2D" uid="uid://cu41173875ncd" path="res://assets/images/magic_panel_01.png" id="1_wh3gp"]
+[ext_resource type="Texture2D" uid="uid://cu41173875ncd" path="res://assets/images/menu/magic_panel_01.png" id="1_wh3gp"]
 [ext_resource type="Script" uid="uid://dv0axyoa7s2f0" path="res://scenes/game/towers/tower_type_button.gd" id="2_wh3gp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5nkwm"]

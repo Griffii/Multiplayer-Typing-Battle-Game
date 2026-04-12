@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dppdjd46i013h" path="res://scenes/game/towers/arrow_tower.gd" id="1_cen7m"]
 [ext_resource type="Texture2D" uid="uid://d0yjqik3bpi4b" path="res://assets/images/towers/Tower-black.png" id="2_w6fnv"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="3_gbksj"]
-[ext_resource type="Texture2D" uid="uid://b8na3q8wdhbrr" path="res://assets/images/magic_bar_empty.png" id="4_bnc5y"]
-[ext_resource type="Texture2D" uid="uid://0i0esmgogqti" path="res://assets/images/magic_bar_filled.png" id="5_y6i83"]
-[ext_resource type="Texture2D" uid="uid://68c4e2karxs3" path="res://assets/images/magic_panel_04.png" id="6_wdbdq"]
+[ext_resource type="Texture2D" uid="uid://b8na3q8wdhbrr" path="res://assets/images/menu/magic_bar_empty.png" id="4_bnc5y"]
+[ext_resource type="Texture2D" uid="uid://0i0esmgogqti" path="res://assets/images/menu/magic_bar_filled.png" id="5_y6i83"]
+[ext_resource type="Texture2D" uid="uid://68c4e2karxs3" path="res://assets/images/menu/magic_panel_04.png" id="6_wdbdq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8t4bd"]
 radius = 250.0

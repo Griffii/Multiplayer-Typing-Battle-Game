@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://cv0vs0fbr1f4f"]
 
 [ext_resource type="Script" uid="uid://dt4ox5fq1jugt" path="res://scenes/game/bases/castle_main.gd" id="1_16nct"]
-[ext_resource type="Texture2D" uid="uid://b8na3q8wdhbrr" path="res://assets/images/magic_bar_empty.png" id="4_61rl7"]
-[ext_resource type="Texture2D" uid="uid://0i0esmgogqti" path="res://assets/images/magic_bar_filled.png" id="5_pvo7f"]
+[ext_resource type="Texture2D" uid="uid://b8na3q8wdhbrr" path="res://assets/images/menu/magic_bar_empty.png" id="4_61rl7"]
+[ext_resource type="Texture2D" uid="uid://0i0esmgogqti" path="res://assets/images/menu/magic_bar_filled.png" id="5_pvo7f"]
 [ext_resource type="PackedScene" uid="uid://c86wxohinjsip" path="res://scenes/game/bases/castle_health_bar.tscn" id="6_7ahkd"]
 [ext_resource type="AudioStream" uid="uid://ce7yx07342a3i" path="res://assets/sfx/environment/animal_sheep_baa_short.ogg" id="7_l2hp0"]
 [ext_resource type="Texture2D" uid="uid://nou6hqfvsi23" path="res://assets/tilemaps/spr_tileset_sunnysideworld_16px.png" id="27_x568f"]

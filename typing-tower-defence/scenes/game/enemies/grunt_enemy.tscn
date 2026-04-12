@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://mxpolmgd3vvh"]
 
 [ext_resource type="Script" uid="uid://cvh6i5dr2v1n4" path="res://scenes/game/enemies/soldier_enemy.gd" id="1_1hy27"]
-[ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/soldiers/soldier_01.png" id="2_wysbr"]
-[ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/soldiers/weapon_01.png" id="3_btfwy"]
-[ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/soldiers/shield.png" id="4_jja6d"]
+[ext_resource type="Texture2D" uid="uid://b6lh1rtpfa1vn" path="res://assets/images/enemies/soldiers/soldier_01.png" id="2_wysbr"]
+[ext_resource type="Texture2D" uid="uid://btccmbpm1ktx8" path="res://assets/images/enemies/soldiers/weapon_01.png" id="3_btfwy"]
+[ext_resource type="Texture2D" uid="uid://dhlutul7udy04" path="res://assets/images/enemies/soldiers/shield.png" id="4_jja6d"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="5_mi6ti"]
 [ext_resource type="PackedScene" uid="uid://5ncf4s20mxcj" path="res://scenes/game/word_label_controller.tscn" id="5_wysbr"]
 [ext_resource type="AudioStream" uid="uid://d1c1qptlmsujv" path="res://assets/sfx/enemies/sword_attack.ogg" id="6_vbw0u"]
