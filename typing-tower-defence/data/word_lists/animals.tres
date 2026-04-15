@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WordListData" format=3 uid="uid://douaq8soxa1hb"]
+
+[ext_resource type="Script" uid="uid://blmx4awdqm5pt" path="res://scripts/configs/WordListData.gd" id="1_np7cu"]
+
+[resource]
+script = ExtResource("1_np7cu")
+id = "animals"
+display_name = "Animals"
+category = "nature"
+words = Array[String](["cat", "dog", "lion", "tiger", "bear", "wolf", "fox", "rabbit", "deer", "horse", "cow", "pig", "sheep", "goat", "chicken", "duck", "eagle", "owl", "hawk", "parrot", "shark", "whale", "dolphin", "octopus", "crab", "frog", "snake", "lizard", "turtle", "panda"])
+metadata/_custom_type_script = "uid://blmx4awdqm5pt"

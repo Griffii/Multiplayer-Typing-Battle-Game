@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WordListData" format=3 uid="uid://biqavub1dfces"]
+
+[ext_resource type="Script" uid="uid://blmx4awdqm5pt" path="res://scripts/configs/WordListData.gd" id="1_rqiyx"]
+
+[resource]
+script = ExtResource("1_rqiyx")
+id = "colors"
+display_name = "Colors"
+category = "general"
+words = Array[String](["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "black", "white", "gray", "gold", "silver"])
+metadata/_custom_type_script = "uid://blmx4awdqm5pt"

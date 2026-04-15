@@ -2,6 +2,7 @@ extends Control
 
 signal play_requested
 signal settings_requested
+signal wordlistsmenu_requested
 
 const LIGHTNING_SCENE: PackedScene = preload("res://scenes/game/projectiles/lightning_projectile.tscn")
 const GRUNT_ENEMY_SCENE: PackedScene = preload("res://scenes/game/enemies/grunt_enemy.tscn")
@@ -17,8 +18,10 @@ const TITLE_TYPED_COLOR := "6fdc8c"
 const MENU_ENEMY_MOVE_SPEED := 50.0
 
 @onready var play_button: Button = %PlayButton
-@onready var multiplayer_button: Button = %MultiplayerButton
 @onready var settings_button: Button = %SettingsButton
+@onready var word_lists_button: Button = %WordListsButton
+@onready var multiplayer_button: Button = %MultiplayerButton
+
 @onready var title_label: RichTextLabel = %TitleLabel
 @onready var tower_container: Node2D = %TowerContainer
 @onready var lightning_marker: Marker2D = %LightningMarker
@@ -206,3 +209,7 @@ func _on_play_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	settings_requested.emit()
+
+
+func _in_wordlists_pressed() -> void:
+	wordlistsmenu_requested.emit()

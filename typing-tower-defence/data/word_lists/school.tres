@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WordListData" format=3 uid="uid://lawxtkkba8k5"]
+
+[ext_resource type="Script" uid="uid://blmx4awdqm5pt" path="res://scripts/configs/WordListData.gd" id="1_he3m6"]
+
+[resource]
+script = ExtResource("1_he3m6")
+id = "school"
+display_name = "School"
+category = "school"
+words = Array[String](["answer", "artroom", "backpack", "blackboard", "bookcase", "campus", "chalk", "classroom", "college", "crayon", "desk", "drawing", "eraser", "example", "exercise", "folder", "grammar", "homework", "lesson", "library", "marker", "notebook", "number", "pencil", "problem", "project", "question", "quiet", "reader", "report", "ruler", "science", "student", "subject", "teacher", "textbook", "timetable", "vocabulary", "whiteboard", "worksheet", "writing", "history", "music", "lunchbox", "schedule", "practice", "speaker", "stationary", "study", "review"])
+metadata/_custom_type_script = "uid://blmx4awdqm5pt"

@@ -1,4 +1,3 @@
-class_name WordLists
 
 const LISTS := {
 	"action": ACTION_WORDS,
