@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueSpeakerData" format=3 uid="uid://cvbt7cg5mp1dq"]
+
+[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b807kf2rrb0yt" path="res://scenes/game/dialogue/avatars/jisho_avatar.tscn" id="2_avatar"]
+
+[resource]
+script = ExtResource("1_script")
+speaker_id = "jisho"
+display_name = "Jisho"
+avatar_scene = ExtResource("2_avatar")
+default_position = "right"
+name_color = Color(1, 0.78431374, 0.99215686, 1)
+metadata/_custom_type_script = "uid://bpi837hrngfsy"

@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="DialogueSequenceData" format=3 uid="uid://tbqfc1d2y0b8"]
+
+[ext_resource type="Script" uid="uid://dc1y2b2f7yhje" path="res://data/dialogue/dialogue_sequence_data.gd" id="1_sequence"]
+[ext_resource type="Script" uid="uid://bm2xra0mbn2u7" path="res://data/dialogue/dialogue_line_data.gd" id="2_line"]
+[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="3_jrf0p"]
+[ext_resource type="Resource" uid="uid://e6y2i0x4piqv" path="res://data/dialogue/speakers/player_speaker_data.tres" id="4_jrf0p"]
+[ext_resource type="Resource" uid="uid://2wxn3tc7dwll" path="res://data/dialogue/speakers/jisho_speaker_data.tres" id="5_q258p"]
+
+[sub_resource type="Resource" id="Line_0"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "The city is under attack!"
+
+[sub_resource type="Resource" id="Line_1"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Oh."
+
+[sub_resource type="Resource" id="Line_2"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "The evil speller Saborus has sent his minions to steal the Gem of Creation from the castle!"
+
+[sub_resource type="Resource" id="Line_3"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "We can't let that happen."
+
+[sub_resource type="Resource" id="Line_4"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Kay."
+
+[sub_resource type="Resource" id="Line_5"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "Stop the soldiers before they break down the castle gates!"
+
+[resource]
+script = ExtResource("1_sequence")
+speakers = Array[ExtResource("3_jrf0p")]([ExtResource("4_jrf0p"), ExtResource("5_q258p")])
+lines = Array[ExtResource("2_line")]([SubResource("Line_0"), SubResource("Line_1"), SubResource("Line_2"), SubResource("Line_3"), SubResource("Line_4"), SubResource("Line_5")])
+metadata/_custom_type_script = "uid://dc1y2b2f7yhje"

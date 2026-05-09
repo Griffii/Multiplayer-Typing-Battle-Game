@@ -3,6 +3,8 @@ class_name CampaignGameScreen
 extends BaseGameScreen
 
 var campaign_level_data: CampaignLevelData = null
+var has_played_intro_dialogue: bool = false
+var has_played_outro_dialogue: bool = false
 
 
 func _load_run_content() -> void:
@@ -70,6 +72,29 @@ func _setup_run_mode() -> void:
 	print("[CampaignGameScreen] Campaign wave_set size = ", wave_set.size())
 
 
+func _reset_run() -> void:
+	has_played_intro_dialogue = false
+	has_played_outro_dialogue = false
+
+	super._reset_run()
+
+	_try_play_intro_dialogue()
+
+
+func _try_play_intro_dialogue() -> void:
+	if has_played_intro_dialogue:
+		return
+
+	if campaign_level_data == null:
+		return
+
+	if campaign_level_data.intro_dialogue == null:
+		return
+
+	has_played_intro_dialogue = true
+	play_intro_dialogue(campaign_level_data.intro_dialogue, RunState.PRE_WAVE)
+
+
 func _apply_run_upgrades() -> void:
 	# Persistent campaign upgrades should be applied through CombatManager.setup_run().
 	# Add direct player/tower upgrade application here only if needed later.
@@ -80,7 +105,25 @@ func _on_run_victory() -> void:
 	if campaign_level_data != null:
 		CampaignProgress.complete_level(campaign_level_data.level_id)
 
+	if _try_play_outro_dialogue():
+		return
+
 	_set_run_state(RunState.VICTORY)
+
+
+func _try_play_outro_dialogue() -> bool:
+	if has_played_outro_dialogue:
+		return false
+
+	if campaign_level_data == null:
+		return false
+
+	if campaign_level_data.outro_dialogue == null:
+		return false
+
+	has_played_outro_dialogue = true
+	play_outro_dialogue(campaign_level_data.outro_dialogue, RunState.VICTORY)
+	return true
 
 
 func _on_run_defeat() -> void:
@@ -89,6 +132,7 @@ func _on_run_defeat() -> void:
 
 func _should_show_shop_after_wave() -> bool:
 	return true
+
 
 func _get_run_mode_name() -> String:
 	return "campaign"

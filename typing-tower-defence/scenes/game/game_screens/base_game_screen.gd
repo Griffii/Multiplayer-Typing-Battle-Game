@@ -12,11 +12,15 @@ enum RunState {
 	WAVE_ACTIVE,
 	SHOP,
 	BUILD,
+	INTRO_DIALOGUE,
+	OUTRO_DIALOGUE,
+	DIALOGUE,
 	VICTORY,
 	DEFEAT
 }
 
 const SHOP_DEFINITIONS = preload("res://data/shop/shop_definitions.gd")
+const DIALOGUE_OVERLAY_SCENE: PackedScene = preload("res://scenes/game/dialogue/dialogue_overlay.tscn")
 
 var DEV_MODE: bool = true
 
@@ -46,6 +50,10 @@ var current_level: BattlefieldLevel = null
 var player_character: PlayerCharacter = null
 
 var run_state: RunState = RunState.PRE_WAVE
+var previous_run_state_before_dialogue: RunState = RunState.PRE_WAVE
+var dialogue_next_state: RunState = RunState.PRE_WAVE
+var active_dialogue_scene: Node = null
+
 var current_wave_index: int = 0
 var total_waves: int = 0
 var run_active: bool = false
@@ -290,6 +298,10 @@ func _reset_run() -> void:
 	is_shop_open = false
 	is_build_open = false
 	current_gold = 0
+	previous_run_state_before_dialogue = RunState.PRE_WAVE
+	dialogue_next_state = RunState.PRE_WAVE
+
+	_clear_active_dialogue_scene()
 
 	get_tree().paused = false
 
@@ -373,6 +385,27 @@ func _set_run_state(new_state: RunState) -> void:
 			_hide_shop()
 			_show_build()
 
+		RunState.INTRO_DIALOGUE:
+			_disable_typing()
+			_hide_start_wave_button()
+			_set_status_text("Dialogue.")
+			_hide_shop()
+			_hide_build()
+
+		RunState.OUTRO_DIALOGUE:
+			_disable_typing()
+			_hide_start_wave_button()
+			_set_status_text("Dialogue.")
+			_hide_shop()
+			_hide_build()
+
+		RunState.DIALOGUE:
+			_disable_typing()
+			_hide_start_wave_button()
+			_set_status_text("Dialogue.")
+			_hide_shop()
+			_hide_build()
+
 		RunState.VICTORY:
 			_disable_typing()
 			_hide_start_wave_button()
@@ -388,6 +421,85 @@ func _set_run_state(new_state: RunState) -> void:
 			_hide_shop()
 			_hide_build()
 			_show_game_over(false)
+
+
+func play_intro_dialogue(dialogue_data: DialogueSequenceData, next_state: RunState = RunState.PRE_WAVE) -> void:
+	_play_dialogue_data(dialogue_data, RunState.INTRO_DIALOGUE, next_state)
+
+
+func play_outro_dialogue(dialogue_data: DialogueSequenceData, next_state: RunState = RunState.VICTORY) -> void:
+	_play_dialogue_data(dialogue_data, RunState.OUTRO_DIALOGUE, next_state)
+
+
+func play_dialogue(dialogue_data: DialogueSequenceData, next_state: RunState = RunState.PRE_WAVE) -> void:
+	_play_dialogue_data(dialogue_data, RunState.DIALOGUE, next_state)
+
+
+func _play_dialogue_data(dialogue_data: DialogueSequenceData, dialogue_state: RunState, next_state: RunState) -> void:
+	if dialogue_data == null:
+		_set_run_state(next_state)
+		return
+
+	_clear_active_dialogue_scene()
+
+	previous_run_state_before_dialogue = run_state
+	dialogue_next_state = next_state
+
+	_set_run_state(dialogue_state)
+
+	active_dialogue_scene = DIALOGUE_OVERLAY_SCENE.instantiate()
+	add_child(active_dialogue_scene)
+
+	active_dialogue_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+
+	_connect_dialogue_finished_signal(active_dialogue_scene)
+
+	if active_dialogue_scene.has_method("start"):
+		active_dialogue_scene.call_deferred("start", dialogue_data)
+	else:
+		push_warning("BaseGameScreen: Dialogue overlay missing start(dialogue_data).")
+		_on_dialogue_scene_finished()
+
+
+func _connect_dialogue_finished_signal(dialogue_scene: Node) -> void:
+	if dialogue_scene == null:
+		return
+
+	var finished_callable: Callable = Callable(self, "_on_dialogue_scene_finished")
+
+	if dialogue_scene.has_signal("dialogue_finished"):
+		dialogue_scene.connect("dialogue_finished", finished_callable, CONNECT_ONE_SHOT)
+		return
+
+	if dialogue_scene.has_signal("cutscene_finished"):
+		dialogue_scene.connect("cutscene_finished", finished_callable, CONNECT_ONE_SHOT)
+		return
+
+	if dialogue_scene.has_signal("finished"):
+		dialogue_scene.connect("finished", finished_callable, CONNECT_ONE_SHOT)
+		return
+
+	push_warning("BaseGameScreen: Cutscene scene has no dialogue_finished, cutscene_finished, or finished signal.")
+
+
+func _on_dialogue_scene_finished() -> void:
+	_clear_active_dialogue_scene()
+	_set_run_state(dialogue_next_state)
+
+
+func _clear_active_dialogue_scene() -> void:
+	if active_dialogue_scene != null and is_instance_valid(active_dialogue_scene):
+		active_dialogue_scene.queue_free()
+
+	active_dialogue_scene = null
+
+
+func _is_dialogue_state() -> bool:
+	return (
+		run_state == RunState.INTRO_DIALOGUE
+		or run_state == RunState.OUTRO_DIALOGUE
+		or run_state == RunState.DIALOGUE
+	)
 
 
 func _refresh_wave_ui() -> void:
@@ -407,6 +519,9 @@ func _on_start_wave_pressed() -> void:
 	if is_game_menu_open or is_shop_open:
 		return
 
+	if _is_dialogue_state():
+		return
+
 	if run_state != RunState.PRE_WAVE and run_state != RunState.SHOP:
 		return
 
@@ -418,6 +533,9 @@ func _on_start_wave_pressed() -> void:
 
 func _on_countdown_finished() -> void:
 	if not run_active:
+		return
+
+	if _is_dialogue_state():
 		return
 
 	if current_wave_index >= wave_set.size():
@@ -440,6 +558,9 @@ func _on_wave_started(wave_index: int) -> void:
 
 func _on_wave_cleared(wave_index: int) -> void:
 	if run_state == RunState.DEFEAT or run_state == RunState.VICTORY:
+		return
+
+	if _is_dialogue_state():
 		return
 
 	if combat_manager != null and combat_manager.has_method("reset_special_meter"):
@@ -465,6 +586,9 @@ func _on_all_waves_cleared() -> void:
 	if run_state == RunState.DEFEAT or run_state == RunState.VICTORY:
 		return
 
+	if _is_dialogue_state():
+		return
+
 	run_active = false
 	_on_run_victory()
 
@@ -487,6 +611,9 @@ func _on_base_repaired(_amount: int) -> void:
 
 func _on_base_destroyed() -> void:
 	if run_state == RunState.DEFEAT or run_state == RunState.VICTORY:
+		return
+
+	if _is_dialogue_state():
 		return
 
 	run_active = false
@@ -575,6 +702,9 @@ func _on_special_meter_changed(current_value: float, max_value: float) -> void:
 
 
 func _on_special_meter_filled() -> void:
+	if run_state != RunState.WAVE_ACTIVE:
+		return
+
 	if spawn_manager == null or not spawn_manager.has_method("get_front_most_enemy"):
 		return
 
@@ -594,6 +724,9 @@ func _on_special_projectile_impact(target_enemy: Node) -> void:
 
 
 func _on_player_damaged(amount: int) -> void:
+	if _is_dialogue_state():
+		return
+
 	if combat_manager != null and combat_manager.has_method("apply_base_damage"):
 		combat_manager.apply_base_damage(amount)
 
@@ -641,6 +774,7 @@ func _show_game_over(did_win: bool) -> void:
 func _get_run_mode_name() -> String:
 	return "base"
 
+
 func _show_start_wave_button(button_text: String) -> void:
 	if game_hud != null and game_hud.has_method("show_start_wave_button"):
 		game_hud.show_start_wave_button(button_text)
@@ -685,6 +819,9 @@ func _on_game_menu_pressed() -> void:
 	if run_state == RunState.VICTORY or run_state == RunState.DEFEAT:
 		return
 
+	if _is_dialogue_state():
+		return
+
 	is_game_menu_open = true
 	get_tree().paused = true
 	_disable_typing()
@@ -715,10 +852,13 @@ func _on_word_lists_requested() -> void:
 
 func _on_return_to_map_requested() -> void:
 	get_tree().paused = false
+	_clear_active_dialogue_scene()
 	return_to_map_requested.emit()
+
 
 func _on_back_to_menu_pressed() -> void:
 	get_tree().paused = false
+	_clear_active_dialogue_scene()
 	back_to_menu_requested.emit()
 
 

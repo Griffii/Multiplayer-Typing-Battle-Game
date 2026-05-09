@@ -66,7 +66,7 @@ func show_results(data: Dictionary) -> void:
 
 	to_map_button.visible = is_campaign
 	to_map_button.disabled = not is_campaign
-	to_map_button.text = "Return to World Map"
+	to_map_button.text = "Return to\nWorld Map"
 
 
 func hide_overlay() -> void:

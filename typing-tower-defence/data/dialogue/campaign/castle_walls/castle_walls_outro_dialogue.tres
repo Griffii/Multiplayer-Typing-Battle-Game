@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="DialogueSequenceData" format=3 uid="uid://xqox0p6wcca2"]
+
+[ext_resource type="Script" uid="uid://dc1y2b2f7yhje" path="res://data/dialogue/dialogue_sequence_data.gd" id="1_sequence"]
+[ext_resource type="Script" uid="uid://bm2xra0mbn2u7" path="res://data/dialogue/dialogue_line_data.gd" id="2_line"]
+[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="3_ma574"]
+[ext_resource type="Resource" uid="uid://dgnwns6tacp4j" path="res://data/dialogue/speakers/player_speaker_data.tres" id="4_ma574"]
+[ext_resource type="Resource" uid="uid://cvbt7cg5mp1dq" path="res://data/dialogue/speakers/jisho_speaker_data.tres" id="5_o8jua"]
+
+[sub_resource type="Resource" id="Line_0"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "YES! BURN THE HERETICS!"
+
+[sub_resource type="Resource" id="Line_1"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "HAHAHAHAHAHAHHAHA!!!! BUUUUUURRN!"
+
+[sub_resource type="Resource" id="Line_2"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Bro. Chill."
+
+[resource]
+script = ExtResource("1_sequence")
+speakers = Array[ExtResource("3_ma574")]([ExtResource("4_ma574"), ExtResource("5_o8jua")])
+lines = Array[ExtResource("2_line")]([SubResource("Line_0"), SubResource("Line_1"), SubResource("Line_2")])
+metadata/_custom_type_script = "uid://dc1y2b2f7yhje"

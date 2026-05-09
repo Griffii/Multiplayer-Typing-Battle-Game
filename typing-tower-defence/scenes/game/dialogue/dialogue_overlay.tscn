@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://bxtvbt0ut71y2"]
+
+[ext_resource type="Texture2D" uid="uid://c5bmw5vg1gewl" path="res://assets/cute_fantasy_assets/ui/UI_Frames.png" id="1_kgewi"]
+[ext_resource type="Script" uid="uid://e758gj5waa8y" path="res://scenes/game/dialogue/dialogue_overlay.gd" id="1_knqct"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="3_o46lv"]
+[ext_resource type="FontFile" uid="uid://b4qpckb7ynfwm" path="res://assets/fonts/BadComic-Italic.ttf" id="4_3yv1t"]
+[ext_resource type="Texture2D" uid="uid://cly140miwtr7n" path="res://assets/cute_fantasy_assets/ui/UI_Ribbons.png" id="5_6a4k6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_knqct"]
+texture = ExtResource("1_kgewi")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(1256, 8, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f74x8"]
+texture = ExtResource("5_6a4k6")
+texture_margin_left = 25.0
+texture_margin_top = 3.0
+texture_margin_right = 24.0
+texture_margin_bottom = 17.0
+region_rect = Rect2(7, 1, 65, 20)
+
+[sub_resource type="Animation" id="Animation_knqct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DimBackground:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogueBoxContainer/DialogueBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AvatarLayer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DialogueBoxContainer/NameLabel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o46lv"]
+resource_name = "close_dialogue"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DimBackground:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogueBoxContainer/DialogueBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AvatarLayer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 537)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DialogueBoxContainer/NameLabel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3yv1t"]
+resource_name = "open_dialogue"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DimBackground:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogueBoxContainer/DialogueBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AvatarLayer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 537), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DialogueBoxContainer/NameLabel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6orpp"]
+_data = {
+&"RESET": SubResource("Animation_knqct"),
+&"close_dialogue": SubResource("Animation_o46lv"),
+&"open_dialogue": SubResource("Animation_3yv1t")
+}
+
+[node name="DialogueOverlay" type="CanvasLayer" unique_id=211241507]
+script = ExtResource("1_knqct")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=1853227205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="AvatarLayer" type="Control" parent="." unique_id=1594665293]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftAvatarMarker" type="Marker2D" parent="AvatarLayer" unique_id=255255571]
+unique_name_in_owner = true
+position = Vector2(207, 393)
+
+[node name="RightAvatarMarker" type="Marker2D" parent="AvatarLayer" unique_id=1500617371]
+unique_name_in_owner = true
+position = Vector2(767, 394)
+
+[node name="DialogueBoxContainer" type="Node2D" parent="." unique_id=1930014514]
+
+[node name="DialogueBox" type="PanelContainer" parent="DialogueBoxContainer" unique_id=1336086179]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+offset_left = 30.0
+offset_top = 375.0
+offset_right = 930.0
+offset_bottom = 525.0
+pivot_offset = Vector2(0, 150)
+theme_override_styles/panel = SubResource("StyleBoxTexture_knqct")
+
+[node name="DialogueMargin" type="MarginContainer" parent="DialogueBoxContainer/DialogueBox" unique_id=1210081874]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueBoxContainer/DialogueBox/DialogueMargin" unique_id=1262799405]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+theme_override_fonts/normal_font = ExtResource("3_o46lv")
+theme_override_fonts/bold_italics_font = ExtResource("4_3yv1t")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+
+[node name="PromptLabel" type="Label" parent="DialogueBoxContainer/DialogueBox" unique_id=1057783420]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.45840502, 0.45840508, 0.45840502, 1)
+theme_override_fonts/font = ExtResource("4_3yv1t")
+text = "Click / Enter"
+
+[node name="NameLabel" type="Label" parent="DialogueBoxContainer" unique_id=846426990]
+unique_name_in_owner = true
+offset_left = 43.0
+offset_top = 356.0
+offset_right = 152.0
+offset_bottom = 404.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_o46lv")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_f74x8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=170818072]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_6orpp")

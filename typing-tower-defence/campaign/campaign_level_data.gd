@@ -13,5 +13,5 @@ extends Resource
 
 @export var enemy_families: Array[String] = []
 
-@export_file("*.tscn") var intro_cutscene_scene_path: String = ""
-@export_file("*.tscn") var outro_cutscene_scene_path: String = ""
+@export var intro_dialogue: DialogueSequenceData
+@export var outro_dialogue: DialogueSequenceData
