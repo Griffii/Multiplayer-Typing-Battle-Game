@@ -38,3 +38,4 @@ vertical_alignment = 1
 unique_name_in_owner = true
 stream = ExtResource("3_i3x7k")
 volume_db = -5.0
+bus = &"SFX"

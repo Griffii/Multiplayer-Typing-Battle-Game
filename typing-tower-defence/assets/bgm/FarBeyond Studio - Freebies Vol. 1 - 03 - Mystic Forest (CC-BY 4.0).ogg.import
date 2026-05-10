@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cavd8q0fq2l7s"
+path="res://.godot/imported/FarBeyond Studio - Freebies Vol. 1 - 03 - Mystic Forest (CC-BY 4.0).ogg-9dba4398e5bd5fca6ac596ed91881278.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/bgm/FarBeyond Studio - Freebies Vol. 1 - 03 - Mystic Forest (CC-BY 4.0).ogg"
+dest_files=["res://.godot/imported/FarBeyond Studio - Freebies Vol. 1 - 03 - Mystic Forest (CC-BY 4.0).ogg-9dba4398e5bd5fca6ac596ed91881278.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

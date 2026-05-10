@@ -102,7 +102,6 @@ animations = [{
 }]
 
 [node name="FireballProjectile_01" type="Node2D" unique_id=1510425965]
-scale = Vector2(1.2, 1.2)
 script = ExtResource("1_5vnfl")
 
 [node name="FireballSprite" type="AnimatedSprite2D" parent="." unique_id=2109604757]

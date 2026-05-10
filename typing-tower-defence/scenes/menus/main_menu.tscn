@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://b68w6soxh2uuv" path="res://assets/sfx/towers/arrow_shoot.mp3" id="20_287l7"]
 [ext_resource type="AudioStream" uid="uid://d21dtkxbcw5qs" path="res://assets/sfx/menus/Type_Click.ogg" id="21_287l7"]
 [ext_resource type="AudioStream" uid="uid://ce7yx07342a3i" path="res://assets/sfx/environment/animal_sheep_baa_short.ogg" id="22_8hoqd"]
+[ext_resource type="AudioStream" uid="uid://b7v8i6jb0ds5x" path="res://assets/bgm/Cuddle Clouds.ogg" id="26_n8vdk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ng0o5"]
 texture = ExtResource("3_jygr6")
@@ -2628,6 +2629,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xqga4")
 
+[node name="Scene_BGM" type="AudioStreamPlayer" parent="." unique_id=1557332651]
+unique_name_in_owner = true
+stream = ExtResource("26_n8vdk")
+volume_db = 6.0
+bus = &"Music"
+parameters/looping = true
+
 [node name="TitleLabel" type="RichTextLabel" parent="." unique_id=701896305]
 unique_name_in_owner = true
 clip_contents = false
@@ -2783,7 +2791,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_6bivr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_50h1w")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_imvie")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_imvie")
-disabled = true
 text = "Settings"
 
 [node name="BGContainer" type="Node2D" parent="." unique_id=1081627366]
@@ -2951,18 +2958,22 @@ position = Vector2(96, 209)
 [node name="ShootMagicSfx" type="AudioStreamPlayer2D" parent="TowerContainer" unique_id=328489305]
 unique_name_in_owner = true
 stream = ExtResource("17_25m6f")
+bus = &"SFX"
 
 [node name="LightningSfx" type="AudioStreamPlayer2D" parent="TowerContainer" unique_id=772448919]
 unique_name_in_owner = true
 stream = ExtResource("18_nkawv")
+bus = &"SFX"
 
 [node name="HitArrowSfx" type="AudioStreamPlayer2D" parent="TowerContainer" unique_id=423999817]
 unique_name_in_owner = true
 stream = ExtResource("19_w32d4")
+bus = &"SFX"
 
 [node name="ShootArrowSfx" type="AudioStreamPlayer2D" parent="TowerContainer" unique_id=649495030]
 unique_name_in_owner = true
 stream = ExtResource("20_287l7")
+bus = &"SFX"
 
 [node name="CharactersContainer" type="Node2D" parent="." unique_id=711948835]
 
@@ -3006,13 +3017,12 @@ script = ExtResource("10_bh4e2")
 [node name="TypingSfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=416496977]
 unique_name_in_owner = true
 stream = ExtResource("21_287l7")
+bus = &"Typing_SFX"
 
 [node name="SheepBaa" type="AudioStreamPlayer2D" parent="." unique_id=1370919838]
 unique_name_in_owner = true
 stream = ExtResource("22_8hoqd")
-
-[node name="MainMenuBGM" type="AudioStreamPlayer" parent="." unique_id=1557332651]
-volume_db = -24.0
+bus = &"SFX"
 
 [node name="EnemySpawnMarker" type="Marker2D" parent="." unique_id=658431021]
 unique_name_in_owner = true

@@ -574,14 +574,17 @@ horizontal_alignment = 1
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1599622870]
 unique_name_in_owner = true
 stream = ExtResource("6_duoiv")
+bus = &"SFX"
 
 [node name="death-sfx" type="AudioStreamPlayer2D" parent="." unique_id=656105441]
 unique_name_in_owner = true
 stream = ExtResource("8_jbcq4")
+bus = &"SFX"
 
 [node name="hit-sfx" type="AudioStreamPlayer2D" parent="." unique_id=37362774]
 unique_name_in_owner = true
 stream = ExtResource("7_fsd4n")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=473145069]
 unique_name_in_owner = true

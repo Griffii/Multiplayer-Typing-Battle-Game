@@ -419,6 +419,8 @@ libraries/ = SubResource("AnimationLibrary_e43iu")
 
 [node name="open_sfx" type="AudioStreamPlayer2D" parent="." unique_id=989231342]
 stream = ExtResource("10_12o2h")
+bus = &"SFX"
 
 [node name="close_sfx" type="AudioStreamPlayer2D" parent="." unique_id=118611868]
 stream = ExtResource("11_ugody")
+bus = &"SFX"

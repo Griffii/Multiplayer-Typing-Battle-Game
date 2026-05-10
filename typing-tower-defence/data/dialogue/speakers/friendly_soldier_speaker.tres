@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueSpeakerData" format=3 uid="uid://l8dde8lo8w6i"]
+
+[ext_resource type="PackedScene" uid="uid://baji5cxistid" path="res://scenes/game/dialogue/avatars/friendly_soldier.tscn" id="1_limc7"]
+[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+speaker_id = "soldier"
+display_name = "Soldier"
+avatar_scene = ExtResource("1_limc7")
+default_position = "offscreen_right"
+name_color = Color(0.6323823, 0.91207844, 0.57666546, 1)
+metadata/_custom_type_script = "uid://bpi837hrngfsy"

@@ -2111,14 +2111,17 @@ position = Vector2(0, -94)
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="." unique_id=1560836194]
 unique_name_in_owner = true
 stream = ExtResource("9_t2hb6")
+bus = &"SFX"
 
 [node name="DieSfx" type="AudioStreamPlayer2D" parent="." unique_id=1474403075]
 unique_name_in_owner = true
 stream = ExtResource("10_7cpak")
+bus = &"SFX"
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="." unique_id=1637124317]
 unique_name_in_owner = true
 stream = ExtResource("11_ebhn5")
+bus = &"SFX"
 
 [node name="BodyCollision" type="CollisionShape2D" parent="." unique_id=1290610819]
 position = Vector2(-2.5, -30.5)

@@ -8,7 +8,19 @@ extends Resource
 
 @export var avatar_scene: PackedScene
 
-@export_enum("left", "center", "right") var default_position: String = "left"
+@export_enum(
+	"left",
+	"left_1",
+	"left_2",
+	"center",
+	"center_1",
+	"center_2",
+	"right",
+	"right_1",
+	"right_2",
+	"offscreen_left",
+	"offscreen_right"
+) var default_position: String = "left"
 
 @export var dialogue_box_style: StyleBox
 @export var name_color: Color = Color.WHITE

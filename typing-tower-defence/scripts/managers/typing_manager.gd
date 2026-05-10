@@ -6,7 +6,7 @@ signal target_released(target_enemy: Node)
 signal target_changed(target_enemy: Node)
 signal word_completed(target_enemy: Node)
 signal input_cleared
-signal special_used
+
 
 @onready var spawn_manager: Node = %SpawnManager
 

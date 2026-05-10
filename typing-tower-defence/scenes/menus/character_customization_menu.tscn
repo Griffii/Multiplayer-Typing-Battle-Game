@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c5bmw5vg1gewl" path="res://assets/cute_fantasy_assets/ui/UI_Frames.png" id="8_p2uxk"]
 [ext_resource type="AudioStream" uid="uid://b887neunyf6da" path="res://assets/sfx/menus/Paper_01.mp3" id="10_tqbf4"]
 [ext_resource type="AudioStream" uid="uid://bldwj3xauyf52" path="res://assets/sfx/menus/Paper_02.mp3" id="11_3ubid"]
+[ext_resource type="AudioStream" uid="uid://b7v8i6jb0ds5x" path="res://assets/bgm/Cuddle Clouds.ogg" id="13_f4ify"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0k2f"]
 texture = ExtResource("2_3ubid")
@@ -264,6 +265,12 @@ offset_bottom = -0.00012207031
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0mlbl")
+
+[node name="Scene_BGM" type="AudioStreamPlayer" parent="." unique_id=402075648]
+unique_name_in_owner = true
+stream = ExtResource("13_f4ify")
+bus = &"Music"
+parameters/looping = true
 
 [node name="BGTexture" type="Panel" parent="." unique_id=1540492491]
 z_index = -1
@@ -544,6 +551,8 @@ libraries/ = SubResource("AnimationLibrary_phoqo")
 
 [node name="open_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1410214123]
 stream = ExtResource("10_tqbf4")
+bus = &"SFX"
 
 [node name="close_sfx" type="AudioStreamPlayer2D" parent="." unique_id=714543974]
 stream = ExtResource("11_3ubid")
+bus = &"SFX"

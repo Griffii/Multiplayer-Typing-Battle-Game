@@ -3,11 +3,14 @@ extends Control
 const MAIN_MENU_SCENE: PackedScene = preload("uid://dlouqnp58v4nl")
 const ENDLESS_SETUP_SCENE: PackedScene = preload("uid://dk55vhpecvo3w")
 const LEVEL_SELECT_SCENE: PackedScene = preload("uid://0xlvdjakqgnq")
-const WORD_LISTS_SCENE: PackedScene = preload("uid://b3dwhhkipwc5c")
 const CHARACTER_CUSTOMIZE_SCENE: PackedScene = preload("uid://defo7xtrxfi6s")
 const ENDLESS_GAME_SCENE: PackedScene = preload("uid://160u44o703f8")
 const CAMPAIGN_GAME_SCENE: PackedScene = preload("uid://ds243ews64l1a")
 const TRAINING_ROOM_GAME_SCENE: PackedScene = preload("uid://dly0hhr52vbhj")
+
+## Modal scenes
+const WORD_LISTS_SCENE: PackedScene = preload("uid://b3dwhhkipwc5c")
+const SETTINGS_MENU_SCENE: PackedScene = preload("uid://gx0317qb6t87")
 
 @onready var screen_container: Control = %ScreenContainer
 @onready var scene_transition: CanvasLayer = %Scene_Transition
@@ -34,6 +37,9 @@ func set_screen(scene: PackedScene) -> Control:
 	var instance: Control = scene.instantiate() as Control
 	screen_container.add_child(instance)
 	current_screen = instance
+	
+	_apply_scene_bgm(instance)
+	
 	return instance
 
 
@@ -103,6 +109,9 @@ func _set_main_menu() -> void:
 	if menu.has_signal("wordlistsmenu_requested"):
 		menu.wordlistsmenu_requested.connect(_on_word_lists_menu_requested)
 
+	if menu.has_signal("settingsmenu_requested"):
+		menu.settingsmenu_requested.connect(_on_settings_menu_requested)
+
 	if menu.has_signal("customizecharactermenu_requested"):
 		menu.customizecharactermenu_requested.connect(_on_customize_menu_requested)
 
@@ -119,6 +128,9 @@ func _set_endless_setup_menu() -> void:
 	if menu.has_signal("start_requested"):
 		menu.start_requested.connect(_on_selection_finished)
 
+	if menu.has_signal("settingsmenu_requested"):
+		menu.settingsmenu_requested.connect(_on_settings_menu_requested)
+
 
 func _set_wordlists_menu() -> void:
 	var menu: CanvasLayer = show_modal(WORD_LISTS_SCENE)
@@ -130,6 +142,19 @@ func _set_wordlists_menu() -> void:
 		menu.back_requested.connect(_on_word_lists_modal_closed)
 
 
+func _set_settings_menu() -> void:
+	var menu: CanvasLayer = show_modal(SETTINGS_MENU_SCENE)
+
+	if menu == null:
+		return
+
+	if menu.has_signal("close_requested"):
+		menu.close_requested.connect(_on_settings_modal_closed)
+
+	if menu.has_signal("back_requested"):
+		menu.back_requested.connect(_on_settings_modal_closed)
+
+
 func _set_level_select() -> void:
 	var level_select: Control = set_screen(LEVEL_SELECT_SCENE)
 
@@ -139,12 +164,18 @@ func _set_level_select() -> void:
 	if level_select.has_signal("back_requested"):
 		level_select.back_requested.connect(_on_back_to_menu_requested)
 
+	if level_select.has_signal("settingsmenu_requested"):
+		level_select.settingsmenu_requested.connect(_on_settings_menu_requested)
+
 
 func _set_character_customize_menu() -> void:
 	var menu: Control = set_screen(CHARACTER_CUSTOMIZE_SCENE)
 
 	if menu.has_signal("back_requested"):
 		menu.back_requested.connect(_on_back_to_menu_requested)
+
+	if menu.has_signal("settingsmenu_requested"):
+		menu.settingsmenu_requested.connect(_on_settings_menu_requested)
 
 
 func _set_endless_game_screen() -> void:
@@ -155,6 +186,9 @@ func _set_endless_game_screen() -> void:
 
 	if game.has_signal("word_lists_requested"):
 		game.word_lists_requested.connect(_on_word_lists_menu_requested)
+
+	if game.has_signal("settingsmenu_requested"):
+		game.settingsmenu_requested.connect(_on_settings_menu_requested)
 
 
 func _set_campaign_game_screen() -> void:
@@ -169,6 +203,9 @@ func _set_campaign_game_screen() -> void:
 	if game.has_signal("word_lists_requested"):
 		game.word_lists_requested.connect(_on_word_lists_menu_requested)
 
+	if game.has_signal("settingsmenu_requested"):
+		game.settingsmenu_requested.connect(_on_settings_menu_requested)
+
 
 func _set_training_room_game_screen() -> void:
 	var game: Control = set_screen(TRAINING_ROOM_GAME_SCENE)
@@ -178,6 +215,9 @@ func _set_training_room_game_screen() -> void:
 
 	if game.has_signal("word_lists_requested"):
 		game.word_lists_requested.connect(_on_word_lists_menu_requested)
+
+	if game.has_signal("settingsmenu_requested"):
+		game.settingsmenu_requested.connect(_on_settings_menu_requested)
 
 
 func _on_return_to_map_requested() -> void:
@@ -211,6 +251,14 @@ func _on_word_lists_menu_requested() -> void:
 
 
 func _on_word_lists_modal_closed() -> void:
+	close_current_modal_immediate()
+
+
+func _on_settings_menu_requested() -> void:
+	_set_settings_menu()
+
+
+func _on_settings_modal_closed() -> void:
 	close_current_modal_immediate()
 
 
@@ -250,3 +298,29 @@ func close_current_modal_immediate() -> void:
 		current_modal.queue_free()
 
 	current_modal = null
+
+
+func _apply_scene_bgm(scene_root: Node) -> void:
+	if scene_root == null:
+		return
+
+	var scene_bgm: AudioStreamPlayer = scene_root.find_child("Scene_BGM", true, false) as AudioStreamPlayer
+
+	if scene_bgm == null:
+		return
+
+	if AudioManager == null:
+		push_warning("AppRoot: AudioManager not found.")
+		return
+
+	if scene_bgm.stream == null:
+		if AudioManager.has_method("stop_music"):
+			AudioManager.stop_music()
+		return
+
+	if AudioManager.has_method("play_music"):
+		AudioManager.play_music(
+			scene_bgm.stream,
+			1.0,
+			scene_bgm.volume_db
+		)

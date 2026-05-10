@@ -572,14 +572,17 @@ metadata/_edit_use_anchors_ = true
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1599622870]
 unique_name_in_owner = true
 stream = ExtResource("6_vbw0u")
+bus = &"SFX"
 
 [node name="death-sfx" type="AudioStreamPlayer2D" parent="." unique_id=98160918]
 unique_name_in_owner = true
 stream = ExtResource("8_pd8my")
+bus = &"SFX"
 
 [node name="hit-sfx" type="AudioStreamPlayer2D" parent="." unique_id=684487782]
 unique_name_in_owner = true
 stream = ExtResource("7_rr3is")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=540991098]
 unique_name_in_owner = true

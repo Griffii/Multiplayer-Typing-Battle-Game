@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cew3xi5xdq3s0"]
+
+[ext_resource type="Texture2D" uid="uid://b773rl4l64gyf" path="res://assets/images/menu/progress_white_border.png" id="1_6px7e"]
+[ext_resource type="Texture2D" uid="uid://b1j8qmur8uhkh" path="res://assets/images/menu/progress_red_border.png" id="2_mobrv"]
+[ext_resource type="Script" uid="uid://dusvh1fqme5fl" path="res://scenes/game/ui/sliders/volume_slider.gd" id="2_wvu2r"]
+[ext_resource type="Texture2D" uid="uid://b8na3q8wdhbrr" path="res://assets/images/menu/magic_bar_empty.png" id="3_mobrv"]
+[ext_resource type="Texture2D" uid="uid://0i0esmgogqti" path="res://assets/images/menu/magic_bar_filled.png" id="4_p5eb0"]
+[ext_resource type="FontFile" uid="uid://dfafj6dmhu6ti" path="res://assets/fonts/ud-digi-kyokasho-n-b.ttf" id="6_p5eb0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6px7e"]
+texture = ExtResource("3_mobrv")
+texture_margin_left = 11.0
+texture_margin_top = 5.0
+texture_margin_right = 2.0
+texture_margin_bottom = 5.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 50, 11)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mobrv"]
+texture = ExtResource("4_p5eb0")
+texture_margin_left = 11.0
+texture_margin_top = 5.0
+texture_margin_right = 2.0
+texture_margin_bottom = 6.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 50, 11)
+
+[node name="volume_slider" type="HSlider" unique_id=1437933216]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -8.0
+offset_right = 50.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+mouse_default_cursor_shape = 2
+theme_override_icons/grabber = ExtResource("1_6px7e")
+theme_override_icons/grabber_highlight = ExtResource("2_mobrv")
+theme_override_styles/slider = SubResource("StyleBoxTexture_6px7e")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_mobrv")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_mobrv")
+max_value = 1.0
+step = 0.001
+value = 0.5
+script = ExtResource("2_wvu2r")
+
+[node name="slider_label" type="Label" parent="." unique_id=1633888309]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 7.0
+offset_right = 98.0
+offset_bottom = 26.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("6_p5eb0")
+text = "50"
+vertical_alignment = 1

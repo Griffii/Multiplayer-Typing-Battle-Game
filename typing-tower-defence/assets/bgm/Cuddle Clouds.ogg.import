@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7v8i6jb0ds5x"
+path="res://.godot/imported/Cuddle Clouds.ogg-50c49d98d42d007c7d218bf8f4ad9a5a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/bgm/Cuddle Clouds.ogg"
+dest_files=["res://.godot/imported/Cuddle Clouds.ogg-50c49d98d42d007c7d218bf8f4ad9a5a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

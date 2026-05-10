@@ -4,6 +4,7 @@ extends Control
 
 signal back_to_menu_requested
 signal word_lists_requested
+signal settingsmenu_requested
 
 enum TrainingStep {
 	INTRO,
@@ -36,13 +37,6 @@ const PLAYER_AVATAR_SCENE: PackedScene = preload("uid://8npj02qfrg3f")
 
 const TUTORIAL_SPEAKERS: Array[Dictionary] = [
 	{
-		"speaker_id": "jisho",
-		"display_name": "Jisho",
-		"default_position": "right",
-		"avatar_scene": JISHO_AVATAR_SCENE,
-		"name_color": Color(1.0, 0.784, 1.0, 1.0),
-	},
-	{
 		"speaker_id": "player",
 		"display_name": "Player",
 		"default_position": "left",
@@ -50,13 +44,20 @@ const TUTORIAL_SPEAKERS: Array[Dictionary] = [
 		"use_player_name": true,
 		"name_color": Color(1.0, 1.0, 0.784, 1.0),
 	},
+	{
+		"speaker_id": "jisho",
+		"display_name": "Jisho",
+		"default_position": "right",
+		"avatar_scene": JISHO_AVATAR_SCENE,
+		"name_color": Color(1.0, 0.784, 1.0, 1.0),
+	},
 ]
 
 const INTRO_DIALOGUE: Dictionary = {
 	"speakers": TUTORIAL_SPEAKERS,
 	"lines": [
 		{"speaker_id": "jisho", "text": "Welcome to the training room."},
-		{"speaker_id": "jisho", "text": "I am Jisho. Your magical grimoire, and best friend!"},
+		{"speaker_id": "jisho", "text": "I'm Jisho. Your magical grimoire, and best friend!"},
 		{"speaker_id": "player", "text": "Oh."},
 		{"speaker_id": "jisho", "text": "What should I call you?"},
 	]
@@ -306,15 +307,18 @@ func _connect_signals() -> void:
 		if game_hud.has_signal("word_list_change_pressed") and not game_hud.word_list_change_pressed.is_connected(_on_word_list_change_button_pressed):
 			game_hud.word_list_change_pressed.connect(_on_word_list_change_button_pressed)
 
-	if game_menu_overlay != null:
-		if game_menu_overlay.has_signal("back_to_menu_requested") and not game_menu_overlay.back_to_menu_requested.is_connected(_on_back_to_menu_pressed):
-			game_menu_overlay.back_to_menu_requested.connect(_on_back_to_menu_pressed)
+		if game_menu_overlay != null:
+			if game_menu_overlay.has_signal("back_to_menu_requested") and not game_menu_overlay.back_to_menu_requested.is_connected(_on_back_to_menu_pressed):
+				game_menu_overlay.back_to_menu_requested.connect(_on_back_to_menu_pressed)
 
-		if game_menu_overlay.has_signal("resume_requested") and not game_menu_overlay.resume_requested.is_connected(_on_game_menu_resume_requested):
-			game_menu_overlay.resume_requested.connect(_on_game_menu_resume_requested)
+			if game_menu_overlay.has_signal("resume_requested") and not game_menu_overlay.resume_requested.is_connected(_on_game_menu_resume_requested):
+				game_menu_overlay.resume_requested.connect(_on_game_menu_resume_requested)
 
-		if game_menu_overlay.has_signal("word_lists_requested") and not game_menu_overlay.word_lists_requested.is_connected(_on_word_lists_requested):
-			game_menu_overlay.word_lists_requested.connect(_on_word_lists_requested)
+			if game_menu_overlay.has_signal("word_lists_requested") and not game_menu_overlay.word_lists_requested.is_connected(_on_word_lists_requested):
+				game_menu_overlay.word_lists_requested.connect(_on_word_lists_requested)
+
+			if game_menu_overlay.has_signal("settingsmenu_requested") and not game_menu_overlay.settingsmenu_requested.is_connected(_on_settingsmenu_requested):
+				game_menu_overlay.settingsmenu_requested.connect(_on_settingsmenu_requested)
 
 	if shop_overlay != null:
 		if shop_overlay.has_signal("purchase_requested") and not shop_overlay.purchase_requested.is_connected(_on_shop_purchase_requested):
@@ -612,6 +616,10 @@ func _on_back_to_menu_pressed() -> void:
 
 func _on_word_lists_requested() -> void:
 	word_lists_requested.emit()
+
+
+func _on_settingsmenu_requested() -> void:
+	settingsmenu_requested.emit()
 
 
 func _hide_game_menu() -> void:

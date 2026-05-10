@@ -9,12 +9,12 @@
 [sub_resource type="Resource" id="Line_0"]
 script = ExtResource("2_line")
 speaker_id = "jisho"
-text = "The city is under attack!"
+text = "{player_name}, hurry! The city is under attack!"
 
 [sub_resource type="Resource" id="Line_1"]
 script = ExtResource("2_line")
 speaker_id = "player"
-text = "Oh."
+text = "Uh oh."
 
 [sub_resource type="Resource" id="Line_2"]
 script = ExtResource("2_line")
@@ -29,7 +29,7 @@ text = "We can't let that happen."
 [sub_resource type="Resource" id="Line_4"]
 script = ExtResource("2_line")
 speaker_id = "player"
-text = "Kay."
+text = "Ok."
 
 [sub_resource type="Resource" id="Line_5"]
 script = ExtResource("2_line")

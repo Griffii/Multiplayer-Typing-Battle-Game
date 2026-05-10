@@ -52,6 +52,7 @@ func get_wave_definitions() -> Array:
 				_enemy("tank", ["medium"]),
 				_enemy("grunt", ["medium"]),
 				_enemy("scout", ["medium"]),
+				_enemy("boss", ["medium"]),
 			],
 		},
 	]

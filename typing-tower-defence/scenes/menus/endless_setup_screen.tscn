@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bm3bbs2s8c15" path="res://assets/images/menu/confirm.png" id="17_27671"]
 [ext_resource type="PackedScene" uid="uid://dqmi7kaf6mca1" path="res://scenes/game/ui/add_word_list_popup.tscn" id="19_rux53"]
 [ext_resource type="Texture2D" uid="uid://c5bmw5vg1gewl" path="res://assets/cute_fantasy_assets/ui/UI_Frames.png" id="20_awmu3"]
+[ext_resource type="AudioStream" uid="uid://t01ghc2ro5ou" path="res://assets/bgm/JDSherbert - Ambiences Music Pack - Junction Jazz.ogg" id="23_e0k1d"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snn44"]
 texture = ExtResource("2_nrc65")
@@ -336,6 +337,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vhn6x")
+
+[node name="Scene_BGM" type="AudioStreamPlayer" parent="." unique_id=915991822]
+unique_name_in_owner = true
+stream = ExtResource("23_e0k1d")
+bus = &"Music"
+parameters/looping = true
 
 [node name="BGTexture" type="Panel" parent="." unique_id=1224092353]
 z_index = -1

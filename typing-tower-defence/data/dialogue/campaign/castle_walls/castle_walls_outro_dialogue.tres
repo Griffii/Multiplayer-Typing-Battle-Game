@@ -1,28 +1,117 @@
-[gd_resource type="Resource" script_class="DialogueSequenceData" format=3 uid="uid://xqox0p6wcca2"]
+[gd_resource type="Resource" script_class="DialogueSequenceData" format=3 uid="uid://6sfve33svspp"]
 
 [ext_resource type="Script" uid="uid://dc1y2b2f7yhje" path="res://data/dialogue/dialogue_sequence_data.gd" id="1_sequence"]
 [ext_resource type="Script" uid="uid://bm2xra0mbn2u7" path="res://data/dialogue/dialogue_line_data.gd" id="2_line"]
-[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="3_ma574"]
-[ext_resource type="Resource" uid="uid://dgnwns6tacp4j" path="res://data/dialogue/speakers/player_speaker_data.tres" id="4_ma574"]
-[ext_resource type="Resource" uid="uid://cvbt7cg5mp1dq" path="res://data/dialogue/speakers/jisho_speaker_data.tres" id="5_o8jua"]
+[ext_resource type="Script" uid="uid://bpi837hrngfsy" path="res://data/dialogue/dialogue_speaker_data.gd" id="3_speaker"]
+[ext_resource type="Resource" uid="uid://dgnwns6tacp4j" path="res://data/dialogue/speakers/player_speaker_data.tres" id="4_player"]
+[ext_resource type="Resource" uid="uid://cvbt7cg5mp1dq" path="res://data/dialogue/speakers/jisho_speaker_data.tres" id="5_jisho"]
+[ext_resource type="Resource" uid="uid://l8dde8lo8w6i" path="res://data/dialogue/speakers/friendly_soldier_speaker.tres" id="6_o8jua"]
 
 [sub_resource type="Resource" id="Line_0"]
 script = ExtResource("2_line")
 speaker_id = "jisho"
-text = "YES! BURN THE HERETICS!"
-
-[sub_resource type="Resource" id="Line_1"]
-script = ExtResource("2_line")
-speaker_id = "jisho"
-text = "HAHAHAHAHAHAHHAHA!!!! BUUUUUURRN!"
+text = "YES! FLEE, YOU COWARDS! RUN FROM THE FIRE!"
 
 [sub_resource type="Resource" id="Line_2"]
 script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "HAHAHAHA! DID YOU SEE THEM BREAK?!"
+
+[sub_resource type="Resource" id="Line_4"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "Another few minutes and we would have scorched every last one of them!"
+
+[sub_resource type="Resource" id="Line_5"]
+script = ExtResource("2_line")
 speaker_id = "player"
-text = "Bro. Chill."
+text = "Chill."
+
+[sub_resource type="Resource" id="Line_6"]
+script = ExtResource("2_line")
+speaker_id = "soldier"
+text = "Grand Speller!"
+add_speakers = Array[String](["soldier"])
+move_speakers = {
+"jisho": "left_2",
+"soldier": "right_1"
+}
+flip_speakers = {
+"soldier": true
+}
+
+[sub_resource type="Resource" id="Line_7"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "What now?! Speak quickly!"
+
+[sub_resource type="Resource" id="Line_8"]
+script = ExtResource("2_line")
+speaker_id = "soldier"
+text = "Enemy forces breached the eastern wall during the battle."
+
+[sub_resource type="Resource" id="Line_9"]
+script = ExtResource("2_line")
+speaker_id = "soldier"
+text = "Saborus led a strike team into the royal vault."
+
+[sub_resource type="Resource" id="Line_10"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Oh."
+
+[sub_resource type="Resource" id="Line_11"]
+script = ExtResource("2_line")
+speaker_id = "soldier"
+text = "The Gem of Creation has been stolen!"
+
+[sub_resource type="Resource" id="Line_12"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "WHAT?!"
+
+[sub_resource type="Resource" id="Line_13"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "That lunatic cannot be allowed to keep it!"
+
+[sub_resource type="Resource" id="Line_14"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "Do you have any idea what he could create with that power?!"
+
+[sub_resource type="Resource" id="Line_15"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Bad?"
+
+[sub_resource type="Resource" id="Line_16"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "YES, BAD!"
+
+[sub_resource type="Resource" id="Line_17"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "If Saborus reaches the outer kingdoms, he could raise armies, monsters... perhaps even dragons!"
+
+[sub_resource type="Resource" id="Line_19"]
+script = ExtResource("2_line")
+speaker_id = "soldier"
+text = "The king is gathering his advisors now."
+
+[sub_resource type="Resource" id="Line_20"]
+script = ExtResource("2_line")
+speaker_id = "jisho"
+text = "Good. Then we march to the castle at once."
+
+[sub_resource type="Resource" id="Line_21"]
+script = ExtResource("2_line")
+speaker_id = "player"
+text = "Fine."
 
 [resource]
 script = ExtResource("1_sequence")
-speakers = Array[ExtResource("3_ma574")]([ExtResource("4_ma574"), ExtResource("5_o8jua")])
-lines = Array[ExtResource("2_line")]([SubResource("Line_0"), SubResource("Line_1"), SubResource("Line_2")])
+speakers = Array[ExtResource("3_speaker")]([ExtResource("4_player"), ExtResource("5_jisho"), ExtResource("6_o8jua")])
+lines = Array[ExtResource("2_line")]([SubResource("Line_0"), SubResource("Line_2"), SubResource("Line_4"), SubResource("Line_5"), SubResource("Line_6"), SubResource("Line_7"), SubResource("Line_8"), SubResource("Line_9"), SubResource("Line_10"), SubResource("Line_11"), SubResource("Line_12"), SubResource("Line_13"), SubResource("Line_14"), SubResource("Line_15"), SubResource("Line_16"), SubResource("Line_17"), SubResource("Line_19"), SubResource("Line_20"), SubResource("Line_21")])
 metadata/_custom_type_script = "uid://dc1y2b2f7yhje"

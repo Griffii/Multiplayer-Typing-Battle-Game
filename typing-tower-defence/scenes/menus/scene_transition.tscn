@@ -206,3 +206,4 @@ libraries/ = SubResource("AnimationLibrary_dl3iu")
 
 [node name="whoosh_sfx" type="AudioStreamPlayer2D" parent="." unique_id=820802789]
 stream = ExtResource("2_sromv")
+bus = &"SFX"

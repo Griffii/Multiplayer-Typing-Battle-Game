@@ -351,3 +351,4 @@ caret_blink = true
 [node name="TypingSfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1151039798]
 unique_name_in_owner = true
 stream = ExtResource("7_121qb")
+bus = &"Typing_SFX"

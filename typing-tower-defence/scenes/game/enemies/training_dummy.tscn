@@ -309,15 +309,18 @@ position = Vector2(0, -78)
 
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=2046593178]
 unique_name_in_owner = true
+bus = &"SFX"
 
 [node name="death-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1119710449]
 unique_name_in_owner = true
 stream = ExtResource("6_euo34")
+bus = &"SFX"
 
 [node name="hit-sfx" type="AudioStreamPlayer2D" parent="." unique_id=800291747]
 unique_name_in_owner = true
 stream = ExtResource("6_moyrj")
 volume_db = -8.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1458636917]
 unique_name_in_owner = true

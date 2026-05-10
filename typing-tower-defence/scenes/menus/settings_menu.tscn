@@ -1,0 +1,349 @@
+[gd_scene format=3 uid="uid://gx0317qb6t87"]
+
+[ext_resource type="Script" uid="uid://dn3fryg7g5wom" path="res://scenes/menus/settings_menu.gd" id="1_kffdn"]
+[ext_resource type="Texture2D" uid="uid://brdf40xlbra6f" path="res://assets/cute_fantasy_assets/ui/Book_UI.png" id="1_s2d1y"]
+[ext_resource type="PackedScene" uid="uid://cew3xi5xdq3s0" path="res://scenes/game/ui/sliders/volume_slider.tscn" id="2_da10i"]
+[ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="2_jjfif"]
+[ext_resource type="AudioStream" uid="uid://b887neunyf6da" path="res://assets/sfx/menus/Paper_01.mp3" id="2_ojvp1"]
+[ext_resource type="AudioStream" uid="uid://bldwj3xauyf52" path="res://assets/sfx/menus/Paper_02.mp3" id="3_da10i"]
+[ext_resource type="Texture2D" uid="uid://c5bmw5vg1gewl" path="res://assets/cute_fantasy_assets/ui/UI_Frames.png" id="3_kffdn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jjfif"]
+texture = ExtResource("1_s2d1y")
+region_rect = Rect2(248, 6, 224, 133)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kffdn"]
+texture = ExtResource("1_s2d1y")
+region_rect = Rect2(488, 150, 224, 133)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2d1y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojvp1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qnuys"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(964, 4, 40, 41)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eoonq"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(1019, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mcc4n"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(58, 250, 28, 31)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_muhwa"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 4.0
+texture_margin_top = 6.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(442, 248, 28, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g67jo"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(202, 250, 28, 31)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrg86"]
+texture = ExtResource("3_kffdn")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(58, 251, 28, 30)
+modulate_color = Color(1, 1, 1, 0.5882353)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0eij"]
+
+[sub_resource type="Animation" id="Animation_f4ify"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BookContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a8hkd"]
+resource_name = "close_menu"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("close_sfx:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BookContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 540)]
+}
+
+[sub_resource type="Animation" id="Animation_0k1ti"]
+resource_name = "open_menu"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("open_sfx:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BookContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 540), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qnuys"]
+_data = {
+&"RESET": SubResource("Animation_f4ify"),
+&"close_menu": SubResource("Animation_a8hkd"),
+&"open_menu": SubResource("Animation_0k1ti")
+}
+
+[node name="SettingsMenu" type="CanvasLayer" unique_id=1563143256]
+layer = 5
+script = ExtResource("1_kffdn")
+
+[node name="BookContainer" type="Control" parent="." unique_id=833290869]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BookBG" type="Panel" parent="BookContainer" unique_id=1422384659]
+z_index = -1
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 930.0
+offset_bottom = 520.00024
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_jjfif")
+
+[node name="BookBGCoverColor" type="Panel" parent="BookContainer/BookBG" unique_id=789579738]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 500.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_kffdn")
+
+[node name="LeftPanel" type="PanelContainer" parent="BookContainer" unique_id=1200587072]
+custom_minimum_size = Vector2(340, 400)
+layout_mode = 0
+offset_left = 83.0
+offset_top = 54.0
+offset_right = 429.0
+offset_bottom = 458.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s2d1y")
+
+[node name="RightPanel" type="PanelContainer" parent="BookContainer" unique_id=232678703]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 0
+offset_left = 524.0
+offset_top = 50.0
+offset_right = 882.0
+offset_bottom = 463.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ojvp1")
+
+[node name="MarginContainer" type="MarginContainer" parent="BookContainer/RightPanel" unique_id=764456728]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BookContainer/RightPanel/MarginContainer" unique_id=1877894891]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="AudioControlsLabel" type="Label" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=734309927]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_qnuys")
+text = "Audio Settings:"
+horizontal_alignment = 1
+
+[node name="MasterVolume" type="HBoxContainer" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=1549731911]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/MasterVolume" unique_id=1278306678]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxTexture_eoonq")
+text = "Master"
+horizontal_alignment = 1
+
+[node name="master_volume_slider" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/MasterVolume" unique_id=1437933216 instance=ExtResource("2_da10i")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+bus_name = "Master"
+
+[node name="MusicVolume" type="HBoxContainer" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=1703781483]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/MusicVolume" unique_id=1667894418]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxTexture_eoonq")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="music_volume_slider" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/MusicVolume" unique_id=1130912175 instance=ExtResource("2_da10i")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+bus_name = "Music"
+
+[node name="SFXVolume" type="HBoxContainer" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=1382053633]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="SFXVolumeLabel" type="Label" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/SFXVolume" unique_id=1147487015]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxTexture_eoonq")
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="sfx_volume_slider" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/SFXVolume" unique_id=1081873689 instance=ExtResource("2_da10i")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+bus_name = "SFX"
+
+[node name="TypingSFXVolume" type="HBoxContainer" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer" unique_id=242639892]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="TypingSFXVolumeLabel" type="Label" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/TypingSFXVolume" unique_id=113398118]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.73333335)
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxTexture_eoonq")
+text = "Typing"
+horizontal_alignment = 1
+
+[node name="typing_sfx_volume_slider" parent="BookContainer/RightPanel/MarginContainer/HBoxContainer/TypingSFXVolume" unique_id=1968992752 instance=ExtResource("2_da10i")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+bus_name = "Typing_SFX"
+
+[node name="BackButton" type="Button" parent="BookContainer" unique_id=650318142]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 0
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 92.0
+offset_bottom = 53.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_jjfif")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_mcc4n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_muhwa")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g67jo")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_rrg86")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l0eij")
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=998072862]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_qnuys")
+
+[node name="open_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1755475818]
+stream = ExtResource("2_ojvp1")
+bus = &"SFX"
+
+[node name="close_sfx" type="AudioStreamPlayer2D" parent="." unique_id=853204226]
+stream = ExtResource("3_da10i")
+bus = &"SFX"

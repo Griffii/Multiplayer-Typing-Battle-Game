@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bxkgnqvmq6yhe"]
+
+[ext_resource type="Script" uid="uid://dcvcxp3sjicau" path="res://scenes/app/AudioManager.gd" id="1_idyvo"]
+
+[sub_resource type="AudioStream" id="AudioStream_idyvo"]
+
+[sub_resource type="AudioStream" id="AudioStream_gn56o"]
+
+[node name="AudioManager" type="Node" unique_id=1420118453]
+script = ExtResource("1_idyvo")
+
+[node name="MusicA" type="AudioStreamPlayer" parent="." unique_id=920932723]
+unique_name_in_owner = true
+stream = SubResource("AudioStream_idyvo")
+bus = &"Music"
+
+[node name="MusicB" type="AudioStreamPlayer" parent="." unique_id=26917375]
+unique_name_in_owner = true
+stream = SubResource("AudioStream_gn56o")
+bus = &"Music"

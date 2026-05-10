@@ -169,8 +169,10 @@ World Map"
 [node name="FanfareSfx" type="AudioStreamPlayer" parent="." unique_id=126516856]
 unique_name_in_owner = true
 stream = ExtResource("8_pxy88")
+bus = &"SFX"
 
 [node name="FailSfx" type="AudioStreamPlayer" parent="." unique_id=1293181556]
 unique_name_in_owner = true
 stream = ExtResource("9_8xsqk")
 volume_db = -10.0
+bus = &"SFX"

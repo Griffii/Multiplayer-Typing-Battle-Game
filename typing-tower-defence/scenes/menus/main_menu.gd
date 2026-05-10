@@ -4,7 +4,7 @@ signal play_requested
 signal levelselectmenu_requested
 signal endless_mode_requested
 signal training_room_requested
-signal settings_requested
+signal settingsmenu_requested
 signal wordlistsmenu_requested
 signal customizecharactermenu_requested
 
@@ -265,7 +265,7 @@ func _on_training_room_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	settings_requested.emit()
+	settingsmenu_requested.emit()
 
 
 func _on_wordlists_pressed() -> void:

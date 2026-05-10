@@ -5,6 +5,7 @@ extends Control
 signal back_to_menu_requested
 signal return_to_map_requested
 signal word_lists_requested
+signal settingsmenu_requested
 
 enum RunState {
 	PRE_WAVE,
@@ -25,7 +26,7 @@ const DIALOGUE_OVERLAY_SCENE: PackedScene = preload("res://scenes/game/dialogue/
 ##########################################################################
 ######### CHANGE THIS BEFORE EXPORTING - PLEASE FOR THE LOVE OF GOD ######
 ##########################################################################
-var DEV_MODE: bool = false
+var DEV_MODE: bool = true
 ###########################################################################
 var selected_level_scene: PackedScene = null
 var selected_wave_defs: Array = []
@@ -138,6 +139,8 @@ func _connect_signals() -> void:
 			game_menu_overlay.resume_requested.connect(_on_game_menu_resume_requested)
 		if game_menu_overlay.has_signal("word_lists_requested"):
 			game_menu_overlay.word_lists_requested.connect(_on_word_lists_requested)
+		if game_menu_overlay.has_signal("settingsmenu_requested"):
+			game_menu_overlay.settingsmenu_requested.connect(_on_settingsmenu_requested)
 
 	if shop_overlay != null:
 		if shop_overlay.has_signal("purchase_requested"):
@@ -863,6 +866,9 @@ func _on_back_to_menu_pressed() -> void:
 	get_tree().paused = false
 	_clear_active_dialogue_scene()
 	back_to_menu_requested.emit()
+
+func _on_settingsmenu_requested() -> void:
+	settingsmenu_requested.emit()
 
 
 func _show_shop() -> void:

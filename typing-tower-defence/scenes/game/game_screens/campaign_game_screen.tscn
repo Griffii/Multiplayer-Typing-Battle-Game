@@ -11,8 +11,6 @@
 [ext_resource type="Script" uid="uid://c3nnrk7jojd3j" path="res://scripts/managers/spawn_manager.gd" id="9_w3wge"]
 [ext_resource type="Script" uid="uid://d3jb80mi3pwid" path="res://scripts/managers/typing_manager.gd" id="10_fknqu"]
 [ext_resource type="Script" uid="uid://i0uokjc0q4k" path="res://scripts/managers/combat_manager.gd" id="11_hwfn7"]
-[ext_resource type="AudioStream" uid="uid://dagwp65eftifx" path="res://assets/sfx/menus/correct-ping.ogg" id="12_7ilww"]
-[ext_resource type="AudioStream" uid="uid://lj557ih7bune" path="res://assets/sfx/menus/no-sfx.ogg" id="13_8i27r"]
 [ext_resource type="FontFile" uid="uid://bxnlee350xbyr" path="res://assets/fonts/BadComic-Regular.ttf" id="14_u57qc"]
 [ext_resource type="Texture2D" uid="uid://dl8g1tdf1vman" path="res://assets/images/menu/buttonSquare_beige.png" id="15_fut1a"]
 [ext_resource type="Texture2D" uid="uid://cx2ovcmvgohjs" path="res://assets/images/menu/buttonSquare_beige_pressed.png" id="16_p0xlf"]
@@ -115,17 +113,6 @@ script = ExtResource("10_fknqu")
 [node name="CombatManager" type="Node" parent="Managers" unique_id=649021532]
 unique_name_in_owner = true
 script = ExtResource("11_hwfn7")
-
-[node name="Audio" type="Node" parent="." unique_id=239962183]
-
-[node name="correct-sfx" type="AudioStreamPlayer2D" parent="Audio" unique_id=1839958051]
-unique_name_in_owner = true
-stream = ExtResource("12_7ilww")
-volume_db = -15.0
-
-[node name="wrong-sfx" type="AudioStreamPlayer2D" parent="Audio" unique_id=1002116931]
-unique_name_in_owner = true
-stream = ExtResource("13_8i27r")
 
 [node name="DevStuff" type="CanvasLayer" parent="." unique_id=1547193028]
 unique_name_in_owner = true

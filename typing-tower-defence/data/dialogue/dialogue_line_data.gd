@@ -9,3 +9,11 @@ extends Resource
 @export var expression: String = ""
 @export var animation_name: String = ""
 @export var wait_after_seconds: float = 0.0
+
+# DialogueLineData new optional fields
+
+@export var add_speakers: Array[String] = []
+@export var remove_speakers: Array[String] = []
+@export var move_speakers: Dictionary = {}
+@export var flip_speakers: Dictionary = {}
+@export var focus_speaker_id: String = ""

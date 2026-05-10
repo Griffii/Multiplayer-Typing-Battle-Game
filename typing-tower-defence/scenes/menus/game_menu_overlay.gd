@@ -3,6 +3,7 @@ extends CanvasLayer
 signal resume_requested
 signal back_to_menu_requested
 signal word_lists_requested
+signal settingsmenu_requested
 
 const BUTTON_HOVER_SCALE: Vector2 = Vector2(1.06, 1.06)
 const BUTTON_NORMAL_SCALE: Vector2 = Vector2.ONE
@@ -11,6 +12,7 @@ const BUTTON_HOVER_TWEEN_DURATION: float = 0.08
 @onready var back_button: Button = %BackButton
 @onready var main_menu_button: Button = %MainMenuButton
 @onready var wordlists_button: Button = %WordlistsButton
+@onready var settings_button: Button = %SettingsButton
 
 var button_tweens: Dictionary = {}
 
@@ -36,6 +38,12 @@ func _ready() -> void:
 			wordlists_button.pressed.connect(_on_wordlists_pressed)
 
 		_setup_button_hover(wordlists_button)
+
+	if settings_button != null:
+		if not settings_button.pressed.is_connected(_on_settings_pressed):
+			settings_button.pressed.connect(_on_settings_pressed)
+
+		_setup_button_hover(settings_button)
 
 
 func show_overlay() -> void:
@@ -63,6 +71,10 @@ func _on_main_menu_pressed() -> void:
 
 func _on_wordlists_pressed() -> void:
 	word_lists_requested.emit()
+
+
+func _on_settings_pressed() -> void:
+	settingsmenu_requested.emit()
 
 
 func _setup_button_hover(button: Button) -> void:

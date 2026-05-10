@@ -572,14 +572,17 @@ position = Vector2(0, -33)
 [node name="attack-sfx" type="AudioStreamPlayer2D" parent="." unique_id=1599622870]
 unique_name_in_owner = true
 stream = ExtResource("6_u4ii5")
+bus = &"SFX"
 
 [node name="death-sfx" type="AudioStreamPlayer2D" parent="." unique_id=289706370]
 unique_name_in_owner = true
 stream = ExtResource("8_vfbyj")
+bus = &"SFX"
 
 [node name="hit-sfx" type="AudioStreamPlayer2D" parent="." unique_id=683944138]
 unique_name_in_owner = true
 stream = ExtResource("7_s8oqu")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1418589485]
 unique_name_in_owner = true

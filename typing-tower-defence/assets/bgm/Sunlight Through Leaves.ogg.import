@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bfikof55y6d0a"
+path="res://.godot/imported/Sunlight Through Leaves.ogg-085050351510cbf8eeee5ee5df3deeda.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/bgm/Sunlight Through Leaves.ogg"
+dest_files=["res://.godot/imported/Sunlight Through Leaves.ogg-085050351510cbf8eeee5ee5df3deeda.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
