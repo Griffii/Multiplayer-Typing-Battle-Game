@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://0sph3h4ghhey"]
 
 [ext_resource type="Script" uid="uid://b46e1krytm5u4" path="res://scenes/game/player/player_avatar.gd" id="1_x0o4k"]
-[ext_resource type="Texture2D" uid="uid://d3lrxe7gd36mm" path="res://assets/images/player/bodies/body_01.png" id="2_u13hl"]
-[ext_resource type="Texture2D" uid="uid://bxmq6oscn5q38" path="res://assets/images/player/undies/boy_undies.png" id="3_yrvmc"]
-[ext_resource type="Texture2D" uid="uid://byusa6m3tjw4b" path="res://assets/images/player/clothes/robe_white.png" id="4_x0o4k"]
-[ext_resource type="Texture2D" uid="uid://dch2errjaw3st" path="res://assets/images/player/hair/hair_01.png" id="5_34wga"]
-[ext_resource type="Texture2D" uid="uid://bcbiblr7clk6r" path="res://assets/images/player/hats/wizard_hat.png" id="6_yqbcp"]
-[ext_resource type="Texture2D" uid="uid://dvqfyi0c673g" path="res://assets/images/player/wands/oak_staff.png" id="7_f0b1h"]
+[ext_resource type="Texture2D" uid="uid://5gjqrykuhyxd" path="res://assets/images/player/bodies/body.png" id="2_34wga"]
+[ext_resource type="Texture2D" uid="uid://doffoan6o17oo" path="res://assets/images/player/eyes/eyes_01.png" id="3_34wga"]
+[ext_resource type="Texture2D" uid="uid://ct758fe20jc7" path="res://assets/images/player/shoes/elf_mage_boots.png" id="4_yqbcp"]
+[ext_resource type="Texture2D" uid="uid://dunbfqxqpxlqa" path="res://assets/images/player/clothes/elf_robes_lower.png" id="5_f0b1h"]
+[ext_resource type="Texture2D" uid="uid://b33bb3yxegivl" path="res://assets/images/player/bodies/hand.png" id="6_8mhwf"]
+[ext_resource type="Texture2D" uid="uid://cilpqii56rjy2" path="res://assets/images/player/hats/wizard_hat.png" id="6_yqbcp"]
+[ext_resource type="Texture2D" uid="uid://cuk84b23uff16" path="res://assets/images/player/clothes/elf_robes_upper.png" id="7_ptmqb"]
+[ext_resource type="Texture2D" uid="uid://3bjheayrme3u" path="res://assets/images/player/hair/elf_mage_hair.png" id="8_nm3uq"]
+[ext_resource type="Texture2D" uid="uid://dhqffpjlon15w" path="res://assets/images/player/staves/elf_mage_staff.png" id="10_ejvd6"]
 
 [sub_resource type="Animation" id="Animation_u13hl"]
 length = 0.001
@@ -48,45 +51,95 @@ _data = {
 
 [node name="PlayerAvatar" type="Node2D" unique_id=1193445698]
 script = ExtResource("1_x0o4k")
+default_body = null
+default_body_color = null
+default_eyes = null
+default_clothes = null
+default_hair = null
+default_hair_color = null
+default_hat = null
+default_hat_color = null
+default_staff = null
+default_spell = null
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=259889046]
 unique_name_in_owner = true
 
 [node name="BodySprite" type="Sprite2D" parent="VisualRoot" unique_id=1156593775]
 unique_name_in_owner = true
-position = Vector2(0, -32)
+position = Vector2(0, -64)
 scale = Vector2(4, 4)
-texture = ExtResource("2_u13hl")
+texture = ExtResource("2_34wga")
 
-[node name="UndiesSprite" type="Sprite2D" parent="VisualRoot" unique_id=1535471263]
+[node name="LeftEyeColor" type="ColorRect" parent="VisualRoot" unique_id=1140965420]
 unique_name_in_owner = true
-position = Vector2(0, -32)
-scale = Vector2(4, 4)
-texture = ExtResource("3_yrvmc")
+offset_left = -8.0
+offset_top = -64.0
+offset_right = -4.0
+offset_bottom = -56.0
+color = Color(0, 0, 0, 1)
 
-[node name="ClothesSprite" type="Sprite2D" parent="VisualRoot" unique_id=1894701979]
+[node name="RightEyeColor" type="ColorRect" parent="VisualRoot" unique_id=475957763]
 unique_name_in_owner = true
-position = Vector2(0, -12)
-scale = Vector2(4, 4)
-texture = ExtResource("4_x0o4k")
+offset_left = 8.0
+offset_top = -64.0
+offset_right = 12.0
+offset_bottom = -56.0
+color = Color(0, 0, 0, 1)
 
-[node name="HairSprite" type="Sprite2D" parent="VisualRoot" unique_id=1767546153]
-unique_name_in_owner = true
-position = Vector2(0, -44)
-scale = Vector2(4, 4)
-texture = ExtResource("5_34wga")
-
-[node name="HatSprite" type="Sprite2D" parent="VisualRoot" unique_id=1796612608]
+[node name="EyesSprite" type="Sprite2D" parent="VisualRoot" unique_id=316699724]
 unique_name_in_owner = true
 position = Vector2(0, -64)
 scale = Vector2(4, 4)
+texture = ExtResource("3_34wga")
+
+[node name="HairSprite" type="Sprite2D" parent="VisualRoot" unique_id=1767546153]
+unique_name_in_owner = true
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("8_nm3uq")
+
+[node name="BootsSprite" type="Sprite2D" parent="VisualRoot" unique_id=1994211052]
+unique_name_in_owner = true
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("4_yqbcp")
+
+[node name="ClothesLowerSprite" type="Sprite2D" parent="VisualRoot" unique_id=557298104]
+unique_name_in_owner = true
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("5_f0b1h")
+
+[node name="LeftHandSprite" type="Sprite2D" parent="VisualRoot" unique_id=2146559792]
+unique_name_in_owner = true
+position = Vector2(-20, -24)
+scale = Vector2(4, 4)
+texture = ExtResource("6_8mhwf")
+
+[node name="ClothesUpperSprite" type="Sprite2D" parent="VisualRoot" unique_id=1894701979]
+unique_name_in_owner = true
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("7_ptmqb")
+
+[node name="HatSprite" type="Sprite2D" parent="VisualRoot" unique_id=1796612608]
+unique_name_in_owner = true
+position = Vector2(0, -128)
+scale = Vector2(4, 4)
 texture = ExtResource("6_yqbcp")
 
-[node name="WandSprite" type="Sprite2D" parent="VisualRoot" unique_id=481223801]
+[node name="StaffSprite" type="Sprite2D" parent="VisualRoot" unique_id=481223801]
 unique_name_in_owner = true
-position = Vector2(23, -28)
+position = Vector2(0, -64)
 scale = Vector2(4, 4)
-texture = ExtResource("7_f0b1h")
+texture = ExtResource("10_ejvd6")
+
+[node name="RightHandSprite" type="Sprite2D" parent="VisualRoot" unique_id=520525224]
+unique_name_in_owner = true
+position = Vector2(34, -31)
+scale = Vector2(4, 4)
+texture = ExtResource("6_8mhwf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1736763524]
 unique_name_in_owner = true

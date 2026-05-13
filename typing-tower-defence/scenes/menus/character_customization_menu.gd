@@ -28,11 +28,11 @@ var current_slot: String = "clothes"
 
 var categories: Array[String] = [
 	"body",
-	"undies",
+	"eyes",
 	"clothes",
 	"hair",
 	"hat",
-	"wand",
+	"staff",
 	"spell"
 ]
 
@@ -48,9 +48,8 @@ func _ready() -> void:
 			PlayerLoadout.loadout_changed.connect(_on_loadout_changed)
 
 	PlayerLoadout.load_loadout()
-	
-	_setup_name_input()
 
+	_setup_name_input()
 	_refresh_name_label()
 	_bind_existing_category_buttons()
 
@@ -58,7 +57,6 @@ func _ready() -> void:
 		avatar_preview.apply_loadout(PlayerLoadout.get_loadout())
 
 	_show_slot_items(current_slot)
-	
 	_play_open_animation()
 
 
@@ -76,13 +74,14 @@ func _bind_existing_category_buttons() -> void:
 			continue
 
 		category_button_map[slot_id] = button
-
 		button.pivot_offset = button.size * 0.5
 
 		if not button.pressed.is_connected(_on_category_pressed.bind(slot_id)):
 			button.pressed.connect(_on_category_pressed.bind(slot_id))
+
 		if not button.mouse_entered.is_connected(_on_category_button_mouse_entered.bind(slot_id)):
 			button.mouse_entered.connect(_on_category_button_mouse_entered.bind(slot_id))
+
 		if not button.mouse_exited.is_connected(_on_category_button_mouse_exited.bind(slot_id)):
 			button.mouse_exited.connect(_on_category_button_mouse_exited.bind(slot_id))
 
@@ -93,24 +92,27 @@ func _find_category_button(slot_id: String) -> Button:
 	if category_buttons == null:
 		return null
 
+	var formatted_name := _format_slot_name(slot_id)
+
 	var expected_names: Array[String] = [
 		slot_id,
 		slot_id.capitalize(),
 		"%sButton" % slot_id.capitalize(),
-		"%sButton" % _format_slot_name(slot_id),
+		"%sButton" % formatted_name,
 	]
 
 	for child in category_buttons.get_children():
 		if child is Button:
 			var button := child as Button
+			var button_text := button.text.strip_edges().to_lower()
 
 			if button.name in expected_names:
 				return button
 
-			if button.text.strip_edges().to_lower() == _format_slot_name(slot_id).to_lower():
+			if button_text == formatted_name.to_lower():
 				return button
 
-			if button.text.strip_edges().to_lower() == slot_id.to_lower():
+			if button_text == slot_id.to_lower():
 				return button
 
 	return null
@@ -121,7 +123,6 @@ func _show_slot_items(slot_id: String) -> void:
 
 	_clear_item_grid()
 	_clear_color_grid()
-
 	_update_category_button_visuals()
 
 	if _slot_allows_none(slot_id):
@@ -149,6 +150,7 @@ func _update_category_button_visuals() -> void:
 
 		button.scale = target_scale
 
+
 func _on_category_button_mouse_entered(slot_id: String) -> void:
 	var button: Button = category_button_map.get(slot_id, null)
 
@@ -161,12 +163,7 @@ func _on_category_button_mouse_entered(slot_id: String) -> void:
 		target_scale = HOVER_SELECTED_CATEGORY_SCALE
 
 	var tween := create_tween()
-	tween.tween_property(
-		button,
-		"scale",
-		target_scale,
-		CATEGORY_TWEEN_DURATION
-	)
+	tween.tween_property(button, "scale", target_scale, CATEGORY_TWEEN_DURATION)
 
 
 func _on_category_button_mouse_exited(slot_id: String) -> void:
@@ -181,12 +178,8 @@ func _on_category_button_mouse_exited(slot_id: String) -> void:
 		target_scale = SELECTED_CATEGORY_SCALE
 
 	var tween := create_tween()
-	tween.tween_property(
-		button,
-		"scale",
-		target_scale,
-		CATEGORY_TWEEN_DURATION
-	)
+	tween.tween_property(button, "scale", target_scale, CATEGORY_TWEEN_DURATION)
+
 
 func _clear_item_grid() -> void:
 	if item_grid == null:
@@ -229,7 +222,10 @@ func _add_none_button(slot_id: String) -> void:
 		"unlocked": true
 	}
 
-	var equipped := PlayerLoadout.get_equipped(slot_id).is_empty() or PlayerLoadout.get_equipped(slot_id) == "none"
+	var equipped := (
+		PlayerLoadout.get_equipped(slot_id).is_empty()
+		or PlayerLoadout.get_equipped(slot_id) == "none"
+	)
 
 	var button := _create_item_button(
 		slot_id,
@@ -295,7 +291,7 @@ func _create_item_button(
 		return null
 
 	button.setup(slot_id, item_id, item_data, equipped)
-	
+
 	if button.has_method("set_selected_border_visible"):
 		button.set_selected_border_visible(equipped)
 
@@ -332,6 +328,9 @@ func _refresh_color_grid_for_slot(slot_id: String) -> void:
 	)
 
 	for dye_id in available_dyes:
+		if dye_id == "default" and available_dyes.size() == 1:
+			continue
+
 		_add_color_button(color_slot_id, dye_id)
 
 
@@ -340,6 +339,8 @@ func _add_color_button(color_slot_id: String, dye_id: String) -> void:
 
 	if color_slot_id == "body_color":
 		dye_data = CustomizationDefinitions.get_item_data("body_color", dye_id)
+	elif color_slot_id == "eyes_color":
+		dye_data = CustomizationDefinitions.get_item_data("eyes_color", dye_id)
 	else:
 		dye_data = CustomizationDefinitions.get_dye_data(dye_id)
 
@@ -366,8 +367,8 @@ func _get_color_slot_for_slot(slot_id: String) -> String:
 		"body":
 			return "body_color"
 
-		"undies":
-			return "undies_color"
+		"eyes":
+			return "eyes_color"
 
 		"clothes":
 			return "clothes_color"
@@ -378,15 +379,17 @@ func _get_color_slot_for_slot(slot_id: String) -> String:
 		"hat":
 			return "hat_color"
 
-		"wand":
-			return "wand_color"
-
 		_:
 			return ""
 
 
 func _slot_allows_none(slot_id: String) -> bool:
-	return slot_id != "body" and slot_id != "spell"
+	match slot_id:
+		"hat", "staff":
+			return true
+
+		_:
+			return false
 
 
 func _on_category_pressed(slot_id: String) -> void:
@@ -437,8 +440,8 @@ func _get_base_slot_for_color_slot(color_slot_id: String) -> String:
 		"body_color":
 			return "body"
 
-		"undies_color":
-			return "undies"
+		"eyes_color":
+			return "eyes"
 
 		"clothes_color":
 			return "clothes"
@@ -449,9 +452,6 @@ func _get_base_slot_for_color_slot(color_slot_id: String) -> String:
 		"hat_color":
 			return "hat"
 
-		"wand_color":
-			return "wand"
-
 		_:
 			return ""
 
@@ -461,8 +461,8 @@ func _format_slot_name(slot_id: String) -> String:
 		"body":
 			return "Body"
 
-		"undies":
-			return "Base"
+		"eyes":
+			return "Eyes"
 
 		"clothes":
 			return "Clothes"
@@ -473,8 +473,8 @@ func _format_slot_name(slot_id: String) -> String:
 		"hat":
 			return "Hat"
 
-		"wand":
-			return "Wand"
+		"staff":
+			return "Staff"
 
 		"spell":
 			return "Spell"
@@ -483,14 +483,17 @@ func _format_slot_name(slot_id: String) -> String:
 			return slot_id.capitalize()
 
 
-
 func _setup_name_input() -> void:
 	if name_label == null:
 		return
 
 	name_label.text = PlayerLoadout.get_player_name()
-	name_label.focus_exited.connect(_on_name_input_focus_exited)
-	name_label.text_submitted.connect(_on_name_input_submitted)
+
+	if not name_label.focus_exited.is_connected(_on_name_input_focus_exited):
+		name_label.focus_exited.connect(_on_name_input_focus_exited)
+
+	if not name_label.text_submitted.is_connected(_on_name_input_submitted):
+		name_label.text_submitted.connect(_on_name_input_submitted)
 
 
 func _on_name_input_focus_exited() -> void:
@@ -544,10 +547,12 @@ func _set_menu_buttons_disabled(disabled: bool) -> void:
 		if button != null and is_instance_valid(button):
 			button.disabled = disabled
 
-	for child in item_grid.get_children():
-		if child is Button:
-			child.disabled = disabled
+	if item_grid != null:
+		for child in item_grid.get_children():
+			if child is Button:
+				child.disabled = disabled
 
-	for child in color_grid.get_children():
-		if child is Button:
-			child.disabled = disabled
+	if color_grid != null:
+		for child in color_grid.get_children():
+			if child is Button:
+				child.disabled = disabled

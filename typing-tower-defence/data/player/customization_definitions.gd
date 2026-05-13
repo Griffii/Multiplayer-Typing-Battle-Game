@@ -1,14 +1,20 @@
 # res://data/player/customization_definitions.gd
 
-
 const ITEMS: Dictionary = {
 	"body": {
 		"body_01": {
 			"display_name": "Body",
-			"texture": preload("res://assets/images/player/bodies/body_01.png"),
+			"texture": preload("uid://5gjqrykuhyxd"),
 			"available_dyes": [
-				"skin_01", "skin_02", "skin_03", "skin_04", "skin_05",
-				"skin_red", "skin_purple", "skin_pink"
+				"skin_01",
+				"skin_02",
+				"skin_03",
+				"skin_04",
+				"skin_05",
+				"skin_06",
+				"skin_red",
+				"skin_purple",
+				"skin_pink"
 			],
 			"unlock_hint": "",
 			"bonuses": {}
@@ -17,101 +23,165 @@ const ITEMS: Dictionary = {
 
 	"body_color": {
 		"skin_01": {"display_name": "Skin 1", "color": Color("#ffffff"), "unlock_hint": "", "bonuses": {}},
-		"skin_02": {"display_name": "Skin 2", "color": Color("#f2c7a5"), "unlock_hint": "", "bonuses": {}},
+		"skin_02": {"display_name": "Skin 2", "color": Color("#f3c7a6"), "unlock_hint": "", "bonuses": {}},
 		"skin_03": {"display_name": "Skin 3", "color": Color("#d99a6c"), "unlock_hint": "", "bonuses": {}},
-		"skin_04": {"display_name": "Skin 4", "color": Color("#9b5f3f"), "unlock_hint": "", "bonuses": {}},
-		"skin_05": {"display_name": "Skin 5", "color": Color("#5c3828"), "unlock_hint": "", "bonuses": {}},
+		"skin_04": {"display_name": "Skin 4", "color": Color("#a96b46"), "unlock_hint": "", "bonuses": {}},
+		"skin_05": {"display_name": "Skin 5", "color": Color("#70452f"), "unlock_hint": "", "bonuses": {}},
+		"skin_06": {"display_name": "Skin 6", "color": Color("#3f2419"), "unlock_hint": "", "bonuses": {}},
 		"skin_red": {"display_name": "Red Skin", "color": Color("#d94b4b"), "unlock_hint": "Go to the underworld.", "bonuses": {}},
 		"skin_purple": {"display_name": "Purple Skin", "color": Color("#9b5de5"), "unlock_hint": "Go to space.", "bonuses": {}},
 		"skin_pink": {"display_name": "Pink Skin", "color": Color("#ff8fab"), "unlock_hint": "Eat a donut.", "bonuses": {}}
-		
 	},
 
-	"undies": {
-		"boy_undies": {
-			"display_name": "Shorts",
-			"texture": preload("res://assets/images/player/undies/boy_undies.png"),
-			"available_dyes": ["white", "beige", "black", "red", "blue", "green"],
+	"eyes": {
+		"eyes_01": {
+			"display_name": "Eyes 01",
+			"texture": preload("uid://doffoan6o17oo"),
+			"available_dyes": [
+				"eye_blue",
+				"eye_green",
+				"eye_brown",
+				"eye_gold",
+				"eye_purple",
+				"eye_red"
+			],
 			"unlock_hint": "",
-			"bonuses": {}
-		},
-		"girl_undies": {
-			"display_name": "Two Piece",
-			"texture": preload("res://assets/images/player/undies/girl_undies.png"),
-			"available_dyes": ["white", "beige", "black", "red", "blue", "green"],
-			"unlock_hint": "",
-			"bonuses": {}
-		},
-		"leotard_undies": {
-			"display_name": "Leotard",
-			"texture": preload("res://assets/images/player/undies/leotard_undies.png"),
-			"available_dyes": ["white", "beige", "black", "red", "blue", "green"],
-			"unlock_hint": "Locked",
 			"bonuses": {}
 		}
+	},
+	
+	"eyes_color": {
+		"eye_blue": {"display_name": "Blue Eyes", "color": Color("#4f9cff"), "unlock_hint": "", "bonuses": {}},
+		"eye_green": {"display_name": "Green Eyes", "color": Color("#5bbf73"), "unlock_hint": "", "bonuses": {}},
+		"eye_brown": {"display_name": "Brown Eyes", "color": Color("#7a4a2a"), "unlock_hint": "", "bonuses": {}},
+		"eye_gold": {"display_name": "Gold Eyes", "color": Color("#f0c84b"), "unlock_hint": "", "bonuses": {}},
+		"eye_purple": {"display_name": "Purple Eyes", "color": Color("#9b5de5"), "unlock_hint": "", "bonuses": {}},
+		"eye_red": {"display_name": "Red Eyes", "color": Color("#d94b4b"), "unlock_hint": "", "bonuses": {}}
 	},
 
 	"clothes": {
-		"robe_white": {
-			"display_name": "Wizard Robe",
-			"texture": preload("res://assets/images/player/clothes/robe_white.png"),
-			"available_dyes": ["white", "blue", "red", "green", "gray", "black"],
-			"unlock_hint": "",
-			"bonuses": {}
-		}
-	},
-
-	"hair": {
-		"hair_01": {
-			"display_name": "Hair 1",
-			"texture": preload("res://assets/images/player/hair/hair_01.png"),
-			"available_dyes": ["white", "brown", "black", "blonde", "red_hair"],
+		"wizard_robes": {
+			"display_name": "Wizard Robes",
+			"boots_texture": preload("uid://ct758fe20jc7"),
+			"lower_texture": preload("uid://c1hkp1kxgf7er"),
+			"upper_texture": null,
+			"item_icon": preload("uid://c1hkp1kxgf7er"),
+			"available_dyes": [
+				"default",
+				"white",
+				"blue",
+				"red",
+				"green",
+				"gray",
+				"black",
+				"purple",
+				"pink"
+			],
 			"unlock_hint": "",
 			"bonuses": {}
 		},
-		"hair_02": {
-			"display_name": "Hair 2",
-			"texture": preload("res://assets/images/player/hair/hair_02.png"),
-			"available_dyes": ["white", "blonde", "brown", "black", "red_hair"],
+		"elf_mage": {
+			"display_name": "Elf Mage",
+			"boots_texture": preload("uid://ct758fe20jc7"),
+			"lower_texture": preload("uid://dunbfqxqpxlqa"),
+			"upper_texture": preload("uid://cuk84b23uff16"),
+			"item_icon": preload("uid://nhq0kinl2swy"),
+			"available_dyes": ["default"],
 			"unlock_hint": "",
 			"bonuses": {}
-		}
+		},
+		
+	},
+
+	"hair": {
+		"short_hair": {
+			"display_name": "Short Hair",
+			"texture": preload("uid://dpgpheugk04go"),
+			"available_dyes": [
+				"default",
+				"blonde",
+				"brown",
+				"dark_brown",
+				"black",
+				"red_hair",
+				"blue",
+				"purple",
+				"pink"
+			],
+			"unlock_hint": "",
+			"bonuses": {}
+		},
+		"long_hair": {
+			"display_name": "Long Hair",
+			"texture": preload("uid://47xvk48c6sav"),
+			"available_dyes": [
+				"default",
+				"blonde",
+				"brown",
+				"dark_brown",
+				"black",
+				"red_hair",
+				"blue",
+				"purple",
+				"pink"
+			],
+			"unlock_hint": "",
+			"bonuses": {}
+		},
+		"elf_mage_hair": {
+			"display_name": "Elf Mage",
+			"texture": preload("uid://3bjheayrme3u"),
+			"available_dyes": [
+				"default",
+			],
+			"unlock_hint": "",
+			"bonuses": {}
+		},
 	},
 
 	"hat": {
 		"wizard_hat": {
 			"display_name": "Wizard Hat",
-			"texture": preload("res://assets/images/player/hats/wizard_hat.png"),
-			"available_dyes": ["white", "blue", "red", "green", "gray", "black"],
+			"texture": preload("uid://cilpqii56rjy2"),
+			"available_dyes": [
+				"default",
+				"white",
+				"blue",
+				"red",
+				"green",
+				"gray",
+				"black",
+				"purple",
+				"pink"
+			],
 			"unlock_hint": "",
-			"bonuses": {}
-		},
-		"flower_hat": {
-			"display_name": "Flower Hat",
-			"texture": preload("res://assets/images/player/hats/flower_hat.png"),
-			"available_dyes": ["default"],
-			"unlock_hint": "Be one with nature.",
 			"bonuses": {}
 		}
 	},
 
-	"wand": {
+	"staff": {
 		"oak_staff": {
 			"display_name": "Oak Staff",
-			"texture": preload("res://assets/images/player/wands/oak_staff.png"),
+			"texture": preload("uid://br3evirrpdtvp"),
 			"available_dyes": ["default"],
 			"unlock_hint": "",
 			"bonuses": {}
 		},
 		"glass_staff": {
 			"display_name": "Glass Staff",
-			"texture": preload("res://assets/images/player/wands/glass_staff.png"),
+			"texture": preload("uid://bcl5ob8o0fb24"),
 			"available_dyes": ["default"],
 			"unlock_hint": "Locked",
 			"bonuses": {}
+		},
+		"elf_mage_staff": {
+			"display_name": "Elf Mage Staff",
+			"texture": preload("uid://dhqffpjlon15w"),
+			"available_dyes": ["default"],
+			"unlock_hint": "",
+			"bonuses": {}
 		}
 	}
-
 }
 
 
@@ -161,9 +231,24 @@ static func get_texture(slot_id: String, item_id: String) -> Texture2D:
 	return data.get("texture", null)
 
 
+static func get_clothes_textures(item_id: String) -> Dictionary:
+	var data: Dictionary = get_item_data("clothes", item_id)
+
+	return {
+		"boots": data.get("boots_texture", null),
+		"lower": data.get("lower_texture", null),
+		"upper": data.get("upper_texture", null),
+	}
+
+
 static func get_body_color(color_id: String) -> Color:
 	var data: Dictionary = get_item_data("body_color", color_id)
 	return data.get("color", Color.WHITE)
+
+
+static func get_eye_color(color_id: String) -> Color:
+	var data: Dictionary = get_item_data("eyes_color", color_id)
+	return data.get("color", Color("#4f9cff"))
 
 
 static func get_dye_data(dye_id: String) -> Dictionary:

@@ -324,7 +324,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_f4ify")
 [node name="PlayerAvatar" parent="BookContainer/PreviewPanel" unique_id=1193445698 instance=ExtResource("2_ebh46")]
 unique_name_in_owner = true
 position = Vector2(160, 375.00003)
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 
 [node name="NameLabel" type="LineEdit" parent="BookContainer" unique_id=612705210]
 unique_name_in_owner = true
@@ -419,7 +419,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_p2uxk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tqbf4")
 text = "Body"
 
-[node name="UndiesButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=128495507]
+[node name="EyesButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=128495507]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
@@ -434,7 +434,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_phoqo")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gj5la")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_j7lkb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3ubid")
-text = "Undies"
+text = "Eyes"
 
 [node name="ClothesButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=1074507489]
 unique_name_in_owner = true
@@ -487,7 +487,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_j7lkb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3ubid")
 text = "Hats"
 
-[node name="WandButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=499956590]
+[node name="StaffButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=499956590]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
@@ -502,7 +502,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_phoqo")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gj5la")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_j7lkb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3ubid")
-text = "Wands"
+text = "Staves"
 
 [node name="SpellButton" type="Button" parent="BookContainer/CategoryPanel/CategoryButtons" unique_id=634198541]
 unique_name_in_owner = true

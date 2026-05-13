@@ -3,8 +3,8 @@ extends Node
 
 ### UNLOCK ITEMS FROM ANYWHERE WITH THIS SYNTAX ##########
 #
-# PlayerLoadout.unlock_item("hat", "flower_hat")
-# PlayerLoadout.unlock_item("wand", "glass_wand")
+# PlayerLoadout.unlock_item("hat", "wizard_hat")
+# PlayerLoadout.unlock_item("staff", "glass_staff")
 # PlayerLoadout.unlock_item("body_color", "skin_purple")
 #
 ##########################################################
@@ -12,62 +12,105 @@ extends Node
 signal loadout_changed(loadout: Dictionary)
 signal item_unlocked(slot_id: String, item_id: String)
 
-var player_name: String = "Spellicus"
+const DEFAULT_PLAYER_NAME := "Spellicus"
+
+var player_name: String = DEFAULT_PLAYER_NAME
 
 var equipped_loadout: Dictionary = {
 	"body": "body_01",
 	"body_color": "skin_01",
 
-	"undies": "boy_undies",
-	"undies_color": "white",
+	"eyes": "eyes_01",
+	"eyes_color": "eye_blue",
 
-	"clothes": "robe_white",
-	"clothes_color": "white",
+	"clothes": "elf_mage",
+	"clothes_color": "default",
 
-	"hair": "hair_01",
-	"hair_color": "brown",
+	"hair": "elf_mage_hair",
+	"hair_color": "default",
 
 	"hat": "wizard_hat",
-	"hat_color": "white",
+	"hat_color": "blue",
 
-	"wand": "oak_staff",
-	"wand_color": "default",
+	"staff": "oak_staff",
 
 	"spell": "fireball_01"
 }
 
 var unlocked_items: Dictionary = {
 	"body": ["body_01"],
-	"body_color": ["skin_01", "skin_02", "skin_03", "skin_04", "skin_05"],
+	"body_color": [
+		"skin_01",
+		"skin_02",
+		"skin_03",
+		"skin_04",
+		"skin_05",
+		"skin_06",
+		"skin_red",
+		"skin_purple",
+		"skin_pink"
+	],
 
-	"undies": ["boy_undies", "girl_undies","leotard_undies"],
-	"undies_color": ["white", "beige", "black", "red", "blue", "green"],
+	"eyes": ["eyes_01"],
+	"eyes_color": [
+		"eye_blue",
+		"eye_green",
+		"eye_brown",
+		"eye_gold",
+		"eye_purple",
+		"eye_red"
+	],
 
-	"clothes": ["robe_white"],
-	"clothes_color": ["white", "blue", "red", "green", "gray", "black"],
+	"clothes": ["wizard_robes","elf_mage"],
+	"clothes_color": [
+		"default",
+		"white",
+		"blue",
+		"red",
+		"green",
+		"gray",
+		"black",
+		"purple",
+		"pink"
+	],
 
-	"hair": ["hair_01", "hair_02"],
+	"hair": ["short_hair","long_hair","elf_mage_hair"],
 	"hair_color": [
+		"default",
 		"white",
 		"blonde",
 		"brown",
 		"dark_brown",
 		"black",
-		"gray",
-		"red",
-		"pink",
+		"red_hair",
 		"blue",
-		"purple"
+		"purple",
+		"pink"
 	],
 
-	"hat": ["wizard_hat","flower_hat"],
-	"hat_color": ["white", "blue", "red", "green", "gray", "black", "default"],
+	"hat": ["wizard_hat"],
+	"hat_color": [
+		"default",
+		"white",
+		"blue",
+		"red",
+		"green",
+		"gray",
+		"black",
+		"purple",
+		"pink"
+	],
 
+	"staff": [
+		"oak_staff",
+		"glass_staff",
+		"elf_mage_staff"
+	],
 
-	"wand": ["oak_staff", "glass_staff"],
-	"wand_color": ["default"],
-
-	"spell": ["fireball_01", "fireball_02"]
+	"spell": [
+		"fireball_01",
+		"fireball_02"
+	]
 }
 
 
@@ -78,11 +121,12 @@ func get_loadout() -> Dictionary:
 func get_equipped(slot_id: String) -> String:
 	return str(equipped_loadout.get(slot_id, ""))
 
+
 func get_player_name() -> String:
 	var cleaned_name := player_name.strip_edges()
 
 	if cleaned_name.is_empty():
-		return "Spellicus"
+		return DEFAULT_PLAYER_NAME
 
 	return cleaned_name
 
@@ -91,7 +135,7 @@ func set_player_name(new_name: String) -> void:
 	var cleaned_name := new_name.strip_edges()
 
 	if cleaned_name.is_empty():
-		cleaned_name = "Spellicus"
+		cleaned_name = DEFAULT_PLAYER_NAME
 
 	player_name = cleaned_name
 	save_loadout()
@@ -148,6 +192,7 @@ func save_loadout() -> void:
 	}
 
 	var file := FileAccess.open("user://player_loadout.json", FileAccess.WRITE)
+
 	if file == null:
 		return
 
@@ -156,30 +201,36 @@ func save_loadout() -> void:
 
 func load_loadout() -> void:
 	if not FileAccess.file_exists("user://player_loadout.json"):
+		_validate_loaded_loadout()
 		return
 
 	var file := FileAccess.open("user://player_loadout.json", FileAccess.READ)
+
 	if file == null:
+		_validate_loaded_loadout()
 		return
 
 	var parsed = JSON.parse_string(file.get_as_text())
+
 	if typeof(parsed) != TYPE_DICTIONARY:
+		_validate_loaded_loadout()
 		return
 
 	if parsed.has("player_name"):
 		player_name = str(parsed["player_name"]).strip_edges()
 
 		if player_name.is_empty():
-			player_name = "Spellicus"
+			player_name = DEFAULT_PLAYER_NAME
 
 	if parsed.has("unlocked_items") and typeof(parsed["unlocked_items"]) == TYPE_DICTIONARY:
-		for slot_id in parsed["unlocked_items"].keys():
-			unlocked_items[str(slot_id)] = parsed["unlocked_items"][slot_id]
+		_load_unlocked_items(parsed["unlocked_items"])
 
 	var loaded_equipped: Dictionary = parsed
 
 	if parsed.has("equipped_loadout") and typeof(parsed["equipped_loadout"]) == TYPE_DICTIONARY:
 		loaded_equipped = parsed["equipped_loadout"]
+
+	_migrate_old_loadout_keys(loaded_equipped)
 
 	for key in equipped_loadout.keys():
 		if loaded_equipped.has(key):
@@ -192,6 +243,59 @@ func load_loadout() -> void:
 
 	_validate_loaded_loadout()
 	loadout_changed.emit(get_loadout())
+	save_loadout()
+
+
+func _load_unlocked_items(loaded_unlocked_items: Dictionary) -> void:
+	for slot_id_variant in loaded_unlocked_items.keys():
+		var slot_id := str(slot_id_variant)
+
+		if _is_removed_slot(slot_id):
+			continue
+
+		var target_slot_id := _migrate_slot_id(slot_id)
+
+		if target_slot_id.is_empty():
+			continue
+
+		if not unlocked_items.has(target_slot_id):
+			unlocked_items[target_slot_id] = []
+
+		var loaded_array = loaded_unlocked_items[slot_id_variant]
+
+		if typeof(loaded_array) != TYPE_ARRAY:
+			continue
+
+		for item_id_variant in loaded_array:
+			var item_id := str(item_id_variant)
+
+			if item_id.is_empty():
+				continue
+
+			if not unlocked_items[target_slot_id].has(item_id):
+				unlocked_items[target_slot_id].append(item_id)
+
+
+func _migrate_old_loadout_keys(loaded_equipped: Dictionary) -> void:
+	if loaded_equipped.has("wand") and not loaded_equipped.has("staff"):
+		loaded_equipped["staff"] = str(loaded_equipped["wand"])
+
+
+func _migrate_slot_id(slot_id: String) -> String:
+	match slot_id:
+		"wand":
+			return "staff"
+
+		_:
+			return slot_id
+
+
+func _is_removed_slot(slot_id: String) -> bool:
+	return (
+		slot_id == "undies"
+		or slot_id == "undies_color"
+		or slot_id == "wand_color"
+	)
 
 
 func _validate_loaded_loadout() -> void:
@@ -213,33 +317,50 @@ func _get_default_for_slot(slot_id: String) -> String:
 	match slot_id:
 		"body":
 			return "body_01"
+
 		"body_color":
 			return "skin_01"
-		"undies":
-			return "boy_undies"
-		"undies_color":
-			return "white"
+
+		"eyes":
+			return "eyes_01"
+		
+		"eyes_color":
+			return "eye_blue"
+
 		"clothes":
-			return "robe_white"
+			return "elf_mage"
 		"clothes_color":
-			return "white"
+			return "default"
+
 		"hair":
-			return "hair_01"
+			return "elf_mage_hair"
+
 		"hair_color":
-			return "brown"
+			return "default"
+
 		"hat":
 			return "wizard_hat"
+
 		"hat_color":
-			return "white"
-		"wand":
+			return "blue"
+
+		"staff":
 			return "oak_staff"
-		"wand_color":
-			return "default"
+
 		"spell":
 			return "fireball_01"
+
 		_:
 			return ""
 
 
 func _is_required_slot(slot_id: String) -> bool:
-	return slot_id == "body" or slot_id == "body_color" or slot_id == "spell"
+	return (
+		slot_id == "body"
+		or slot_id == "body_color"
+		or slot_id == "eyes"
+		or slot_id == "clothes"
+		or slot_id == "hair"
+		or slot_id == "hair_color"
+		or slot_id == "spell"
+	)

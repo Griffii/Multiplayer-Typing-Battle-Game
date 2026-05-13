@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cilpqii56rjy2"
-path="res://.godot/imported/wizard_hat.png-8e6534a77d5fd02e94f0d8b302c2ac3f.ctex"
+uid="uid://doffoan6o17oo"
+path="res://.godot/imported/eyes_01.png-09138c1e5c77f674f72f9d0b4b610b00.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/player/hats/wizard_hat.png"
-dest_files=["res://.godot/imported/wizard_hat.png-8e6534a77d5fd02e94f0d8b302c2ac3f.ctex"]
+source_file="res://assets/images/player/eyes/eyes_01.png"
+dest_files=["res://.godot/imported/eyes_01.png-09138c1e5c77f674f72f9d0b4b610b00.ctex"]
 
 [params]
 
