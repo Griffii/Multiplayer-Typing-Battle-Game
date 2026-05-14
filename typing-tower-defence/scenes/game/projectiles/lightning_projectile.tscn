@@ -52,7 +52,7 @@ animations = [{
 "texture": null
 }],
 "loop": false,
-"name": &"default",
+"name": &"burst",
 "speed": 12.0
 }]
 

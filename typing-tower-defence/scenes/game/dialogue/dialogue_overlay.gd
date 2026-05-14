@@ -5,13 +5,13 @@ extends CanvasLayer
 signal dialogue_finished
 signal dialogue_sfx_requested(sfx_id: String)
 
-const AVATAR_BASE_SCALE: Vector2 = Vector2(3.0, 3.0)
-const AVATAR_FOCUSED_SCALE: Vector2 = Vector2(3.18, 3.18)
+const AVATAR_BASE_SCALE: Vector2 = Vector2(2.0, 2.0)
+const AVATAR_FOCUSED_SCALE: Vector2 = Vector2(2.18, 2.18)
 const AVATAR_FOCUS_TIME: float = 0.15
 const AVATAR_MOVE_TIME: float = 1.0
 
 const AVATAR_FOCUSED_MODULATE: Color = Color(1.0, 1.0, 1.0, 1.0)
-const AVATAR_UNFOCUSED_MODULATE: Color = Color(0.45, 0.45, 0.45, 1.0)
+const AVATAR_UNFOCUSED_MODULATE: Color = Color(0.85, 0.85, 0.85, 1.0)
 
 const TYPE_CHARACTERS_PER_SECOND: float = 45.0
 

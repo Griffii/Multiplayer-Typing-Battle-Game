@@ -233,11 +233,11 @@ position = Vector2(471, 381)
 
 [node name="LeftMarker2" type="Marker2D" parent="AvatarLayer" unique_id=1660934310]
 unique_name_in_owner = true
-position = Vector2(285, 246)
+position = Vector2(331, 246)
 
 [node name="LeftMarker1" type="Marker2D" parent="AvatarLayer" unique_id=255255571]
 unique_name_in_owner = true
-position = Vector2(207, 381)
+position = Vector2(186, 381)
 
 [node name="DialogueBoxContainer" type="Node2D" parent="." unique_id=1930014514]
 

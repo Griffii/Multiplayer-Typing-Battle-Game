@@ -118,6 +118,14 @@ func set_special_projectile_scene(new_scene: PackedScene) -> void:
 	special_projectile_scene = new_scene
 
 
+func _play_avatar_staff_swing() -> void:
+	if avatar == null:
+		return
+
+	if avatar.has_method("play_staff_swing"):
+		avatar.play_staff_swing()
+
+
 func fire_special_projectile(target_enemy: Node, projectile_container: Node) -> void:
 	_apply_equipped_spell()
 
@@ -129,6 +137,8 @@ func fire_special_projectile(target_enemy: Node, projectile_container: Node) -> 
 
 	if special_projectile_scene == null:
 		return
+
+	_play_avatar_staff_swing()
 
 	var spawn_position: Vector2 = get_special_spawn_position()
 

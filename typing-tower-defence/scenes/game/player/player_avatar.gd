@@ -10,6 +10,7 @@ const CustomizationDefinitions = preload("res://data/player/customization_defini
 @export var default_eyes: String = "eyes_01"
 
 @export var default_clothes: String = "elf_mage"
+@export var default_clothes_color: String = "default"
 
 @export var default_hair: String = "elf_mage_hair"
 @export var default_hair_color: String = "default"
@@ -36,6 +37,24 @@ const CustomizationDefinitions = preload("res://data/player/customization_defini
 @onready var right_hand_sprite: Sprite2D = %RightHandSprite
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var eyes_anim_player: AnimationPlayer = %EyesAnimPlayer
+@onready var staff_anim_player: AnimationPlayer = %StaffAnimPlayer
+
+
+@export var blink_enabled: bool = true
+@export var blink_min_delay: float = 2.0
+@export var blink_max_delay: float = 5.5
+@export var double_blink_chance: float = 0.18
+
+
+@onready var lightning_burst: AnimatedSprite2D = %LightningBurst
+var lightning_burst_playing: bool = false
+
+@onready var interact_button: Button = %InteractButton
+
+
+var blink_timer: SceneTreeTimer = null
+var blink_loop_running: bool = false
 
 var equipped_body: String = ""
 var equipped_body_color: String = ""
@@ -44,6 +63,7 @@ var equipped_eyes: String = ""
 var equipped_eyes_color: String = ""
 
 var equipped_clothes: String = ""
+var equipped_clothes_color: String = ""
 
 var equipped_hair: String = ""
 var equipped_hair_color: String = ""
@@ -57,6 +77,17 @@ var equipped_spell: String = ""
 
 
 func _ready() -> void:
+	if interact_button != null:
+		if not interact_button.pressed.is_connected(_on_interact_button_pressed):
+			interact_button.pressed.connect(_on_interact_button_pressed)
+	if lightning_burst != null:
+		if not lightning_burst.animation_finished.is_connected(_on_lightning_burst_finished):
+			lightning_burst.animation_finished.connect(_on_lightning_burst_finished)
+
+		lightning_burst.visible = false
+	
+	randomize()
+
 	equipped_body = default_body
 	equipped_body_color = default_body_color
 
@@ -64,6 +95,7 @@ func _ready() -> void:
 	equipped_eyes_color = default_eyes_color
 
 	equipped_clothes = default_clothes
+	equipped_clothes_color = default_clothes_color
 
 	equipped_hair = default_hair
 	equipped_hair_color = default_hair_color
@@ -78,6 +110,8 @@ func _ready() -> void:
 	refresh_visuals()
 	play_idle()
 
+	_start_blink_loop()
+
 
 func apply_loadout(loadout: Dictionary) -> void:
 	equipped_body = str(loadout.get("body", equipped_body))
@@ -87,6 +121,7 @@ func apply_loadout(loadout: Dictionary) -> void:
 	equipped_eyes_color = str(loadout.get("eyes_color", equipped_eyes_color))
 
 	equipped_clothes = str(loadout.get("clothes", equipped_clothes))
+	equipped_clothes_color = str(loadout.get("clothes_color", equipped_clothes_color))
 
 	equipped_hair = str(loadout.get("hair", equipped_hair))
 	equipped_hair_color = str(loadout.get("hair_color", equipped_hair_color))
@@ -98,6 +133,7 @@ func apply_loadout(loadout: Dictionary) -> void:
 
 	equipped_spell = str(loadout.get("spell", equipped_spell))
 
+	_validate_all_equipped_colors()
 	refresh_visuals()
 
 
@@ -110,6 +146,7 @@ func get_loadout() -> Dictionary:
 		"eyes_color": equipped_eyes_color,
 
 		"clothes": equipped_clothes,
+		"clothes_color": equipped_clothes_color,
 
 		"hair": equipped_hair,
 		"hair_color": equipped_hair_color,
@@ -127,26 +164,55 @@ func equip_part(slot_id: String, item_id: String) -> void:
 	match slot_id:
 		"body":
 			equipped_body = item_id
+			equipped_body_color = _validate_color_for_item(
+				"body",
+				equipped_body,
+				equipped_body_color
+			)
 
 		"body_color", "skin", "skin_color":
 			equipped_body_color = item_id
 
 		"eyes":
 			equipped_eyes = item_id
+			equipped_eyes_color = _validate_color_for_item(
+				"eyes",
+				equipped_eyes,
+				equipped_eyes_color
+			)
+
 		"eyes_color":
 			equipped_eyes_color = item_id
 
 		"clothes":
 			equipped_clothes = item_id
+			equipped_clothes_color = _validate_color_for_item(
+				"clothes",
+				equipped_clothes,
+				equipped_clothes_color
+			)
+
+		"clothes_color":
+			equipped_clothes_color = item_id
 
 		"hair":
 			equipped_hair = item_id
+			equipped_hair_color = _validate_color_for_item(
+				"hair",
+				equipped_hair,
+				equipped_hair_color
+			)
 
 		"hair_color":
 			equipped_hair_color = item_id
 
 		"hat":
 			equipped_hat = item_id
+			equipped_hat_color = _validate_color_for_item(
+				"hat",
+				equipped_hat,
+				equipped_hat_color
+			)
 
 		"hat_color":
 			equipped_hat_color = item_id
@@ -161,7 +227,7 @@ func equip_part(slot_id: String, item_id: String) -> void:
 			push_warning("PlayerAvatar: Unknown slot_id: " + slot_id)
 			return
 
-	refresh_visuals()
+	refresh_visuals()	
 
 
 func refresh_visuals() -> void:
@@ -205,6 +271,63 @@ func play_cast() -> void:
 
 	if animation_player.has_animation("cast"):
 		animation_player.play("cast")
+
+
+func _validate_color_for_item(
+	slot_id: String,
+	item_id: String,
+	current_color_id: String
+) -> String:
+	var available_dyes: Array[String] = (
+		CustomizationDefinitions.get_available_dyes_for_item(
+			slot_id,
+			item_id
+		)
+	)
+
+	if available_dyes.is_empty():
+		return "default"
+
+	if available_dyes.has(current_color_id):
+		return current_color_id
+
+	if available_dyes.has("default"):
+		return "default"
+
+	return available_dyes[0]
+
+
+func _validate_all_equipped_colors() -> void:
+	equipped_body_color = _validate_color_for_item(
+		"body",
+		equipped_body,
+		equipped_body_color
+	)
+
+	equipped_eyes_color = _validate_color_for_item(
+		"eyes",
+		equipped_eyes,
+		equipped_eyes_color
+	)
+
+	equipped_clothes_color = _validate_color_for_item(
+		"clothes",
+		equipped_clothes,
+		equipped_clothes_color
+	)
+
+	equipped_hair_color = _validate_color_for_item(
+		"hair",
+		equipped_hair,
+		equipped_hair_color
+	)
+
+	equipped_hat_color = _validate_color_for_item(
+		"hat",
+		equipped_hat,
+		equipped_hat_color
+	)
+
 
 
 func _apply_body() -> void:
@@ -257,22 +380,32 @@ func _apply_clothes() -> void:
 		)
 	)
 
+	var clothes_color: Color = Color.WHITE
+
+	if not equipped_clothes_color.is_empty() and equipped_clothes_color != "default":
+		clothes_color = CustomizationDefinitions.get_dye_color(
+			equipped_clothes_color
+		)
+
 	_apply_texture_to_sprite(
 		boots_sprite,
 		textures.get("boots", null),
-		false
+		false,
+		clothes_color
 	)
 
 	_apply_texture_to_sprite(
 		clothes_lower_sprite,
 		textures.get("lower", null),
-		false
+		false,
+		clothes_color
 	)
 
 	_apply_texture_to_sprite(
 		clothes_upper_sprite,
 		textures.get("upper", null),
-		false
+		false,
+		clothes_color
 	)
 
 
@@ -336,7 +469,8 @@ func _apply_part(
 func _apply_texture_to_sprite(
 	sprite: Sprite2D,
 	texture: Texture2D,
-	required: bool = false
+	required: bool = false,
+	modulate_color: Color = Color.WHITE
 ) -> void:
 	if sprite == null:
 		return
@@ -351,4 +485,102 @@ func _apply_texture_to_sprite(
 
 	sprite.texture = texture
 	sprite.visible = true
-	sprite.modulate = Color.WHITE
+	sprite.modulate = modulate_color
+
+
+func play_blink() -> void:
+	if eyes_anim_player == null:
+		return
+
+	if not eyes_anim_player.has_animation("blink"):
+		return
+
+	eyes_anim_player.play("blink")
+
+
+func _start_blink_loop() -> void:
+	if blink_loop_running:
+		return
+
+	blink_loop_running = true
+	_run_blink_loop()
+
+
+func _run_blink_loop() -> void:
+	while blink_enabled:
+		var delay: float = randf_range(
+			blink_min_delay,
+			blink_max_delay
+		)
+
+		blink_timer = get_tree().create_timer(delay)
+		await blink_timer.timeout
+
+		if not is_inside_tree():
+			return
+
+		play_blink()
+
+		# occasional natural double blink
+		if randf() <= double_blink_chance:
+			var double_delay: float = randf_range(0.08, 0.22)
+
+			blink_timer = get_tree().create_timer(double_delay)
+			await blink_timer.timeout
+
+			if not is_inside_tree():
+				return
+
+			play_blink()
+
+	blink_loop_running = false
+
+
+func _play_lightning_burst() -> void:
+	if lightning_burst == null:
+		return
+	
+	if lightning_burst_playing:
+		return
+	
+	lightning_burst_playing = true
+	lightning_burst.visible = true
+	lightning_burst.frame = 0
+	lightning_burst.play()
+
+
+func _on_lightning_burst_finished() -> void:
+	if not lightning_burst_playing:
+		return
+	
+	lightning_burst_playing = false
+	lightning_burst.visible = false
+	
+	if lightning_burst != null:
+		lightning_burst.stop()
+		lightning_burst.frame = 0
+		lightning_burst.visible = false
+
+
+func _on_interact_button_pressed() -> void:
+	_play_staff_ground_tap()
+
+
+func _play_staff_ground_tap() -> void:
+	if staff_anim_player == null:
+		return
+
+	if not staff_anim_player.has_animation("staff_ground_tap"):
+		return
+
+	staff_anim_player.play("staff_ground_tap")
+
+
+func play_staff_swing() -> void:
+	if staff_anim_player == null:
+		return
+
+	if not staff_anim_player.has_animation("staff_swing"):
+		return
+
+	staff_anim_player.play("staff_swing")

@@ -38,6 +38,7 @@ const ITEMS: Dictionary = {
 			"display_name": "Eyes 01",
 			"texture": preload("uid://doffoan6o17oo"),
 			"available_dyes": [
+				"eye_black",
 				"eye_blue",
 				"eye_green",
 				"eye_brown",
@@ -51,6 +52,7 @@ const ITEMS: Dictionary = {
 	},
 	
 	"eyes_color": {
+		"eye_black": {"display_name": "Black Eyes", "color": Color("000000ff"), "unlock_hint": "", "bonuses": {}},
 		"eye_blue": {"display_name": "Blue Eyes", "color": Color("#4f9cff"), "unlock_hint": "", "bonuses": {}},
 		"eye_green": {"display_name": "Green Eyes", "color": Color("#5bbf73"), "unlock_hint": "", "bonuses": {}},
 		"eye_brown": {"display_name": "Brown Eyes", "color": Color("#7a4a2a"), "unlock_hint": "", "bonuses": {}},
@@ -68,7 +70,6 @@ const ITEMS: Dictionary = {
 			"item_icon": preload("uid://c1hkp1kxgf7er"),
 			"available_dyes": [
 				"default",
-				"white",
 				"blue",
 				"red",
 				"green",
@@ -94,9 +95,26 @@ const ITEMS: Dictionary = {
 	},
 
 	"hair": {
-		"short_hair": {
-			"display_name": "Short Hair",
+		"messy_short_hair": {
+			"display_name": "Messy Short Hair",
 			"texture": preload("uid://dpgpheugk04go"),
+			"available_dyes": [
+				"default",
+				"blonde",
+				"brown",
+				"dark_brown",
+				"black",
+				"red_hair",
+				"blue",
+				"purple",
+				"pink"
+			],
+			"unlock_hint": "",
+			"bonuses": {}
+		},
+		"academic_short_hair": {
+			"display_name": "Academic Short Hair",
+			"texture": preload("uid://c37hcg2ojn7ub"),
 			"available_dyes": [
 				"default",
 				"blonde",
@@ -145,7 +163,6 @@ const ITEMS: Dictionary = {
 			"texture": preload("uid://cilpqii56rjy2"),
 			"available_dyes": [
 				"default",
-				"white",
 				"blue",
 				"red",
 				"green",

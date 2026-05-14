@@ -23,14 +23,14 @@ var equipped_loadout: Dictionary = {
 	"eyes": "eyes_01",
 	"eyes_color": "eye_blue",
 
-	"clothes": "elf_mage",
-	"clothes_color": "default",
+	"clothes": "wizard_robes",
+	"clothes_color": "black",
 
-	"hair": "elf_mage_hair",
-	"hair_color": "default",
+	"hair": "messy_short_hair",
+	"hair_color": "black",
 
-	"hat": "wizard_hat",
-	"hat_color": "blue",
+	"hat": "none",
+	"hat_color": "black",
 
 	"staff": "oak_staff",
 
@@ -53,6 +53,7 @@ var unlocked_items: Dictionary = {
 
 	"eyes": ["eyes_01"],
 	"eyes_color": [
+		"eye_black",
 		"eye_blue",
 		"eye_green",
 		"eye_brown",
@@ -64,7 +65,6 @@ var unlocked_items: Dictionary = {
 	"clothes": ["wizard_robes","elf_mage"],
 	"clothes_color": [
 		"default",
-		"white",
 		"blue",
 		"red",
 		"green",
@@ -74,10 +74,9 @@ var unlocked_items: Dictionary = {
 		"pink"
 	],
 
-	"hair": ["short_hair","long_hair","elf_mage_hair"],
+	"hair": ["messy_short_hair","academic_short_hair","long_hair","elf_mage_hair"],
 	"hair_color": [
 		"default",
-		"white",
 		"blonde",
 		"brown",
 		"dark_brown",
@@ -91,7 +90,6 @@ var unlocked_items: Dictionary = {
 	"hat": ["wizard_hat"],
 	"hat_color": [
 		"default",
-		"white",
 		"blue",
 		"red",
 		"green",

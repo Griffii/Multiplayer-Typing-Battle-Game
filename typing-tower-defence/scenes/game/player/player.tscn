@@ -37,4 +37,4 @@ show_percentage = false
 
 [node name="SpecialSpawnMarker" type="Marker2D" parent="." unique_id=2010550149]
 unique_name_in_owner = true
-position = Vector2(37, -40)
+position = Vector2(37, -64)

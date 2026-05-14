@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.53333336, 1, 1.5333334, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -32), Vector2(0, -29), Vector2(0, -36), Vector2(0, -30), Vector2(0, -31.999998)]
+"values": [Vector2(0, -41), Vector2(0, -58), Vector2(0, -51), Vector2(0, -48), Vector2(0, -41)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -69,7 +69,7 @@ _data = {
 [node name="JishoSprite" type="Sprite2D" parent="." unique_id=1302207980]
 position = Vector2(0, -26.000002)
 rotation = -0.12915437
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_reovt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1450338407]
