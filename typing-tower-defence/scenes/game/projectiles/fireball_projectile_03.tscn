@@ -101,7 +101,7 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="FireballProjectile_01" type="Node2D" unique_id=1510425965]
+[node name="FireballProjectile_03" type="Node2D" unique_id=1510425965]
 script = ExtResource("1_o247a")
 
 [node name="FireballSprite" type="AnimatedSprite2D" parent="." unique_id=2109604757]

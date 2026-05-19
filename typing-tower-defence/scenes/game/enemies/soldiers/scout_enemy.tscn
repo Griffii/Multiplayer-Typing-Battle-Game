@@ -550,7 +550,7 @@ offset_left = -17.0
 offset_top = 19.0
 offset_right = -17.0
 offset_bottom = 19.0
-scale = Vector2(0.55, 0.1)
+scale = Vector2(0.55, 0.3)
 
 [node name="FloatingDamageNumberMarker" type="Marker2D" parent="." unique_id=814454266]
 unique_name_in_owner = true

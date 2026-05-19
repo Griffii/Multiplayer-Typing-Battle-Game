@@ -1,7 +1,7 @@
 # res://scripts/game/portals/basic_magic_turret.gd
 extends Node2D
 
-const MAGIC_BEAM_PROJECTILE_SCENE: PackedScene = preload("uid://dlda6ydil1wqt")
+const MAGIC_BEAM_PROJECTILE_SCENE: PackedScene = preload("uid://b0ju2ulxgvbw1")
 
 @onready var projectile_spawn: Marker2D = %ProjectileSpawn
 @onready var range_area: Area2D = %RangeArea
